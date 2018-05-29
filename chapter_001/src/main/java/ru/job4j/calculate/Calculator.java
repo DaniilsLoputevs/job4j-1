@@ -14,48 +14,34 @@ public class Calculator {
      */
     private double result;
 
-    /**
-     * @method : addition.
-     *
-     * @param first
-     * @param second
-     */
+
     public void add(double first, double second) {
         this.result = first + second;
     }
 
     /**
-     * @method subtract.
-     * @param first
-     * @param second
+     * subtract.
      */
     public void sub(double first, double second) {
         this.result = first - second;
     }
 
     /**
-     * @method multiplication.
-     *
-     * @param first
-     * @param second
+     * multiplication.
      */
     public void multple(double first, double second) {
         this.result = first * second;
     }
 
     /**
-     * @method div.
-     *
-     * @param first
-     * @param second
+     * div.
      */
-      public void div(double first, double second) {
-          this.result = first  / second;
-      }
+    public void div(double first, double second) {
+        this.result = first / second;
+    }
+
     /**
-     * @method : Возвращает значение поля result.
-     *
-     * @return
+     * Возвращает значение поля result.
      */
     public double getResult() {
         return this.result;
