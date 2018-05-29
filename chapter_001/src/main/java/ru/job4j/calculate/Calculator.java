@@ -15,7 +15,7 @@ public class Calculator {
     private double result;
 
     /**
-     * method : addition.
+     * @method : addition.
      *
      * @param first
      * @param second
@@ -25,8 +25,7 @@ public class Calculator {
     }
 
     /**
-     * @method subtract
-     *
+     * @method subtract.
      * @param first
      * @param second
      */
@@ -35,7 +34,7 @@ public class Calculator {
     }
 
     /**
-     * @method  multiplication
+     * @method multiplication.
      *
      * @param first
      * @param second
@@ -45,7 +44,7 @@ public class Calculator {
     }
 
     /**
-     * @method div
+     * @method div.
      *
      * @param first
      * @param second
@@ -54,7 +53,7 @@ public class Calculator {
           this.result = first  / second;
       }
     /**
-     * @method : Возвращает значение поля result
+     * @method : Возвращает значение поля result.
      *
      * @return
      */
