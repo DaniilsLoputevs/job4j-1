@@ -24,16 +24,6 @@ public class MaxTest {
         assertThat(result, is(15));
     }
 
-    /**
-     * Реализация тестирования где first>second.
-     */
-    @Test
-        public void whenFirstMoreSecond() {
-        Max maximmore = new Max();
-        int result = maximmore.maxFirst(55, 16);
-        assertThat(result, is(55));
-        }
-
 
 
 

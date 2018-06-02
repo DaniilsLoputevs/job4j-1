@@ -14,10 +14,6 @@ public class Max {
         return first < second ? first : second;
     }
 
-    public int maxFirst(int first, int second) {
-        return first > second ? first : second;
-    }
-
     public int summation(int first, int second) {
         return first + second;
     }

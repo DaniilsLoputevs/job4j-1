@@ -1,5 +1,5 @@
 /**
- * Package for calculator task.
+ * Package for condition task.
  *
  * @author Sergey Bolshanin (dinospb@gmail.com)
  * @version $Id$
