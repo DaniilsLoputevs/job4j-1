@@ -18,9 +18,11 @@ package ru.job4j.condition;
         this.c = c;
 
     }
+
     public double period(double ab, double ac, double bc) {
         return (ab + ac + bc) / 2;
     }
+
     public double area() {
         double rsl = -1;
         double ab = this.a.distanceTo(this.b);
@@ -32,10 +34,14 @@ package ru.job4j.condition;
         }
         return rsl;
     }
-    private boolean exist(double ab, double ac, double bc) {
 
-        return false;
+    private boolean exist(double ab, double ac, double bc) {
+/**
+ * Проверка на условие : сумма двух сторон должна быть больше третьей стороны .
+ */
+            return (ab + bc > ac) && (bc + ac > ab) && (ac + ab > bc);
+        }
     }
-}
+
 
 
