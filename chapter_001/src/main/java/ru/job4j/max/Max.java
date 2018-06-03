@@ -17,9 +17,9 @@ public class Max {
     public int summation(int first, int second) {
         return first + second;
     }
+
     public int max(int first, int second, int third) {
-        int temp = this.max(this.max(first, second), third);
-        return temp;
+        return this.max(this.max(first, second), third);
     }
 
 }
