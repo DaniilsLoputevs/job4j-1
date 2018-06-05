@@ -40,7 +40,7 @@ package ru.job4j.condition;
  * Проверка на условие : сумма двух сторон должна быть больше третьей стороны .
  */
 
-            return (ab + ac > bc);
+        return ((ab + bc) > ac) && ((bc + ac) > ab) && ((ac + ab) > bc);
         }
     }
 
