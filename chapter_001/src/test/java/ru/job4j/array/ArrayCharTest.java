@@ -30,4 +30,10 @@ public class ArrayCharTest {
         boolean result = word.startWith("Прев");
         assertThat(result, is(false));
     }
+    @Test
+ 	 	public void whenNotStartWithPrefixThenFalse2() {
+        ArrayChar word = new ArrayChar("Hello");
+        boolean result = word.startWith("Helloo");
+        assertThat(result, is(false));
+        }
 }

@@ -12,6 +12,7 @@ public class ArrayChar {
 
     /**
      * Проверяет. что слово начинается с префикса.
+     *
      * @param prefix префикс.
      * @return если слово начинаеться с префикса
      */
@@ -19,13 +20,13 @@ public class ArrayChar {
         boolean result = true;
         char[] value = prefix.toCharArray();
         // проверить. что массив data имеет первые элементы одинаковые с value
-        for (int index =0; index != value.length; index++ ){
-            if (data[index] != value[index]) {
+        for (int index = 0; index < value.length; index++) {
+            if (value.length > data.length || data[index] != value[index]) {
                 result = false;
-
             }
-        }
 
+
+        }
         return result;
     }
 }
