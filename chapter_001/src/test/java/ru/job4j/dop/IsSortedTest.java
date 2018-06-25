@@ -7,18 +7,18 @@ import static org.junit.Assert.assertThat;
 
 public class IsSortedTest {
     @Test
-    public void  WhenArraySorted () {
+    public void  whenArraySorted() {
         IsSorted sort = new IsSorted();
-        int [] input = new int[]{1,3,5,6,7,8};
+        int[] input = new int[]{1, 3, 5, 6, 7, 8};
         boolean result = sort.checksort(input);
         assertThat(result, is(true));
 
 
     }
     @Test
-    public void  WhenArrayNotSorted () {
+    public void  whenArrayNotSorted() {
         IsSorted sort = new IsSorted();
-        int [] input = new int[]{1,3,5,6,7,8,2};
+        int[] input = new int[]{1, 3, 5, 6, 7, 8, 2};
         boolean result = sort.checksort(input);
         assertThat(result, is(false));
 
