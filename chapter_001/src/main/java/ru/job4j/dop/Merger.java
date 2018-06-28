@@ -2,7 +2,7 @@ package ru.job4j.dop;
 
 public class Merger {
 
-    public static int[] merge(int[] a, int[] b) {
+    public int[] merger(int[] a, int[] b) {
         int[] result = new int[a.length + b.length];
         int firstIndex = 0;
         int secondIndex = 0;
@@ -11,11 +11,19 @@ public class Merger {
         while (i < result.length) {
             result[i] = a[firstIndex] < b[secondIndex] ? a[firstIndex++] : b[secondIndex++];
             if (firstIndex == a.length) {
-                System.arraycopy(b, secondIndex, result, ++i, b.length - secondIndex);
+                for (int z = secondIndex; z < b.length; z++) {
+                    i++;
+                    result[i] = b[z];
+                }
+
                 break;
             }
             if (secondIndex == b.length) {
-                System.arraycopy(a, firstIndex, result, ++i, a.length - firstIndex);
+                for (int y = firstIndex; y < a.length; y++) {
+                    i++;
+                    result[i] = b[y];
+                }
+
                 break;
             }
             i++;
@@ -23,6 +31,4 @@ public class Merger {
         return result;
     }
 }
-
-
 
