@@ -1,7 +1,10 @@
 package ru.job4j.array;
-
 /**
- * Обертка над строкой.
+ * Package for array task
+ *
+ * @author Sergey Bolshanin (dinospb@gmail.com)
+ * @version $Id$
+ * @since 0.1
  */
 public class ArrayChar {
     private char[] data;
