@@ -10,7 +10,7 @@ package ru.job4j.calculator;
 
 public class Calculator {
     /**
-     * Внутреннее поле с типом данных double[result].
+     * mathematical operations with variables.
      */
     private double result;
 
@@ -19,30 +19,21 @@ public class Calculator {
         this.result = first + second;
     }
 
-    /**
-     * subtract.
-     */
+
     public void sub(double first, double second) {
         this.result = first - second;
     }
 
-    /**
-     * multiplication.
-     */
+
     public void multple(double first, double second) {
         this.result = first * second;
     }
 
-    /**
-     * div.
-     */
+
     public void div(double first, double second) {
         this.result = first / second;
     }
 
-    /**
-     * Возвращает значение поля result.
-     */
     public double getResult() {
         return this.result;
 

@@ -8,6 +8,6 @@ package ru.job4j.professions;
  * @since 05.07.2018
  */
 public class Student {
-    public String name;
+    private String name;
 
 }

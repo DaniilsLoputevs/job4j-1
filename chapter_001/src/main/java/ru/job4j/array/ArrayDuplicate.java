@@ -8,6 +8,9 @@ package ru.job4j.array;
  */
 import java.util.Arrays;
 
+/**
+ * Check for Array Duplicate.
+ */
 public class ArrayDuplicate {
     public String[] remove(String[] array) {
         int uniqdata = array.length;
