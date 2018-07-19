@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -65,7 +66,9 @@ public class Tracker {
         return result;
     }
 
-    /** Метод удаления .
+    /**
+     * Метод удаления .
+     *
      * @param id Идентификатор
      */
     public void delete(String id) {
@@ -87,16 +90,23 @@ public class Tracker {
      */
     public Item[] findByName(String key) {
         Item[] find = new Item[this.position];
-        for (int i = 0; i < this.position; i++) {
-            if (this.items[i].getName().equals(key)) {
-                find[i] = this.items[i];
+
+        if (key != null) {
+            int index = 0;
+            for (int i = 0; i < this.position; i++) {
+                if (key.equals(this.items[i].getName())) {
+                    find[index++] = this.items[i];
+                }
             }
+            find = Arrays.copyOf(find, index);
         }
+
         return find;
     }
 
     /**
      * Метод поиска по уникальному ключу
+     *
      * @param id уникальный идентификатор.
      * @return Возвращает элемент найденный по ключу.
      */
@@ -105,6 +115,7 @@ public class Tracker {
         for (int i = 0; i < this.position; i++) {
             if (this.items[i].getId().equals(id)) {
                 item = this.items[i];
+                break;
 
             }
         }

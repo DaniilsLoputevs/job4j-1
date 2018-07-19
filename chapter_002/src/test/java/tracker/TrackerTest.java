@@ -64,12 +64,15 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item firstItem = new Item("firstTestItem", "firstTestDesc", 123L);
         Item secondItem = new Item("secondTestItem", "secondTestDesc", 234L);
+        Item secondItem2 = new Item("secondTestItem", "secondTestDesc", 234L);
         Item thirdItem = new Item("thirdTestItem", "thirdTestDesc", 235L);
         tracker.add(firstItem);
         tracker.add(secondItem);
+        tracker.add(secondItem2);
         tracker.add(thirdItem);
-        tracker.findByName(secondItem.getName());
-        assertThat(secondItem.getName(), is("secondTestItem"));
+        Item[] actual = tracker.findByName(secondItem.getName());
+        Item[] expected = new Item[] {secondItem2, secondItem};
+        assertThat(actual, is(expected));
     }
 
     @Test
