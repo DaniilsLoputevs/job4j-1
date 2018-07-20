@@ -65,14 +65,12 @@ public class TrackerTest {
         Item firstItem = new Item("firstTestItem", "firstTestDesc", 123L);
         Item secondItem = new Item("secondTestItem", "secondTestDesc", 234L);
         Item secondItem2 = new Item("secondTestItem", "secondTestDesc", 234L);
-        Item thirdItem = new Item("thirdTestItem", "thirdTestDesc", 235L);
+        Item thirdItem = new Item("secondTestItem","secondTestDesc",445L);
         tracker.add(firstItem);
         tracker.add(secondItem);
         tracker.add(secondItem2);
         tracker.add(thirdItem);
-        Item[] actual = tracker.findByName(secondItem.getName());
-        Item[] expected = new Item[] {secondItem2, secondItem};
-        assertThat(actual, is(expected));
+        assertThat(tracker.findByName("secondTestItem").length, is(3));
     }
 
     @Test
