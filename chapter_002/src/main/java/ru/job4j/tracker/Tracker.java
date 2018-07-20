@@ -90,7 +90,6 @@ public class Tracker {
      */
     public Item[] findByName(String key) {
         Item[] find = new Item[this.position];
-
         if (key != null) {
             int index = 0;
             for (int i = 0; i < this.position; i++) {

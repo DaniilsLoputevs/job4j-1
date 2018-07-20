@@ -5,6 +5,7 @@ import org.junit.Test;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
+import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainingInAnyOrder;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -65,12 +66,14 @@ public class TrackerTest {
         Item firstItem = new Item("firstTestItem", "firstTestDesc", 123L);
         Item secondItem = new Item("secondTestItem", "secondTestDesc", 234L);
         Item secondItem2 = new Item("secondTestItem", "secondTestDesc", 234L);
-        Item thirdItem = new Item("secondTestItem","secondTestDesc",445L);
+        Item thirdItem = new Item("secondTestItem", "secondTestDesc", 445L);
         tracker.add(firstItem);
         tracker.add(secondItem);
         tracker.add(secondItem2);
         tracker.add(thirdItem);
-        assertThat(tracker.findByName("secondTestItem").length, is(3));
+        Item[] result = tracker.findByName("secondTestItem");
+        Item[] expect = {secondItem, secondItem2, thirdItem};
+        assertThat(result, arrayContainingInAnyOrder(expect));
     }
 
     @Test
