@@ -131,8 +131,11 @@ public class StartUI {
     public void deleteItem() {
         System.out.println("----Введите айди заявки----");
         String id = this.consoleInput.ask("Введите ID заявки");
-        tracker.delete(id);
-        System.out.println("-----Ваша заявка была успешно удалена.-----");
+        if (tracker.delete(id)) {
+            System.out.println("-----Ваша заявка была успешно удалена.-----");
+        } else {
+            System.out.println("------Ваша заявка не была удалена-----");
+        }
     }
 
     /**

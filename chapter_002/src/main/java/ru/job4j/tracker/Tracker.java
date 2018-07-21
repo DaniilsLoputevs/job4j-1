@@ -74,15 +74,19 @@ public class Tracker {
      *
      * @param id Идентификатор
      */
-    public void delete(String id) {
+    public boolean delete(String id) {
+        boolean res = false;
         for (int i = 0; i < this.position; i++) {
             if (this.items[i].getId().equals(id)) {
                 items[i] = null;
                 System.arraycopy(items, i + 1, items, i, items.length - 1 - i);
                 position--;
+                res = true;
                 break;
             }
+
         }
+        return res;
     }
 
     /**
