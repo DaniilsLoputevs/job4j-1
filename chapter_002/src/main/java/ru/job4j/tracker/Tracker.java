@@ -41,16 +41,19 @@ public class Tracker {
         return new Date().toString() + Math.random();
     }
 
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
+        boolean res = false;
         for (int i = 0; i < this.position; i++) {
-            if (item.getId().equals(id)) {
+            if (this.items[i].getId().equals(id)) {
                 item.setId(id);
                 items[i] = item;
+                res = true;
                 break;
 
             }
 
         }
+        return res;
     }
 
     /**

@@ -114,16 +114,16 @@ public class StartUI {
         String id = this.consoleInput.ask("Введите ID заявки");
         String name = this.consoleInput.ask("Введите name заявки");
         String desc = this.consoleInput.ask("Введите desc заявки");
-        Item item = new Item(name, desc);
-        item.setId(id);
-        Item[] items = tracker.findAll();
-        for (int i = 0; i < items.length; i++) {
-            if (items[i].getId().equals(id)) {
-                tracker.replace(id, item);
-                break;
-            }
+        Item item = new Item(id, name, desc);
+        if (tracker.replace(id, item)) {
+            System.out.println("Ваша заявка отредактирована");
+
+        } else {
+            System.out.println("Ваша заявка не отредактирована.");
         }
+
     }
+
 
     /**
      * Пункт в меню реализующий метод удаления заявки по ID.
