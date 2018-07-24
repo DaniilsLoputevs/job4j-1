@@ -39,14 +39,16 @@ public class StartUI {
 
     private final Tracker tracker;
 
-    private final ConsoleInput consoleInput;
+
+    private final Input input;
 
 
-    public StartUI(ConsoleInput consoleInput, Tracker tracker) {
-        this.consoleInput = consoleInput;
+    public StartUI(Input input, Tracker tracker) {
+        this.input = input;
         this.tracker = tracker;
 
     }
+
 
     /**
      * Основной цикл программы.
@@ -55,7 +57,7 @@ public class StartUI {
         boolean exit = false;
         while (!exit) {
             this.showMenu();
-            String answer = this.consoleInput.ask("Введите пункт меню: ");
+            String answer = this.input.ask("Введите пункт меню: ");
             if (ADD.equals(answer)) {
                 // добавление заявки вынесено в отдельнй метод.
                 this.createItem();
@@ -87,8 +89,8 @@ public class StartUI {
      */
     private void createItem() {
         System.out.println("------Добавление новой заявки-----");
-        String name = this.consoleInput.ask("Введите имя заявки");
-        String desc = this.consoleInput.ask("Введите описание заявки.");
+        String name = this.input.ask("Введите имя заявки");
+        String desc = this.input.ask("Введите описание заявки.");
         Item item = new Item(name, desc);
         this.tracker.add(item);
         System.out.println("------------ Новая заявка с getId : " + item.getId() + "-----------");
@@ -111,9 +113,9 @@ public class StartUI {
      */
     public void editItem() {
         System.out.println("----Редактирование заявки.-----");
-        String id = this.consoleInput.ask("Введите ID заявки");
-        String name = this.consoleInput.ask("Введите name заявки");
-        String desc = this.consoleInput.ask("Введите desc заявки");
+        String id = this.input.ask("Введите ID заявки");
+        String name = this.input.ask("Введите name заявки");
+        String desc = this.input.ask("Введите desc заявки");
         Item item = new Item(id, name, desc);
         if (tracker.replace(id, item)) {
             System.out.println("Ваша заявка отредактирована");
@@ -130,7 +132,7 @@ public class StartUI {
      */
     public void deleteItem() {
         System.out.println("----Введите айди заявки----");
-        String id = this.consoleInput.ask("Введите ID заявки");
+        String id = this.input.ask("Введите ID заявки");
         if (tracker.delete(id)) {
             System.out.println("-----Ваша заявка была успешно удалена.-----");
         } else {
@@ -142,12 +144,12 @@ public class StartUI {
      * Пункт в меню реализующий метод поиска заявки по ID
      */
     public void findById() {
-        String id = this.consoleInput.ask("Введите ID заявки");
+        String id = this.input.ask("Введите ID заявки");
         System.out.println("Ваша заявка:" + tracker.findById(id));
     }
 
     public void findByName() {
-        String name = this.consoleInput.ask("Ввведите имя заявки");
+        String name = this.input.ask("Ввведите имя заявки");
         System.out.println("Ваша заявка" + Arrays.toString(tracker.findByName(name)));
     }
 
