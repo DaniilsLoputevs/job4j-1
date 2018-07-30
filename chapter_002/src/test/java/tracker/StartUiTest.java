@@ -1,5 +1,7 @@
 package tracker;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import ru.job4j.tracker.*;
 
@@ -10,16 +12,32 @@ import static org.junit.Assert.assertThat;
 
 
 public class StartUiTest {
+
+    private final Tracker tracker = new Tracker();
+    public Item item = new Item("TestName", "Test");
+
+    @Before
+    public void beforeTest() {
+        Item item = this.item;
+        this.tracker.add(item);
+
+    }
+
+    @After
+    public void afterTest() {
+        this.tracker.delete(this.item.getId());
+        this.item = null;
+    }
+
     /**
      * Тест на добавление заявки в трекер.
      * ключ в меню : 0.
      */
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
-        Tracker tracker = new Tracker();     // создаём Tracker
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});   //создаём StubInput с последовательностью действий
+        Input input = new StubInput(new String[]{"0", "TestName", "TestDesc", "6"});   //создаём StubInput с последовательностью действий
         new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
-        assertThat(tracker.findAll()[0].getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
+        assertThat(tracker.findAll()[0].getName(), is("TestName")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
 
     /**
@@ -28,10 +46,6 @@ public class StartUiTest {
      */
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
-        // создаём Tracker
-        Tracker tracker = new Tracker();
-        //Напрямую добавляем заявку
-        Item item = tracker.add(new Item("test name", "desc"));
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "6"});
         // создаём StartUI и вызываем метод init()
@@ -46,8 +60,6 @@ public class StartUiTest {
      */
     @Test
     public void whenDeleteItemById() {
-        Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("TestName", "TestDesc"));
         Input input = new StubInput(new String[]{"3", item.getId(), "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()), is(nullValue()));
@@ -59,12 +71,10 @@ public class StartUiTest {
      */
     @Test
     public void whenFindByName() {
-        Tracker tracker = new Tracker();
-        Item testItem = tracker.add(new Item("RandomName", "TestDesc"));
-        Input input = new StubInput(new String[]{"5", testItem.getName(), "6"});
+        Input input = new StubInput(new String[]{"5", item.getName(), "6"});
         new StartUI(input, tracker).init();
-        Item[] result = tracker.findByName("RandomName");
-        Item[] expect = {testItem};
+        Item[] result = tracker.findByName("TestName");
+        Item[] expect = {item};
         assertThat(result, arrayContainingInAnyOrder(expect));
     }
 
@@ -74,13 +84,9 @@ public class StartUiTest {
      */
     @Test
     public void whenFindAllItem() {
-        Tracker tracker = new Tracker();
-        Item firstItem = tracker.add(new Item("FirstName", "FirstDesc"));
-        Item secondItem = tracker.add(new Item("SecondTestName", "SecondDesc"));
-        Item thirdItem = tracker.add(new Item("RandomName", "ThirdDesc"));
         Input input = new StubInput(new String[]{"1", "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll().length, is(3));
+        assertThat(tracker.findAll().length, is(1));
     }
 
     /**
@@ -89,8 +95,6 @@ public class StartUiTest {
      */
     @Test
     public void whenFindById() {
-        Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("TestName", "TestDesc"));
         Input input = new StubInput(new String[]{"4", item.getId(), "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()), is(item));
