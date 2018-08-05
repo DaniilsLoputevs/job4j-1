@@ -108,7 +108,7 @@ public class MenuTracker {
             String name = input.ask("Enter the task's name:");
             String desc = input.ask("Enter the task's description :");
             Item item = tracker.add(new Item(name, desc));
-            System.out.println("Создана новая заявка: " + item.toString());
+            System.out.println("Create new task with name: " + item.toString());
         }
 
         @Override
@@ -138,10 +138,10 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------Список заявок в системе.------");
+            System.out.println("------All task in system------");
             Item[] item = tracker.findAll();
             for (int i = 0; i < item.length; i++) {
-                System.out.println("Заявка:" + item[i]);
+                System.out.println("Task:" + item[i]);
             }
         }
 
@@ -171,16 +171,16 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("---Редактирование заявки.----");
-            String id = input.ask("Введите ID заявки");
-            String name = input.ask("Введите name заявки");
-            String desc = input.ask("Введите desc заявки");
+            System.out.println("---Replace task.----");
+            String id = input.ask("Enter ID");
+            String name = input.ask("Enter name task");
+            String desc = input.ask("Enter desc task");
             Item item = new Item(id, name, desc);
             if (tracker.replace(id, item)) {
-                System.out.println("Ваша заявка отредактирована");
+                System.out.println("Your taks replace");
 
             } else {
-                System.out.println("Ваша заявка не отредактирована.");
+                System.out.println("Error replace");
             }
 
 

@@ -11,16 +11,12 @@ public class ConsoleInput implements Input {
         return scanner.nextLine();
     }
 
-    public int ask(String message, int[] range) {
-        int key = Integer.valueOf(this.ask(message));
-        boolean exist = false;
-        for (int i = 0; i < range.length; i++) {
-            if (range[i] == key) {
-                exist = true;
-                break;
-            }
-        }
 
+    public int ask(String question, List<Integer> range) {
+        int res = Integer.valueOf(this.ask(question));
+        return res;
     }
+
+
 
 }

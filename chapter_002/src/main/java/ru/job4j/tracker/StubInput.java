@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
-public class StubInput implements Input {
+import java.util.List;
+
+public class StubInput extends ConsoleInput {
     /**
      * Поле содержащее последовательность ответа пользователя.
      * Например. Если пользователь
@@ -19,8 +21,18 @@ public class StubInput implements Input {
     public StubInput(final String[] value) {
         this.value = value;
     }
+
     @Override
     public String ask(String question) {
         return this.value[position++];
     }
+
+    @Override
+
+    public int ask(String question, List<Integer> range) {
+        int res = Integer.valueOf(this.ask(question));
+        return res;
+
+    }
+
 }
