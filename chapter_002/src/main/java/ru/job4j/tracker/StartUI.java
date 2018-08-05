@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Sergey Bolshanin (dinospb@gmail.com)
@@ -54,33 +56,15 @@ public class StartUI {
      * Основной цикл программы.
      */
     public void init() {
-        boolean exit = false;
-        while (!exit) {
-            this.showMenu();
-            String answer = this.input.ask("Введите пункт меню: ");
-            if (ADD.equals(answer)) {
-                // добавление заявки вынесено в отдельнй метод.
-                this.createItem();
-            } else if (SHOW_ALL_ITEMS.equals(answer)) {
-                // Отображение всех заявок в отдельном методе.
-                this.showAll();
-            } else if (EDIT_ITEMS.equals(answer)) {
-                //Редактирование заявки в отдельном методе.
-                this.editItem();
-            } else if (DELETE.equals(answer)) {
-                //Удаление заявки в отдельном методе.
-                this.deleteItem();
-            } else if (FIND_BY_ID.equals(answer)) {
-                //Поиск по ID в отдельном методе.
-                this.findById();
-            } else if (ITEMS_BY_NAME.equals(answer)) {
-                //по имени в отдельном методе.
-                this.findByName();
-            } else if (EXIT.equals(answer)) {
-                exit = true;
-                System.out.println("Программа успешно завершена.");
-            }
-        }
+        MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        List<Integer> range = new ArrayList<>();
+        menu.fillActions();
+        for (int i = 0; i<menu.getActionsLentgh();i++) {
+            range.add(i);
+        } do {
+            menu.show();
+            menu.select(input.ask("select",range));
+        } while (!"y".equals(this.input.ask("Exit?(y):")));
 
     }
 
