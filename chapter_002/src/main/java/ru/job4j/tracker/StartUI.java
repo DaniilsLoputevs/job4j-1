@@ -9,15 +9,25 @@ import java.util.List;
  * @since 17.07.2018
  */
 public class StartUI {
-
+    /**
+     * Поле используется для выхода из программы.
+     */
     private boolean work = true;
-
+    /**
+     * Обеспечивает хранение заявок.
+     */
     private final Tracker tracker;
-
+    /**
+     * Запрос данных у пользователя.
+     */
 
     private final Input input;
 
-
+    /**
+     * Конструктор
+     * @param input
+     * @param tracker
+     */
     public StartUI(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
@@ -37,7 +47,7 @@ public class StartUI {
         }
         do {
             menu.show();
-            menu.select(input.ask("select", range));
+            menu.select(input.ask("-------Введите пункт меню------", range));
         } while (this.work);
 
     }
@@ -46,8 +56,14 @@ public class StartUI {
         work = false;
     }
 
+    /**
+     * Основной метод начинающий выполнение програмы
+     * Содержит реализацию ValidateInput : обрабатываются коректные данные вводимые пользователем
+     * Tracker : Основная реализация трекера.
+     * @param args
+     */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
 
 
     }
