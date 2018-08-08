@@ -50,7 +50,6 @@ public class MenuTracker {
 
     /**
      * Метод заполняет массив с меню внутренними классами которые реализуют функциональность.
-     *
      */
 
     public void fillActions(StartUI input) {
