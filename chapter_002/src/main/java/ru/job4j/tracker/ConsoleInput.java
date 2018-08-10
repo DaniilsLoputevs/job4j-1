@@ -29,7 +29,7 @@ public class ConsoleInput implements Input {
             }
         }
         if (!exist) {
-            throw new MenuOutofExeption("Введите правильный пункт меню");
+            throw new MenuOutofExeption("Введите правильный пункт меню.");
 
 
         }

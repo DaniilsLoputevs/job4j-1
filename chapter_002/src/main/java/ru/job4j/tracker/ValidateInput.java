@@ -47,7 +47,7 @@ public class ValidateInput implements Input {
             } catch (MenuOutofExeption moe) {
                 System.out.println("Ошибка: Введите верный пункт меню.");
             } catch (IndexOutOfBoundsException ibe) {
-                System.out.println("Пожалуйста укажите верный пункт меню");
+                System.out.println("Пожалуйста укажите верный пункт меню.");
             } catch (NumberFormatException nfe) {
                 System.out.println("Пожалуйста введите правильные данные");
             }
