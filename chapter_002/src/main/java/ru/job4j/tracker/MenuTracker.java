@@ -65,7 +65,7 @@ public class MenuTracker {
     /**
      * Метод в зависимости от ключа выполняет определнное действие в массиве .
      *
-     * @param key ключ действия.
+     * @param key ключ действия
      */
     public void select(int key) {
         this.actions.get(key).execute(this.input, this.tracker);
