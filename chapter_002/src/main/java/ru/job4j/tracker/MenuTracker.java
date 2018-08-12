@@ -55,8 +55,8 @@ public class MenuTracker {
     public void fillActions(StartUI input) {
         this.actions.add(new AddItem(0, "-----Добавление новой заявки-----."));
         this.actions.add(new ShowItems(1, "-----Отобразить все заявки в системе------."));
-        this.actions.add(new MenuTracker.EditItem(2, "-----Редактирование заявки------."));
-        this.actions.add(new MenuTracker.DeleteItem(3, "-----Удаление заявки------."));
+        this.actions.add(new EditItem(2, "-----Редактирование заявки------."));
+        this.actions.add(new DeleteItem(3, "-----Удаление заявки------."));
         this.actions.add(new FindItemById(4, "-----Поиск заявки по уникальному ID------"));
         this.actions.add(new FindItemsByName(5, "------Поиск заявок по имени.------"));
         this.actions.add(new ExitProgram(input, 6, "------Выход из программы.------"));
@@ -65,7 +65,7 @@ public class MenuTracker {
     /**
      * Метод в зависимости от ключа выполняет определнное действие в массиве .
      *
-     * @param key ключ действия
+     * @param key ключ действия.
      */
     public void select(int key) {
         this.actions.get(key).execute(this.input, this.tracker);
@@ -82,26 +82,17 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Внутренний класс расширяет абстракстный класс.
+     */
+    private class AddItem extends BaseAction {
 
-    private class AddItem implements UserAction {
-        private int key;
-        private String desc;
 
-        public AddItem(int key, String desc) {
-            this.key = key;
-            this.desc = desc;
-        }
-
-        /**
-         * Пункт меню соответствующий добавлению заявки.
-         *
-         * @return ключ.
-         */
-        @Override
-        public int key() {
-            return this.key;
+        public AddItem(int key, String name) {
+            super(key, name);
 
         }
+
 
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -111,30 +102,20 @@ public class MenuTracker {
             System.out.println("Создана заявка : " + item.toString());
         }
 
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "-----Добавление новой заявки-----.");
-        }
 
     }
 
-    private class ShowItems implements UserAction {
-        private int key;
-        private String desc;
+    /**
+     * Внутренний класс расширяет абстрактный класс.
+     */
+    private class ShowItems extends BaseAction {
 
-        public ShowItems(int key, String desc) {
-            this.key = key;
-            this.desc = desc;
+
+        public ShowItems(int key, String name) {
+            super(key, name);
+
         }
 
-        /**
-         * Пункт меню соотвестует отображению всех заявок в трекере.
-         */
-
-        @Override
-        public int key() {
-            return this.key;
-        }
 
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -145,29 +126,19 @@ public class MenuTracker {
             }
         }
 
-        @Override
-        public String info() {
-            return String.format("%s. %s.", this.key(), "Все заявки в системе");
-        }
     }
 
-    private class EditItem implements UserAction {
-        private int key;
-        private String desc;
+    /**
+     * Внутренний класс расширяет абстрактный класс.
+     */
+    private class EditItem extends BaseAction {
 
-        public EditItem(int key, String desc) {
-            this.key = key;
-            this.desc = desc;
+
+        public EditItem(int key, String name) {
+            super(key, name);
 
         }
 
-        /**
-         * Пункт меню соответствует редактированию заявки по id.
-         */
-        @Override
-        public int key() {
-            return this.key;
-        }
 
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -186,28 +157,23 @@ public class MenuTracker {
 
         }
 
-        @Override
-        public String info() {
-            return String.format("%s. %s.", this.key(), "Edit Item by ID");
-        }
     }
 
-    private class DeleteItem implements UserAction {
-        private int key;
-        private String desc;
+    /**
+     * Внутренний класс расширяет абстрактный класс.
+     */
+    private class DeleteItem extends BaseAction {
 
-        public DeleteItem(int key, String desc) {
-            this.key = key;
-            this.desc = desc;
+
+        public DeleteItem(int key, String name) {
+            super(key, name);
+
         }
 
         /**
          * Пункт соответстует удаленю заявки из трекера.
          */
-        @Override
-        public int key() {
-            return this.key;
-        }
+
 
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -220,28 +186,19 @@ public class MenuTracker {
             }
         }
 
-        @Override
-        public String info() {
-            return String.format("%s. %s.", this.key(), "Delete Item by ID");
-        }
     }
 
-    private class FindItemById implements UserAction {
-        private int key;
-        private String desc;
+    /**
+     * Внутренний класс расширяет абстракстный класс.
+     */
+    private class FindItemById extends BaseAction {
 
-        public FindItemById(int key, String desc) {
-            this.key = key;
-            this.desc = desc;
+
+        public FindItemById(int key, String name) {
+            super(key, name);
+
         }
 
-        /**
-         * Пункт соотвестует поиску заявки по ID
-         */
-        @Override
-        public int key() {
-            return this.key;
-        }
 
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -250,29 +207,21 @@ public class MenuTracker {
 
         }
 
-        @Override
-        public String info() {
-            return String.format("%s. %s.", this.key(), "Find Item by ID");
-        }
 
     }
 
-    private class FindItemsByName implements UserAction {
-        private int key;
-        private String desc;
+    /**
+     * Внутренний класс раширяет асбстрактный класс.
+     */
+    private class FindItemsByName extends BaseAction {
 
-        public FindItemsByName(int key, String desc) {
-            this.key = key;
-            this.desc = desc;
+
+        public FindItemsByName(int key, String name) {
+            super(key, name);
+
+
         }
 
-        /**
-         * Пункт меню соответствует поиску заявок по имени.
-         */
-        @Override
-        public int key() {
-            return this.key;
-        }
 
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -280,10 +229,6 @@ public class MenuTracker {
             System.out.println("Ваша заявка" + Arrays.toString(tracker.findByName(name)));
         }
 
-        @Override
-        public String info() {
-            return String.format("%s. %s.", this.key(), "Поиск заявок по имени.");
-        }
     }
 
     private class ExitProgram implements UserAction {
