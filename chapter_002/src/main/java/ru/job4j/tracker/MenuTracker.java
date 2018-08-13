@@ -231,21 +231,12 @@ public class MenuTracker {
 
     }
 
-    private class ExitProgram implements UserAction {
+    private class ExitProgram extends BaseAction {
         private final StartUI input;
-        private int key;
-        private String desc;
 
         public ExitProgram(StartUI input, int key, String desc) {
+            super(key, desc);
             this.input = input;
-            this.key = key;
-            this.desc = desc;
-
-        }
-
-        @Override
-        public int key() {
-            return this.key;
         }
 
         @Override
@@ -254,10 +245,6 @@ public class MenuTracker {
             System.out.println("-----Выход из программы-----");
         }
 
-        @Override
-        public String info() {
-            return String.format("%s. %s.", this.key(), "Выход из програмы");
-        }
     }
 
 
