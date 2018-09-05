@@ -5,6 +5,7 @@ import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 import ru.job4j.chess.firuges.ImposibleMoveExeptions;
 
+
 /**
  * @author Petr Arsentev (parsentev@yandex.ru)
  * @version $Id$
@@ -31,15 +32,20 @@ public class BishopBlack implements Figure {
      */
     @Override
     public Cell[] way(Cell source, Cell dest) throws ImposibleMoveExeptions {
-        Cell[] move;
         if (!isDiagonal(source, dest)) {
-            throw new ImposibleMoveExeptions("Данная фигура не может ходить.");
-        } else {
-            move = new Cell[]{dest};
+            throw new ImposibleMoveExeptions();
         }
-
+        Cell[] move = new Cell[Math.abs(source.x - dest.x)];
+        int deltaX = Integer.compare(source.x, dest.x);
+        int deltaY = Integer.compare(source.y, dest.y);
+        for (int i = 0; i < move.length; i++) {
+            move[i] = Cell.values()[(8 * (source.x - deltaX)) + (source.y - deltaY)];
+            deltaX = deltaX < 0 ? deltaX - 1 : deltaX + 1;
+            deltaY = deltaY < 0 ? deltaY - 1 : deltaY + 1;
+        }
         return move;
     }
+
 
 
     @Override

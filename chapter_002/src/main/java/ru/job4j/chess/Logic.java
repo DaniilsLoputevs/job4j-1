@@ -20,7 +20,7 @@ public class Logic {
         this.figures[this.index++] = figure;
     }
 
-    public boolean move(Cell source, Cell dest) throws ImposibleMoveExeptions {
+    public boolean move(Cell source, Cell dest) {
         boolean rst = false;
         int index = this.findBy(source);
         try {
@@ -31,10 +31,10 @@ public class Logic {
                     this.figures[index] = this.figures[index].copy(dest);
                 }
             }
-            return rst;
         } catch (ImposibleMoveExeptions exeptions) {
-            throw new ImposibleMoveExeptions("Неверный ход для фигуры.");
+            System.out.println("Фигура не имеет возможности так ходить!");
         }
+        return rst;
     }
 
     public void clean() {
