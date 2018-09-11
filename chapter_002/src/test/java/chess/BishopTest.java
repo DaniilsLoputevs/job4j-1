@@ -11,10 +11,23 @@ import ru.job4j.chess.firuges.exeptions.OccupiedWayException;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+/**
+ * Тесты на поведение фигуры Bishop Black.
+ *
+ * @author Sergey Bolshanin
+ * @version 1.0
+ * @since 11.09.2018
+ */
 
 public class BishopTest {
 
-
+    /**
+     * Проверка правильности ходов Слона .
+     *
+     * @throws OccupiedWayException    = путь занят.
+     * @throws FigureNotFoundException = фигура не найдена.
+     * @throws ImposibleMoveExeptions  = фигура не может так ходить.
+     */
     @Test
     public void whenBishopMoveRight() throws OccupiedWayException, FigureNotFoundException, ImposibleMoveExeptions {
         Logic logic = new Logic();
@@ -23,6 +36,13 @@ public class BishopTest {
 
     }
 
+    /**
+     * Тест на проверку невозможности хода фигуры .
+     *
+     * @throws OccupiedWayException    = путь занят
+     * @throws FigureNotFoundException = фигура не найдена
+     * @throws ImposibleMoveExeptions  = фигура не может так ходить.
+     */
     @Test(expected = ImposibleMoveExeptions.class)
     public void whenBishopBlackCanNotMove() throws OccupiedWayException, FigureNotFoundException, ImposibleMoveExeptions {
         Logic logic = new Logic();
@@ -30,6 +50,13 @@ public class BishopTest {
         assertThat(logic.move(Cell.F1, Cell.B1), is(false));
     }
 
+    /**
+     * Тест на полный путь фигуры по координатам шахматной доски.
+     *
+     * @throws OccupiedWayException    = путь занят
+     * @throws FigureNotFoundException = фигура не найдена
+     * @throws ImposibleMoveExeptions  = фигура не может так ходить.
+     */
     @Test
     public void whenBishopMoveInDiagonal() throws OccupiedWayException, FigureNotFoundException, ImposibleMoveExeptions {
         BishopBlack bishop = new BishopBlack(Cell.F1);
