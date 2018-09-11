@@ -6,5 +6,6 @@ package ru.job4j.chess.firuges.exeptions;
 public class ImposibleMoveExeptions extends Exception {
 
     public ImposibleMoveExeptions() {
+        super("Данная фигура не может так ходить");
     }
 }
