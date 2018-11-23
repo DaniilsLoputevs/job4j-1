@@ -5,7 +5,7 @@ import java.util.List;
  *
  * @author Sergey Bolshanin (dinospb@gmail.com)
  * @version $Id$
- * @since 06.11.2018
+ * @since 21.11.2018
  */
 
 public class ConvertList2Array {
