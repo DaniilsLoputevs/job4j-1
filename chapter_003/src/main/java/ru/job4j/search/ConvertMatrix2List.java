@@ -20,8 +20,8 @@ public class ConvertMatrix2List {
      */
     public List<Integer> list(int[][] array) {
         List<Integer> integerList = new ArrayList<Integer>();
-        for (int i = 0; i < array.length; i++) {
-            for (int integer : array[i]) {
+        for (int[] one : array) {
+            for (int integer : one) {
                 integerList.add(integer);
 
             }
