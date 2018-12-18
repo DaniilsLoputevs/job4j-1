@@ -16,7 +16,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
-        assertThat(tracker.findAll()[0], is(item));
+        assertThat(tracker.findAll().get(0), is(item));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class TrackerTest {
         Item secondItem = new Item("secondTestItem", "secondTestDesc", 234L);
         tracker.add(firstItem);
         tracker.add(secondItem);
-        assertThat(tracker.findAll().length, is(2));
+        assertThat(tracker.findAll().size(), is(2));
 
     }
 
@@ -71,7 +71,7 @@ public class TrackerTest {
         tracker.add(secondItem);
         tracker.add(secondItem2);
         tracker.add(thirdItem);
-        Item[] result = tracker.findByName("secondTestItem");
+        Item[] result = tracker.findByName("secondTestItem").toArray(new Item[0]);
         Item[] expect = {secondItem, secondItem2, thirdItem};
         assertThat(result, arrayContainingInAnyOrder(expect));
     }

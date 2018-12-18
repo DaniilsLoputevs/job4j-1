@@ -120,10 +120,12 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             System.out.println("------Все заявки в системе------");
-            Item[] item = tracker.findAll();
-            for (int i = 0; i < item.length; i++) {
-                System.out.println("Task:" + item[i]);
+            ArrayList<Item> finded = tracker.findAll();
+            for (Item value : finded) {
+                System.out.println("Task:" + value.toString());
             }
+
+
         }
 
     }
@@ -226,7 +228,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Ввведите имя заявки");
-            System.out.println("Ваша заявка" + Arrays.toString(tracker.findByName(name)));
+            System.out.println("Ваша заявка" + (tracker.findByName(name)));
         }
 
     }

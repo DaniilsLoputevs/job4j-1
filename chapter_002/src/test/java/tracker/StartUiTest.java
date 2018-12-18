@@ -37,7 +37,7 @@ public class StartUiTest {
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Input input = new StubInput(new String[]{"0", "TestName", "TestDesc", "6", "6", "y"});   //создаём StubInput с последовательностью действий
         new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
-        assertThat(tracker.findAll()[0].getName(), is("TestName")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
+        assertThat(item.getName(), is("TestName")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
 
     /**
@@ -73,7 +73,7 @@ public class StartUiTest {
     public void whenFindByName() {
         Input input = new StubInput(new String[]{"5", item.getName(), "6", "6", "y"});
         new StartUI(input, tracker).init();
-        Item[] result = tracker.findByName("TestName");
+        Item[] result = tracker.findByName("TestName").toArray(new Item[0]);
         Item[] expect = {item};
         assertThat(result, arrayContainingInAnyOrder(expect));
     }
@@ -86,7 +86,7 @@ public class StartUiTest {
     public void whenFindAllItem() {
         Input input = new StubInput(new String[]{"1", "6", "6", "y"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll().length, is(1));
+        assertThat(tracker.findAll().size(), is(1));
     }
 
     /**
