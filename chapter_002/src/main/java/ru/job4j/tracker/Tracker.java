@@ -1,8 +1,8 @@
 package ru.job4j.tracker;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Sergey Bolshanin(dinospb@gmail.com)
@@ -13,7 +13,7 @@ public class Tracker {
     /**
      * Массив для хранение заявок.
      */
-    private ArrayList<Item> items = new ArrayList<Item>();
+    private List<Item> items = new ArrayList<Item>();
 
 
     /**
@@ -57,7 +57,7 @@ public class Tracker {
      *
      * @return итоговый массив.
      */
-    public ArrayList<Item> findAll() {
+    public List<Item> findAll() {
 
         return new ArrayList<>(items);
     }
@@ -69,12 +69,12 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean res = false;
-        for (Item value : items) {
-            if (value.getId().equals(id)) {
-                items.remove(value);
+        for (int index = 0; index < items.size(); index++) {
+            if ((items.get(index) != null) && (items.get(index).getId().equals(id))) {
+                this.items.remove(index);
+                res = true;
+                break;
             }
-            res = true;
-            break;
         }
         return res;
     }

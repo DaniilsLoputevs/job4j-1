@@ -2,7 +2,7 @@ package ru.job4j.tracker;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * Package for OOP task.
@@ -120,7 +120,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             System.out.println("------Все заявки в системе------");
-            ArrayList<Item> finded = tracker.findAll();
+            List<Item> finded = tracker.findAll();
             for (Item value : finded) {
                 System.out.println("Task:" + value.toString());
             }
