@@ -1,5 +1,7 @@
 package ru.job4j.search;
 
+import ru.job4j.search.Task;
+
 import java.util.LinkedList;
 
 /**

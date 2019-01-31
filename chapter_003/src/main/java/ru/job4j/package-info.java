@@ -5,4 +5,4 @@
 * @version $Id$
 * @since 06.11.2018
 */
-package ru.job4j.search;
+package ru.job4j;
