@@ -1,6 +1,7 @@
 package ru.job4j.search;
 
 import org.junit.Test;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -39,7 +40,8 @@ public class PriorityQueueTest {
         priorityQueue.put(new Task("Выполнить работу ", 3));
         priorityQueue.put(new Task("Читать теорию по Java", 2));
         priorityQueue.put(new Task("Практиковаться по задачам", 1));
+        priorityQueue.put(new Task("Практиковаться", 1));
         Task result = priorityQueue.take();
-        assertThat(result.getDesc(), is("Практиковаться по задачам"));
+        assertThat(result.getDesc(), is("Практиковаться"));
     }
 }
