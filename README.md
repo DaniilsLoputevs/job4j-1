@@ -1,3 +1,2 @@
-﻿# http://job4j.ru/
-1.Изучение JAVA программирования до возможности устроится на работу
-2. Сделать это к 2020 году попутно получив образование .
+﻿[![Build Status](https://travis-ci.org/eveletspb/job4j.svg?branch=master)](https://travis-ci.org/eveletspb/job4j)
+[![codecov](https://codecov.io/gh/eveletspb/job4j/branch/master/graph/badge.svg)](https://codecov.io/gh/eveletspb/job4j)
