@@ -59,8 +59,10 @@ public class Bank {
      */
     public void addAccountToUser(String passport, Account account) {
         ArrayList<Account> t = this.map.get(findUser(passport));
-        if (t.indexOf(account) == -1) {
-            t.add(account);
+        if (!Objects.isNull(t)) {
+            if (t.indexOf(account) == -1) {
+                t.add(account);
+            }
         }
     }
 
@@ -91,10 +93,12 @@ public class Bank {
     public Account getOneAccount(String passport, String requisites) {
         List<Account> temp = findAccountsUser(passport);
         Account account = null;
-        for (Account ac : temp) {
-            if (ac.getRequisites().equals(requisites)) {
-                account = ac;
-                break;
+        if (!Objects.isNull(temp)) {
+            for (Account ac : temp) {
+                if (ac.getRequisites().equals(requisites)) {
+                    account = ac;
+                    break;
+                }
             }
         }
         return account;
