@@ -60,7 +60,7 @@ public class Bank {
     public void addAccountToUser(String passport, Account account) {
         ArrayList<Account> t = this.map.get(findUser(passport));
         if (!Objects.isNull(t)) {
-            if (t.indexOf(account) == -1) {
+            if (!t.contains(account)) {
                 t.add(account);
             }
         }
