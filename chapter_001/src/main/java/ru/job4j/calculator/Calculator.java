@@ -1,7 +1,7 @@
-package ru.job4j.Calculator;
+package ru.job4j.calculator;
 
 /**
- * Calculator.
+ * calculator.
  *
  * @author Sergey Bolshanin (dinospb@gmail.com)
  * @version $Id$
