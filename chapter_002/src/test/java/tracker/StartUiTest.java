@@ -5,6 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.job4j.tracker.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.function.Consumer;
 import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainingInAnyOrder;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
@@ -12,6 +15,16 @@ import static org.junit.Assert.assertThat;
 
 
 public class StartUiTest {
+
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private final Consumer<String> output = new Consumer<String>() {
+        private final PrintStream stdout = new PrintStream(out);
+
+        @Override
+        public void accept(String s) {
+            stdout.println(s);
+        }
+    };
 
     private final Tracker tracker = new Tracker();
     public Item item = new Item("TestName", "Test");
@@ -36,7 +49,7 @@ public class StartUiTest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Input input = new StubInput(new String[]{"0", "TestName", "TestDesc", "6", "6", "y"});   //создаём StubInput с последовательностью действий
-        new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
+        new StartUI(input, tracker, output).init();     //   создаём StartUI и вызываем метод init()
         assertThat(item.getName(), is("TestName")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
 
@@ -49,7 +62,7 @@ public class StartUiTest {
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "6", "6", "y"});
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
     }
@@ -61,7 +74,7 @@ public class StartUiTest {
     @Test
     public void whenDeleteItemById() {
         Input input = new StubInput(new String[]{"3", item.getId(), "6", "6", "y"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         assertThat(tracker.findById(item.getId()), is(nullValue()));
     }
 
@@ -72,7 +85,7 @@ public class StartUiTest {
     @Test
     public void whenFindByName() {
         Input input = new StubInput(new String[]{"5", item.getName(), "6", "6", "y"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         Item[] result = tracker.findByName("TestName").toArray(new Item[0]);
         Item[] expect = {item};
         assertThat(result, arrayContainingInAnyOrder(expect));
@@ -85,7 +98,7 @@ public class StartUiTest {
     @Test
     public void whenFindAllItem() {
         Input input = new StubInput(new String[]{"1", "6", "6", "y"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         assertThat(tracker.findAll().size(), is(1));
     }
 
@@ -96,8 +109,10 @@ public class StartUiTest {
     @Test
     public void whenFindById() {
         Input input = new StubInput(new String[]{"4", item.getId(), "6", "6", "y"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         assertThat(tracker.findById(item.getId()), is(item));
     }
 
+
 }
+
