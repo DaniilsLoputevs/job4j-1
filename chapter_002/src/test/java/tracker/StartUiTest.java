@@ -8,6 +8,7 @@ import ru.job4j.tracker.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.function.Consumer;
+
 import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainingInAnyOrder;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
@@ -15,8 +16,17 @@ import static org.junit.Assert.assertThat;
 
 
 public class StartUiTest {
-
+    private final PrintStream stdout = System.out;
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private static final String ls = System.lineSeparator();
+    private static final StringBuilder sb = new StringBuilder("0 : -----Добавление новой заявки-----.").append(ls)
+            .append("1 : -----Отобразить все заявки в системе------.").append(ls)
+            .append("2 : -----Редактирование заявки------.").append(ls)
+            .append("3 : -----Удаление заявки------.").append(ls)
+            .append("4 : -----Поиск заявки по уникальному ID------").append(ls)
+            .append("5 : ------Поиск заявок по имени.------").append(ls)
+            .append("6 : ------Выход из программы.------");
+
     private final Consumer<String> output = new Consumer<String>() {
         private final PrintStream stdout = new PrintStream(out);
 
@@ -24,7 +34,13 @@ public class StartUiTest {
         public void accept(String s) {
             stdout.println(s);
         }
+
+        @Override
+        public String toString() {
+            return out.toString();
+        }
     };
+
 
     private final Tracker tracker = new Tracker();
     public Item item = new Item("TestName", "Test");
@@ -113,6 +129,46 @@ public class StartUiTest {
         assertThat(tracker.findById(item.getId()), is(item));
     }
 
+    @Test
+    public void whenTestingFindByIdinOutput() {
+        String[] actions = new String[]{"4", item.getId(), "6", "6", "y"};
+        new StartUI(new StubInput(actions), tracker, output).init();
+
+
+    }
+
+    @Test
+    public void displayAllItems() {
+        Input input = new StubInput(new String[]{"1", "6"});
+        new StartUI(input, tracker, output).init();
+        assertThat(output.toString(), is(sb.toString() + ls +
+                "------Все заявки в системе------" + ls +
+                "Task:" +
+                item.toString() + ls +
+                sb.toString() + ls +
+                "-----Выход из программы-----" + ls
+        ));
+    }
+
+    @Test
+    public void displayExitProgram() {
+        Input input = new StubInput(new String[]{"6"});
+        new StartUI(input, tracker, output).init();
+        assertThat(output.toString(), is(sb.toString() + ls +
+                "-----Выход из программы-----" + ls));
+    }
+
+    @Test
+    public void displayFindbyNameTest() {
+        Input input = new StubInput(new String[]{"5", "TestName", "6"});
+        new StartUI(input, tracker, output).init();
+        assertThat(output.toString(), is(sb.toString() + ls +
+                "Ваша заявка" + "[" +
+                item.toString() + "]" + ls +
+                sb.toString() + ls +
+                "------Выход из программы.------" + ls
+        ));
+    }
 
 }
 

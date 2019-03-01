@@ -249,7 +249,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             this.input.stop();
-            output.accept("-----Выход из программы-----");
+            output.accept("------Выход из программы.------");
         }
 
     }
