@@ -18,13 +18,13 @@ import static org.junit.Assert.assertThat;
 public class StartUiTest {
     private final PrintStream stdout = System.out;
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
-    private static final String ls = System.lineSeparator();
-    private static final StringBuilder sb = new StringBuilder("0 : -----Добавление новой заявки-----.").append(ls)
-            .append("1 : -----Отобразить все заявки в системе------.").append(ls)
-            .append("2 : -----Редактирование заявки------.").append(ls)
-            .append("3 : -----Удаление заявки------.").append(ls)
-            .append("4 : -----Поиск заявки по уникальному ID------").append(ls)
-            .append("5 : ------Поиск заявок по имени.------").append(ls)
+    private static final String LS = System.lineSeparator();
+    private static final StringBuilder SB = new StringBuilder("0 : -----Добавление новой заявки-----.").append(LS)
+            .append("1 : -----Отобразить все заявки в системе------.").append(LS)
+            .append("2 : -----Редактирование заявки------.").append(LS)
+            .append("3 : -----Удаление заявки------.").append(LS)
+            .append("4 : -----Поиск заявки по уникальному ID------").append(LS)
+            .append("5 : ------Поиск заявок по имени.------").append(LS)
             .append("6 : ------Выход из программы.------");
 
     private final Consumer<String> output = new Consumer<String>() {
@@ -141,12 +141,21 @@ public class StartUiTest {
     public void displayAllItems() {
         Input input = new StubInput(new String[]{"1", "6"});
         new StartUI(input, tracker, output).init();
-        assertThat(output.toString(), is(sb.toString() + ls +
-                "------Все заявки в системе------" + ls +
-                "Task:" +
-                item.toString() + ls +
-                sb.toString() + ls +
-                "-----Выход из программы-----" + ls
+        assertThat(output.toString(), is(SB.toString() + LS
+                +
+                "------Все заявки в системе------"
+                + LS
+                +
+                "Task:"
+                +
+                item.toString()
+                + LS
+                +
+                SB.toString()
+                + LS
+                +
+                "------Выход из программы.------"
+                + LS
         ));
     }
 
@@ -154,19 +163,31 @@ public class StartUiTest {
     public void displayExitProgram() {
         Input input = new StubInput(new String[]{"6"});
         new StartUI(input, tracker, output).init();
-        assertThat(output.toString(), is(sb.toString() + ls +
-                "-----Выход из программы-----" + ls));
+        assertThat(output.toString(), is(SB.toString()
+                + LS
+                +
+                "------Выход из программы.------" + LS));
     }
 
     @Test
     public void displayFindbyNameTest() {
         Input input = new StubInput(new String[]{"5", "TestName", "6"});
         new StartUI(input, tracker, output).init();
-        assertThat(output.toString(), is(sb.toString() + ls +
-                "Ваша заявка" + "[" +
-                item.toString() + "]" + ls +
-                sb.toString() + ls +
-                "------Выход из программы.------" + ls
+        assertThat(output.toString(), is(SB.toString()
+                + LS
+                +
+                "Ваша заявка"
+                + "["
+                +
+                item.toString()
+                + "]"
+                + LS
+                +
+                SB.toString()
+                + LS
+                +
+                "------Выход из программы.------"
+                + LS
         ));
     }
 
