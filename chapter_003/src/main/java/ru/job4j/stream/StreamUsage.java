@@ -40,6 +40,7 @@ public class StreamUsage {
                 new Task("Task #2", 100),
                 new Task("Bug #3", 100)
         );
+        //Фильтрация
         List<Task> bugs = tasks.stream().filter(
                 task -> task.name.contains("Bug")
         ).collect(Collectors.toList());
