@@ -39,7 +39,6 @@ public class StartUI {
         this.output = output;
     }
 
-
     /**
      * Основной цикл программы.
      */
