@@ -8,6 +8,8 @@ import java.util.Objects;
  * @since 13.03.2019
  */
 public class Student {
+    private int score;
+
     public Student(int score) {
         this.score = score;
     }
@@ -16,7 +18,6 @@ public class Student {
         return score;
     }
 
-    private int score;
 
     @Override
     public String toString() {
