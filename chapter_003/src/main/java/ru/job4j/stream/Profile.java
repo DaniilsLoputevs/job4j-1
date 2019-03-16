@@ -2,7 +2,7 @@ package ru.job4j.stream;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 /**
  * @author Sergey Bolshanin (dinospb@gmail.com)
@@ -33,9 +33,8 @@ public class Profile {
      * @return результат введенный с помощью потока
      */
     List<Address> collect(List<Profile> profiles) {
-        Stream<Address> addressStream = profiles.stream().map(address -> new Address(address.getAddress().getCity(), address.getAddress().getStreet(), address.getAddress().getHome(), address.getAddress().getApartment()));
-        List<Address> addressresult = addressStream.collect(Collectors.toList());
-        return addressresult;
+
+        return profiles.stream().map(profile -> profile.address).collect(Collectors.toList());
     }
 
     @Override
