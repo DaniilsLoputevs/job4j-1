@@ -37,6 +37,18 @@ public class Profile {
         return profiles.stream().map(profile -> profile.address).collect(Collectors.toList());
     }
 
+    /**
+     * Метод возвращает структуру данных со списком уникальных данных отсортированных
+     *
+     * @param profiles структура данных с карточками клиентов
+     * @return результат введенный с помошью потока
+     */
+    List<Address> collectUnique(List<Profile> profiles) {
+        return profiles.stream().sorted((o1, o2) -> {
+            return o1.getAddress().getCity().compareToIgnoreCase(o2.getAddress().getCity());
+        }).map(profile -> profile.address).distinct().collect(Collectors.toList());
+    }
+
     @Override
     public String toString() {
         return "Profile{"
