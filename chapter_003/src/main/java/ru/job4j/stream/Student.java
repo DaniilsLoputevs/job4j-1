@@ -1,6 +1,8 @@
 package ru.job4j.stream;
 
+
 import java.util.Objects;
+
 
 /**
  * @author Sergey Bolshanin (dinospb@gmail.com)
@@ -9,6 +11,18 @@ import java.util.Objects;
  */
 public class Student {
     private int score;
+    private String lastName;
+
+    public Student(int score, String lastName) {
+        this.score = score;
+        this.lastName = lastName;
+    }
+
+
+    public String getLastName() {
+        return lastName;
+    }
+
 
     public Student(int score) {
         this.score = score;
@@ -17,7 +31,6 @@ public class Student {
     public int getScore() {
         return score;
     }
-
 
     @Override
     public String toString() {
