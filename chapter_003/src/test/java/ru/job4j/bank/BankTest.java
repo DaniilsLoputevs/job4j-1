@@ -12,16 +12,15 @@ public class BankTest {
     public void addUserComplete() {
         Bank bank = new Bank();
         User user = new User("Andrew", "256666z");
-        bank.addUser(user);
-        assertEquals(bank.findUser("256666z"), user);
+        assertThat(bank.addUser(user), is(true));
     }
 
-    @Test(expected = UserExeptions.class)
+    @Test
     public void whenExpectedExeptionsWithDuplicateUser() {
         Bank bank = new Bank();
         User user = new User("Andrew", "256666z");
         bank.addUser(user);
-        bank.addUser(user);
+        assertThat(bank.addUser(user), is(false));
     }
 
     @Test
@@ -79,7 +78,7 @@ public class BankTest {
         bank.addAccountToUser("256z", account);
         bank.addAccountToUser("256z", account1);
         bank.deleteAccountFromUser("256z", account);
-        assertThat(bank.findAccountsUser("256z").size(), is(1));
+        assertThat(bank.deleteAccountFromUser("256z", account), is(true));
     }
 
     @Test

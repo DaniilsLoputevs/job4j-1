@@ -2,6 +2,7 @@ package ru.job4j.bank;
 
 import java.util.*;
 
+
 /**
  * @author Sergey Bolshanin (dinospb@gmail.com)
  * @version 0.1$
@@ -18,10 +19,13 @@ public class Bank {
      *
      * @param user - новый пользователь.
      */
-    public void addUser(User user) {
-        if (this.map.putIfAbsent(user, new ArrayList<>()) != null) {
-            throw new UserExeptions("Пользователь уже существует.");
+    public boolean addUser(User user) {
+        boolean rs = false;
+        if (this.map.putIfAbsent(user, new ArrayList<>()) == null) {
+            rs = true;
+
         }
+        return rs;
     }
 
     /**
@@ -31,14 +35,7 @@ public class Bank {
      * @return - Найденный результат или исключение .
      */
     public User findUser(String passport) {
-        User find = null;
-        for (User user : this.map.keySet()) {
-            if (passport.equals(user.getPassport())) {
-                find = user;
-                break;
-
-            }
-        }
+        User find = this.map.keySet().stream().filter(user -> user.getPassport().equals(passport)).findAny().orElse(null);
         return find;
     }
 
@@ -59,11 +56,10 @@ public class Bank {
      */
     public void addAccountToUser(String passport, Account account) {
         ArrayList<Account> t = this.map.get(findUser(passport));
-        if (!Objects.isNull(t)) {
-            if (!t.contains(account)) {
-                t.add(account);
-            }
+        if (!t.contains(account)) {
+            t.add(account);
         }
+
     }
 
     /**
@@ -91,17 +87,10 @@ public class Bank {
      * @return - найденный счёт.
      */
     public Account getOneAccount(String passport, String requisites) {
+        Account finded = null;
         List<Account> temp = findAccountsUser(passport);
-        Account account = null;
-        if (!Objects.isNull(temp)) {
-            for (Account ac : temp) {
-                if (ac.getRequisites().equals(requisites)) {
-                    account = ac;
-                    break;
-                }
-            }
-        }
-        return account;
+        finded = temp.stream().filter(account -> account.getRequisites().equals(requisites)).findAny().orElse(null);
+        return finded;
     }
 
     /**
@@ -110,17 +99,14 @@ public class Bank {
      * @param passport - паспорт пользователя.
      * @param account  - удаляемый элемент.
      */
-    public void deleteAccountFromUser(String passport, Account account) {
-        User user = findUser(passport);
-        if (!Objects.isNull(user)) {
-            List<Account> accounts = map.get(user);
-            for (int i = 0; i < accounts.size(); i++) {
-                if (accounts.get(i).getRequisites().equals(account.getRequisites())) {
-                    accounts.remove(i);
-                    break;
-                }
-            }
+    public boolean deleteAccountFromUser(String passport, Account account) {
+        boolean rs = false;
+        ArrayList<Account> finded = this.map.get(findUser(passport));
+        if (!Objects.isNull(finded)) {
+            finded.removeIf(account1 -> account.equals(account1));
+            rs = true;
         }
+        return rs;
     }
 
     /**
@@ -157,4 +143,5 @@ public class Bank {
                 +
                 '}';
     }
+
 }
