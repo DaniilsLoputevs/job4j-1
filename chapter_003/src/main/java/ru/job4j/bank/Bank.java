@@ -15,8 +15,6 @@ public class Bank {
 
     /**
      * Добавление пользователя с проверкой при помощи метода putIfAbsent
-     * пробрасывает исключение  "Пользователь уже добавлен"
-     *
      * @param user - новый пользователь.
      */
     public boolean addUser(User user) {
@@ -55,11 +53,12 @@ public class Bank {
      * @param account  - счёт.
      */
     public void addAccountToUser(String passport, Account account) {
-        ArrayList<Account> t = this.map.get(findUser(passport));
-        if (!t.contains(account)) {
-            t.add(account);
+        if (!Objects.isNull(findAccountsUser(passport))) {
+            ArrayList<Account> t = this.map.get(findUser(passport));
+            if (!t.contains(account)) {
+                t.add(account);
+            }
         }
-
     }
 
     /**
