@@ -54,8 +54,9 @@ public class Bank {
      * @param account  - счёт.
      */
     public void addAccountToUser(String passport, Account account) {
-        if (!Objects.isNull(findAccountsUser(passport))) {
-            ArrayList<Account> t = this.map.get(findUser(passport));
+        User rs = findUser(passport);
+        if (!Objects.isNull(rs)) {
+            ArrayList<Account> t = this.map.get(rs);
             if (!t.contains(account)) {
                 t.add(account);
             }
