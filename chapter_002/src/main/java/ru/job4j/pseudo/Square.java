@@ -10,7 +10,7 @@ package ru.job4j.pseudo;
 public class Square implements Shape {
     /**
      * @return Фигура
-     * @Override метод по прорисовке фигуры используя интерфейс Shape.
+     *  метод по прорисовке фигуры используя интерфейс Shape.
      */
     @Override
     public String draw() {

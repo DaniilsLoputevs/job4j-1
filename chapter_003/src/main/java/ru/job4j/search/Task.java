@@ -22,21 +22,11 @@ public class Task {
         this.priority = priority;
     }
 
-    /**
-     * Геттер для поля
-     *
-     * @return - поле описание задачи.
-     */
 
     public String getDesc() {
         return desc;
     }
 
-    /**
-     * Геттер для поля
-     *
-     * @return - поле приоритет для задачи.
-     */
     public int getPriority() {
         return priority;
     }

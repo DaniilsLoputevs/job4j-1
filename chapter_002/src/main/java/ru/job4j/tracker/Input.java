@@ -11,8 +11,10 @@ import java.util.List;
 
 public interface Input {
     /**
-     * Интерфейс использующийся в программе Трекер
-     * @param question Сообщение
+     *  Интерфейс использующийся в программе Трекер
+     *  question Сообщение
+     * @param question
+     * @return
      */
     String ask(String question);
     int ask(String question, List<Integer> range);

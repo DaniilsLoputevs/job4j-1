@@ -8,9 +8,9 @@ package ru.job4j.array;
  */
 public class Check {
     /**
-     * The method checks the array-true or false.
-     * @param data
-     * @return boolean type.
+     *  The method checks the array-true or false.
+     * @param data входящий массив boolean элементов.
+     * @return boolean результат проверки
      */
     public boolean mono(boolean[] data) {
         boolean result = true;

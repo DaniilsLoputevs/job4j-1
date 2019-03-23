@@ -11,7 +11,7 @@ public class Board {
      *
      * @param width ширина
      * @param height высота
-     * @return
+     * @return результат отрисовки
      */
     public String paint(int width, int height) {
         StringBuilder screen = new StringBuilder();

@@ -11,9 +11,8 @@ package ru.job4j.array;
 public class BubbleSort {
     /**
      * Bubble Sort operation.
-     *
-     * @param array
-     * @return sorted array.
+     * @param array входящий массив для сортировки.
+     * @return отсортированный массив int элементов.
      */
 
     public int[] sort(int[] array) {

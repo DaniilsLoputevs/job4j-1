@@ -16,6 +16,7 @@ public class Bank {
     /**
      * Добавление пользователя с проверкой при помощи метода putIfAbsent
      * @param user - новый пользователь.
+     * @return true\false добавление пользователя в структуру.
      */
     public boolean addUser(User user) {
         boolean rs = false;
@@ -65,7 +66,7 @@ public class Bank {
      * Метод по поиску счетов пользователя.
      *
      * @param passport - паспорт.
-     * @return - List<Account> найденных счетов.
+     * @return - List найденных счетов.
      */
 
     public List<Account> findAccountsUser(String passport) {
@@ -97,6 +98,7 @@ public class Bank {
      *
      * @param passport - паспорт пользователя.
      * @param account  - удаляемый элемент.
+     * @return true\false результат удаления аккаунта у пользователя.
      */
     public boolean deleteAccountFromUser(String passport, Account account) {
         boolean rs = false;

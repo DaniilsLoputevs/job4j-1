@@ -13,7 +13,7 @@ public class ListCompare implements Comparator<String> {
      * Метод реализует собственный вариант метода compare для сравнения двух String
      * @param o1 - Первая строка.
      * @param o2 - Вторвая строка.
-     * @return результат > или < 0 или 0 ксли строки равны.
+     * @return результат  больше или меньшн 0 или 0 если строки равны.
      */
     @Override
     public int compare(String o1, String o2) {

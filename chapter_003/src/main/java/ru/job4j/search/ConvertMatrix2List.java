@@ -13,10 +13,10 @@ import java.util.List;
 
 public class ConvertMatrix2List {
     /**
-     * Метод добавляет в List<Integer> двумерный массив.
+     * Метод добавляет в List двумерный массив.
      *
      * @param array - двумерный массив
-     * @return List<Integer>
+     * @return List
      */
     public List<Integer> list(int[][] array) {
         List<Integer> integerList = new ArrayList<Integer>();

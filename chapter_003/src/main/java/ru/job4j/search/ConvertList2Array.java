@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ConvertList2Array {
     /**
-     * Метод конвертирует List<Integer> в двумерный массив.
+     * Метод конвертирует List  в двумерный массив.
      *
      * @param list- Список.
      * @param rows  - Строки.
@@ -36,10 +36,10 @@ public class ConvertList2Array {
     }
 
     /**
-     * Метод добавляется в List<Integer>, List<int[]> содержащий массив целых чисел.
+     * Метод добавляется в List  List содержащий массив целых чисел.
      *
      * @param list Список с массивом целых чисел.
-     * @return List<Integer> с добавленными целыми числами .
+     * @return List  с добавленными целыми числами .
      */
     public List<Integer> convert(List<int[]> list) {
         List<Integer> result = new ArrayList<Integer>();

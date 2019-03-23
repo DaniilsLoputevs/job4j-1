@@ -38,7 +38,7 @@ public class Converter {
     /**
      * Конвертируем доллары в рубли.
      *
-     * @param value
+     * @param value евро
      * @return Рубли
      */
 

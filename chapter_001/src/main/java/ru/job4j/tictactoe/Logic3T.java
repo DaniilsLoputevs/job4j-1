@@ -20,7 +20,7 @@ public class Logic3T {
     }
 
     /**
-     * @param predicate
+     * @param predicate функц интерфейс
      * @param startX    - starting position on line.
      * @param startY    - starting position on column.
      * @param deltaX    - movement by line.

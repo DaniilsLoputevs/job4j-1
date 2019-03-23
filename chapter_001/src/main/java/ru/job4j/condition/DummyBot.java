@@ -11,7 +11,7 @@ public class DummyBot {
     /**
      * Отвечает на вопросы
      *
-     * @param question
+     * @param question вопрос
      * @return Ответ
      */
     public String answer(String question) {
