@@ -18,17 +18,18 @@ public class PriorityQueue {
 
     /**
      * Метод добавляет задачу в связанный список с учётом приоритета задачи.
+     *
      * @param task - задача
      */
     public void put(Task task) {
-        int index = tasks.size();
+        var t = tasks.size();
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getPriority() >= task.getPriority()) {
-                index = i;
+                t = i;
                 break;
             }
         }
-        tasks.add(index, task);
+        tasks.add(t, task);
     }
 
     public Task take() {
