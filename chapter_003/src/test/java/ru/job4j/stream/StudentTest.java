@@ -16,11 +16,13 @@ public class StudentTest {
     public void collect() {
         CollectToMap collectToMap = new CollectToMap();
         List<Student> students = new ArrayList<>();
-        students.add(new Student(45, "Ivanov"));
-        students.add(new Student(46, "Petrov"));
+        Student student = new Student(45, "Ivanov");
+        Student student2 = new Student(45, "Petrov");
+        students.add(student);
+        students.add(student2);
         Map<String, Student> expected = new HashMap<>();
-        expected.put("Ivanov", new Student(45));
-        expected.put("Petrov", new Student(46));
+        expected.put(student.getLastName(), student);
+        expected.put(student2.getLastName(), student2);
         assertThat(collectToMap.collect(students), is(expected));
 
 
