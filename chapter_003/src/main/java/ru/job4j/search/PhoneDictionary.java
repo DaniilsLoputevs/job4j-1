@@ -1,7 +1,5 @@
 package ru.job4j.search;
 
-import ru.job4j.search.Person;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +12,7 @@ import java.util.List;
  */
 public class PhoneDictionary {
 
-    private List<Person> persons = new ArrayList<Person>();
+    private List<Person> persons = new ArrayList<>();
 
     /**
      * Метод добавления карточки.
@@ -33,7 +31,7 @@ public class PhoneDictionary {
      */
     public List<Person> find(String key) {
         List<Person> result = new ArrayList<>();
-        for (Person person : persons) {
+        for (var person : persons) {
             if (person.getName().contains(key) || person.getSurname().contains(key) || person.getPhone().contains(key) || person.getAdress().contains(key)) {
                 result.add(person);
             }
