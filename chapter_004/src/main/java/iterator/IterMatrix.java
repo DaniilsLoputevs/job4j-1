@@ -20,10 +20,10 @@ public class IterMatrix implements Iterator {
     @Override
     public boolean hasNext() {
         boolean rs = false;
-        if (row < array.length && column < array.length){
+        if (row < array.length && column < array.length) {
             rs = true;
         }
-        return rs ;
+        return rs;
     }
 
     @Override
