@@ -89,6 +89,10 @@ public class SimpleArray<T> implements Iterable<T> {
         return rs;
     }
 
+    public int size() {
+        return array.length;
+    }
+
 
     public static void main(String[] args) {
         SimpleArray<String> simpleArray = new SimpleArray(10);
