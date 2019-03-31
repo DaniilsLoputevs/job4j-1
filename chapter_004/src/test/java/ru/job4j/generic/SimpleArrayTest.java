@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.*;
@@ -17,7 +18,7 @@ public class SimpleArrayTest {
         assertThat(simpleArray.get(0), is(29));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void getValueInAnyPosition() {
         SimpleArray<String> stringSimpleArray = new SimpleArray<>(10);
         stringSimpleArray.add("Test");
