@@ -15,6 +15,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
 
     private Object[] array;
+
     private int position = 0;
 
     /**
@@ -33,7 +34,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param value Элемент
      */
     public void add(T value) {
-        if (checkinput(position, array.length - 1)) {
+        if (!Objects.isNull(value) && position < array.length) {
             this.array[position++] = value;
         } else {
             throw new ArrayStoreException();
@@ -47,8 +48,13 @@ public class SimpleArray<T> implements Iterable<T> {
      * @return найденный обьект.
      */
     public T get(int index) {
-        Objects.checkIndex(index, position);
-        return (T) array[index];
+        T value = null;
+        if (index < array.length) {
+            value = (T) array[index];
+        } else {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        return value;
     }
 
     /**
@@ -58,14 +64,10 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param value Значение
      */
     public void set(int index, T value) {
-        Objects.checkIndex(index, array.length);
-        if (checkinput(index, position)) {
+        if (!Objects.isNull(value) && index < array.length) {
             this.array[index] = value;
-        } else {
-            throw new IllegalArgumentException();
         }
     }
-
 
     /**
      * Метод удаление обьекта по индексу
@@ -75,40 +77,21 @@ public class SimpleArray<T> implements Iterable<T> {
      */
     public boolean remove(int index) {
         boolean rs = false;
-        if (checkinput(index, array.length - 1) && checkinput(index, position)) {
+        if (index < array.length) {
             array[index] = null;
             System.arraycopy(array, index + 1, array, index, array.length - 1 - index);
             position--;
             rs = true;
 
         } else {
-            throw new IllegalArgumentException();
+            throw new ArrayIndexOutOfBoundsException();
         }
         return rs;
     }
 
-    public boolean checkinput(int index, int value2) {
-        return index <= value2;
+    public int size() {
+        return array.length;
     }
-
-
-//    public static void main(String[] args) {
-//        SimpleArray<String> simpleArray = new SimpleArray(10);
-//        String s = "Тест";
-//        String s2 = "Тест2";
-//        String s3 = "Тест3";
-//        simpleArray.add(s);
-//        simpleArray.add(s2);
-//        simpleArray.add(s3);
-//        System.out.println(simpleArray + " ДО УДАЛЕНИЯ");
-//        simpleArray.remove(1);
-//        System.out.println(simpleArray + " ПОСЛЕ УДАЛЕНИЯ");
-//        System.out.println(simpleArray.get(3));
-//        simpleArray.set(3, s2);
-//        System.out.println(simpleArray);
-//        System.out.println(simpleArray.remove(3));
-//
-//    }
 
     @Override
     public String toString() {
@@ -135,15 +118,16 @@ public class SimpleArray<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                return itposition < position;
+                return itposition < array.length;
             }
 
             @Override
             public T next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
+                } else {
+                    return (T) array[itposition++];
                 }
-                return (T) array[itposition++];
             }
 
             @Override
