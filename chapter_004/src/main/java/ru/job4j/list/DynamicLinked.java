@@ -74,6 +74,19 @@ public class DynamicLinked<E> implements Iterable<E> {
 
     }
 
+    public E removeFirst() {
+        if (!isEmpty()) {
+            Node<E> rs = first;
+            first = first.next;
+            this.size--;
+            this.position--;
+            modCount++;
+            return rs.data;
+        } else {
+            throw new NoSuchElementException();
+        }
+    }
+
     /**
      * Метод получения размера списка.
      *
@@ -106,7 +119,6 @@ public class DynamicLinked<E> implements Iterable<E> {
             int itcount = modCount;
             Node<E> node = first;
 
-
             @Override
             public boolean hasNext() {
 
@@ -128,14 +140,6 @@ public class DynamicLinked<E> implements Iterable<E> {
             }
         };
         return iterator;
-    }
-
-    public static void main(String[] args) {
-        DynamicLinked<Integer> integers = new DynamicLinked<>();
-        System.out.println(integers.get(0));
-        LinkedList<Integer> integers1 = new LinkedList<>();
-        integers1.add(null);
-        System.out.println(integers1.get(0));
     }
 
 }
