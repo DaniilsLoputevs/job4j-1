@@ -15,7 +15,6 @@ public class SimpleArray<T> implements Iterable<T> {
 
 
     private Object[] array;
-
     private int position = 0;
 
     /**
@@ -34,7 +33,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param value Элемент
      */
     public void add(T value) {
-        if (!Objects.isNull(value) && position < array.length) {
+        if (position < array.length) {
             this.array[position++] = value;
         } else {
             throw new ArrayStoreException();
@@ -93,6 +92,10 @@ public class SimpleArray<T> implements Iterable<T> {
         return array.length;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
     @Override
     public String toString() {
         return "SimpleArray{"
@@ -118,7 +121,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                return itposition < array.length;
+                return itposition < getPosition();
             }
 
             @Override

@@ -34,6 +34,9 @@ public class DynamicList<E> implements Iterable<E> {
         return this.container.length;
     }
 
+    public int getPosition() {
+        return position;
+    }
     /**
      * Метод добавления в структуру динамического списка.
      *
