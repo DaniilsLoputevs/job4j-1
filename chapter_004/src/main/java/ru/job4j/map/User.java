@@ -1,6 +1,7 @@
 package ru.job4j.map;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
  * @author Sergey Bolshanin (dinospb@gmail.com)
@@ -11,6 +12,7 @@ public class User {
     private String name;
     private int child;
     private Calendar birth;
+
 
     /**
      * Конструктор для инициализации обьекта User
@@ -28,6 +30,12 @@ public class User {
     public Calendar getBirth() {
         return birth;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, child, birth);
+    }
+
 
     @Override
     public String toString() {

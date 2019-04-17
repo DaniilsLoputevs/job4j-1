@@ -51,6 +51,8 @@ public class UserTest {
     @Test
     public void testinSoutValuesInMap() {
         System.out.println(map);
+        System.out.println("Значение хэшкода для первого ключа : " + map.get(user).hashCode());
+        System.out.println("Значение хэшкода для второго ключа : " + map.get(user2).hashCode());
     }
 
     @Test
