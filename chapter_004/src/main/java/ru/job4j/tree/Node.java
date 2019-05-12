@@ -9,6 +9,8 @@ import java.util.List;
  * @since
  */
 public class Node<E extends Comparable<E>> {
+
+
     private final List<Node<E>> children = new ArrayList<>();
 
 
@@ -29,6 +31,7 @@ public class Node<E extends Comparable<E>> {
     public boolean eqValue(E that) {
         return this.value.compareTo(that) == 0;
     }
+
 
     public E getValue() {
         return value;

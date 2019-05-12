@@ -53,4 +53,18 @@ public class MyTreeTest {
         assertThat(iterator.next(), is("Value 2"));
         assertThat(iterator.hasNext(), is(false));
     }
+
+    @Test
+    public void checkBinary() {
+        MyTree<Integer> test = new MyTree<>(50);
+        test.add(50, 10);
+        test.add(50, 65);
+        test.add(10, 9);
+        test.add(10, 8);
+        test.add(65, 55);
+        test.add(65, 75);
+        assertThat(test.isBinary(), is(true));
+        test.add(65, 85);
+        assertThat(test.isBinary(), is(false));
+    }
 }

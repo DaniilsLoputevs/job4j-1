@@ -64,6 +64,28 @@ public class MyTree<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     /**
+     * Метод проверки дерева на бинарность.
+     *
+     * @return true/false
+     */
+    public boolean isBinary() {
+        boolean rs = true;
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(this.root);
+        while (!queue.isEmpty()) {
+            Node<E> check = queue.poll();
+            for (Node<E> child : check.leaves()) {
+                if (check.leaves().size() > 2) {
+                    rs = false;
+                }
+                queue.offer(child);
+            }
+
+        }
+        return rs;
+    }
+
+    /**
      * Реализация итератора
      *
      * @return
