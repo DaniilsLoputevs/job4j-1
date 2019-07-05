@@ -13,7 +13,7 @@ public class ZipApp {
 
     public static void main(String[] args) {
         Args args1 = new Args(args);
-        Zip zip = new Zip();
+        Zip zip = new Zip(args);
         List<File> seekBy = zip.seekBy(args1.directory(), args1.ex());
         zip.pack(seekBy, new File(args1.output()));
 
