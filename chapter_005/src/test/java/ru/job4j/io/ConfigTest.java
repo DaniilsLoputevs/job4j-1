@@ -14,7 +14,7 @@ public class ConfigTest {
 
     @Before
     public void init() {
-        config = new Config("C:\\projects\\job4j\\app.properties.txt");
+        config = new Config("C:\\projects\\job4j\\chapter_005\\app.properties.txt");
         config.load();
         val = new HashMap<>();
         val.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");

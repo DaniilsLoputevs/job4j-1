@@ -20,6 +20,7 @@ public class ConsoleChatTest {
         consoleChat.start();
         File log = new File(consoleChat.getLogFile().getFilePath());
         assertThat(log.exists(), is(true));
+        file.delete();
     }
 
     @Test
@@ -33,6 +34,7 @@ public class ConsoleChatTest {
         List<String> actual = consoleChat.getLogFile().getLog();
         List<String> expected = List.of("Привет", "закончить", "SomeRandomWord");
         assertThat(actual.containsAll(expected), is(true));
+        file.delete();
 
 
     }
