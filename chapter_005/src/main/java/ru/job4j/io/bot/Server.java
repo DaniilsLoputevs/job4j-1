@@ -57,7 +57,7 @@ public class Server {
             while (this.work) {
                 in = input.readLine();
                 while (!in.isEmpty()) {
-                    System.out.println("Сообщение от клиента " + in);
+                    System.out.println("Client say : " + in);
                     if (this.close(in)) {
                         break;
                     }
@@ -79,7 +79,7 @@ public class Server {
      */
     private boolean close(String word) {
         boolean rs = false;
-        if (word.equalsIgnoreCase("закончить")) {
+        if (word.equalsIgnoreCase("exit")) {
             rs = true;
             this.work = false;
         }

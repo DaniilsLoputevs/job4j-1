@@ -36,7 +36,7 @@ public class WordsFile {
         List<String> word = List.of("Hello", "Write Anything", "What?", "Nice try", "Wrong answer", "How are you?", "Why you write again");
         try (DataOutputStream br = new DataOutputStream(new FileOutputStream(this.path))) {
             for (String out : word) {
-                br.writeUTF(out + System.lineSeparator());
+                br.writeUTF(out);
                 this.words.add(out);
             }
         } catch (IOException e) {

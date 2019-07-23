@@ -1,5 +1,7 @@
 package ru.job4j.io;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.io.*;
 import java.util.*;
 
@@ -9,9 +11,14 @@ import java.util.*;
  * @since 11.06.2019
  */
 public class Analizy {
+    private String source;
 
-    public void unavailable(String source, String target) {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(source))) {
+    public Analizy(String path) {
+        this.source = path;
+    }
+
+    public void unavailable(String target) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(this.source))) {
             boolean checkStatus = true;
             List<String> rs = new ArrayList<>();
             while (bufferedReader.ready()) {
@@ -48,14 +55,8 @@ public class Analizy {
     }
 
     public static void main(String[] args) {
-        try (PrintWriter out = new PrintWriter(new FileOutputStream("unavailable.csv"))) {
-            out.println("15:01:30;15:02:32");
-            out.println("15:10:30;23:12:32");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Analizy analizy = new Analizy();
-        analizy.unavailable("serverlog.txt", "unavailable.csv");
+        Analizy analizy = new Analizy(Analizy.class.getResource("/serverlog.txt").getFile());
     }
-}
+
+    }
+

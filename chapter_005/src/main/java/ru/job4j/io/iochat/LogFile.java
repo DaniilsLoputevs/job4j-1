@@ -20,7 +20,7 @@ public class LogFile {
      */
     public LogFile() {
         log = new ArrayList<>();
-        this.path = System.getProperty("java.io.tmpdir") + "logchat.txt";
+        this.path = System.getProperty("java.io.tmpdir") + File.separator + "/logchat.txt";
         this.init();
     }
 
@@ -38,12 +38,14 @@ public class LogFile {
 
     /**
      * Метод возвращает путь к файлу
+     *
      * @return String путь к лог файлу .
      */
 
     public String getFilePath() {
         return this.path;
     }
+
     public List<String> getLog() {
         return log;
     }

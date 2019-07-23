@@ -33,8 +33,8 @@ public class Client {
                 output.println();
                 s = dip.readLine();
                 while (!s.isEmpty()) {
-                    System.out.println("Сообщение от сервера: " + s);
-                    if ("закончить".equals(s)) {
+                    System.out.println("Server answer : " + s);
+                    if ("exit".equals(s)) {
                         this.work = false;
                         break;
                     }
@@ -50,7 +50,7 @@ public class Client {
 
     private boolean stop(String word) throws IOException {
         boolean rs = false;
-        if (word.equals("Подключение завершено.")) {
+        if (word.equals("close.")) {
             this.work = false;
             rs = true;
             System.exit(0);

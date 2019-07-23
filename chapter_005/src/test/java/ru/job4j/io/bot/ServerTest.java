@@ -18,14 +18,15 @@ public class ServerTest {
     @Test
     public void outputData() throws IOException {
         Socket socket = mock(Socket.class);
-        Server server = new Server(socket, new WordsFile("пока"));
-        String test = "закончить";
+        WordsFile wordsFile = new WordsFile("bye");
+        Server server = new Server(socket, wordsFile);
+        String test = "exit";
         ByteArrayInputStream in = new ByteArrayInputStream(test.getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         when(socket.getInputStream()).thenReturn(in);
         when(socket.getOutputStream()).thenReturn(out);
         server.outputData();
-        assertThat(out.toString(), is("пока\r\n\r\n"));
+        assertThat(("bye" + System.getProperty("line.separator") + System.getProperty("line.separator")), is(out.toString()));
     }
 
 

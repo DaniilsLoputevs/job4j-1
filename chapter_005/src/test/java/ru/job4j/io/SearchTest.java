@@ -19,7 +19,7 @@ public class SearchTest {
         Search search = new Search();
         List<String> check = new ArrayList<>();
         check.add("txt");
-        String path = System.getProperty("java.io.tmpdir") + "testcase";
+        String path = System.getProperty("java.io.tmpdir") + File.separator + "testcase";
         File rootFolder = new File(path);
         rootFolder.mkdirs();
         File firstFolder = new File(rootFolder, "first_01");

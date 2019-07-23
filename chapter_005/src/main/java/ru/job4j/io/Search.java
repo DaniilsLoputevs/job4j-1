@@ -12,7 +12,13 @@ import java.util.*;
  */
 public class Search {
 
-
+    /**
+     * Метод для поиска из parent пути включая exist
+     *
+     * @param parent корень с которого требуется начать поиск
+     * @param exist  расширение которое требуется добавить .
+     * @return List обьектов File найденных в результате работы метода.
+     */
     public List<File> files(String parent, List<String> exist) {
         List<File> rs = new ArrayList<>();
         Queue<File> queue = new LinkedList<>();
@@ -33,6 +39,42 @@ public class Search {
         return rs;
     }
 
+    /**
+     * Метод поиска файлов содержащих имя или часть имени .
+     *
+     * @param parent корень с которого требуется начать поиск
+     * @param name   имя или часть имени для которые требуется добавить
+     * @return List обьектов File найденных в результате работы метода.
+     */
+
+    public List<File> filesByName(String parent, String name) {
+        List<File> rs = new ArrayList<>();
+        Queue<File> queue = new LinkedList<>();
+        queue.offer(new File(parent));
+        while (!queue.isEmpty()) {
+            File file = queue.poll();
+            if (file.isDirectory()) {
+                for (File deep : file.listFiles()) {
+                    queue.offer(deep);
+                }
+            }
+            if (file.isFile() && this.equalityNeedByName(file, name)) {
+                rs.add(file);
+            }
+
+
+        }
+        return rs;
+    }
+
+
+    /**
+     * Метод для поиска из parent пути исключая расширения
+     *
+     * @param parent корень с которого требуется начать поиск
+     * @param ext    расширения которые требуется исключить.
+     * @return List обьектов File найденных в результате работы метода.
+     */
     public List<File> filesWithFold(String parent, String ext) {
         List<String> ext1 = List.of(ext);
         List<File> rs = new LinkedList<>();
@@ -56,7 +98,13 @@ public class Search {
 //    }
     }
 
-
+    /**
+     * Метод проверяет файл на расширение.
+     *
+     * @param file  файл
+     * @param exist расщирение
+     * @return true/false
+     */
     private boolean equalityNeed(File file, List<String> exist) {
         boolean rs = false;
         String s = file.toString();
@@ -66,6 +114,23 @@ public class Search {
             }
         }
         return rs;
+    }
+
+    /**
+     * Метод проверяет что файл содержит имя требуемое для поиска.
+     *
+     * @param file файл
+     * @param need требуемое имя или часть имени
+     * @return true/false
+     */
+    private boolean equalityNeedByName(File file, String need) {
+        boolean rs = false;
+        if (file.getName().equals(need) || file.getName().contains(need)) {
+            rs = true;
+
+        }
+        return rs;
+
     }
 
     public static void main(String[] args) {

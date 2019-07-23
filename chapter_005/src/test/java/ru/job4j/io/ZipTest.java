@@ -15,8 +15,8 @@ public class ZipTest {
 
     @Test
     public void seekBy() throws IOException {
-        String path = (System.getProperty("java.io.tmpdir") + "testcase2");
-        String output = (System.getProperty("java.io.tmpdir") + "pr.zip");
+        String path = (System.getProperty("java.io.tmpdir") + File.separator + "/testcase2");
+        String output = (System.getProperty("java.io.tmpdir") + File.separator + "/pr.zip");
         String[] arguments = new String[]{"-d", path, "-e", "zip", "-o", output};
         Zip zip = new Zip(arguments);
         File root = new File(path);
@@ -48,8 +48,8 @@ public class ZipTest {
 
     @Test
     public void pack() throws IOException {
-        String path = (System.getProperty("java.io.tmpdir") + "testcase2");
-        String output = (System.getProperty("java.io.tmpdir") + "pr.zip");
+        String path = (System.getProperty("java.io.tmpdir") + File.separator + "testcase2");
+        String output = (System.getProperty("java.io.tmpdir") + File.separator + "pr.zip");
         String[] arguments = new String[]{"-d", path, "-e", "zip", "-o", output};
         Zip zip = new Zip(arguments);
         File root = new File(path);
