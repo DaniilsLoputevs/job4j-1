@@ -19,7 +19,7 @@ public class Finder {
         this.arg = new FinderArgs(args);
     }
 
-    private void startFinder() {
+    public void startFinder() {
         List<File> rs = search.filesByName(this.arg.directory(), this.arg.getSearchName());
         try (PrintWriter out = new PrintWriter(new FileOutputStream(this.arg.output(), false))) {
             for (File f : rs) {
