@@ -1,15 +1,20 @@
 package ru.job4j.io;
 
+
 /**
  * @author Sergey Bolshanin (dinospb@gmail.com)
  * @version 0.1$
  * @since 21.06.2019
  */
 public class Args {
-
     private String dir;
     private String ex;
     private String out;
+    private String name;
+    private String mode;
+
+    public Args() {
+    }
 
     public Args(String[] args) {
         for (int i = 0; i < args.length; i++) {
@@ -26,6 +31,12 @@ public class Args {
         }
     }
 
+    public Args(String rootpath, String name, String output) {
+        this.dir = rootpath;
+        this.name = name;
+        this.out = output;
+    }
+
 
     public String directory() {
         return this.dir;
@@ -39,6 +50,34 @@ public class Args {
         return this.out;
     }
 
-
+    public String getName() {
+        return name;
     }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setDir(String dir) {
+        this.dir = dir;
+    }
+
+    public void setEx(String ex) {
+        this.ex = ex;
+    }
+
+    public void setOut(String out) {
+        this.out = out;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+
+}
 

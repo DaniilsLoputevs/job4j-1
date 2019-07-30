@@ -30,7 +30,7 @@ public class Search {
                     queue.offer(deep);
                 }
             }
-            if (file.isFile() && this.equalityNeed(file, exist)) {
+            if (file.isFile() && this.equalityExtension(file, exist)) {
                 rs.add(file);
             }
 
@@ -47,7 +47,35 @@ public class Search {
      * @return List обьектов File найденных в результате работы метода.
      */
 
-    public List<File> filesByName(String parent, String name) {
+    public List<File> filesByFullNameEquality(String parent, String name) {
+        List<File> rs = new ArrayList<>();
+        Queue<File> queue = new LinkedList<>();
+        queue.offer(new File(parent));
+        while (!queue.isEmpty()) {
+            File file = queue.poll();
+            if (file.isDirectory()) {
+                for (File deep : file.listFiles()) {
+                    queue.offer(deep);
+
+                }
+            }
+            if (file.isFile() && this.equalityByFullStringName(file, name)) {
+                rs.add(file);
+            }
+
+
+        }
+        return rs;
+    }
+
+    /**
+     * Метод поиска файлов содержащих часть иимени.
+     *
+     * @param parent - корень с которого начинается поиск
+     * @param name   - часть имени которое требуется добавить.
+     * @return List обьектов File найденных в результате работы метода.
+     */
+    public List<File> filesEqualityByMask(String parent, String name) {
         List<File> rs = new ArrayList<>();
         Queue<File> queue = new LinkedList<>();
         queue.offer(new File(parent));
@@ -58,7 +86,7 @@ public class Search {
                     queue.offer(deep);
                 }
             }
-            if (file.isFile() && this.equalityNeedByName(file, name)) {
+            if (file.isFile() && this.equalityByMaskName(file, name)) {
                 rs.add(file);
             }
 
@@ -88,7 +116,7 @@ public class Search {
                     queue.offer(deep);
                 }
             }
-            if (file.isFile() && !this.equalityNeed(file, ext1)) {
+            if (file.isFile() && !this.equalityExtension(file, ext1)) {
                 rs.add(file);
             }
         }
@@ -105,7 +133,7 @@ public class Search {
      * @param exist расщирение
      * @return true/false
      */
-    private boolean equalityNeed(File file, List<String> exist) {
+    private boolean equalityExtension(File file, List<String> exist) {
         boolean rs = false;
         String s = file.toString();
         for (String needExt : exist) {
@@ -123,9 +151,19 @@ public class Search {
      * @param need требуемое имя или часть имени
      * @return true/false
      */
-    private boolean equalityNeedByName(File file, String need) {
+    private boolean equalityByFullStringName(File file, String need) {
         boolean rs = false;
-        if (file.getName().equals(need) || file.getName().contains(need)) {
+        if (file.getName().equals(need)) {
+            rs = true;
+
+        }
+        return rs;
+
+    }
+
+    private boolean equalityByMaskName(File file, String need) {
+        boolean rs = false;
+        if (file.getName().contains(need)) {
             rs = true;
 
         }
