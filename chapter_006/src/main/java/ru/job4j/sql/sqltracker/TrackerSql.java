@@ -2,7 +2,6 @@ package ru.job4j.sql.sqltracker;
 
 import ru.job4j.tracker.ItTracker;
 import ru.job4j.tracker.Item;
-import ru.job4j.tracker.Tracker;
 
 
 import java.io.InputStream;
@@ -22,10 +21,11 @@ public class TrackerSql implements ItTracker, AutoCloseable {
     @Override
     public Item add(Item item) {
         try (Connection connectionadd = this.connection) {
-            String sql = "insert into tracker.public.items(name, description) values(?,?) ";
+            String sql = "insert into tracker.public.items(name, description,created) values(?,?,?) ";
             PreparedStatement statement = connectionadd.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, item.getName());
             statement.setString(2, item.getDesc());
+            statement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
             statement.executeUpdate();
             try (ResultSet keys = statement.getGeneratedKeys()) {
                 if (keys.next()) {
@@ -95,7 +95,7 @@ public class TrackerSql implements ItTracker, AutoCloseable {
                         +
                         "description varchar (200),"
                         +
-                        "created integer ,"
+                        "created timestamp ,"
                         +
                         "comments varchar (1000));");
 
