@@ -22,15 +22,22 @@ public class TrackerSql implements ItTracker, AutoCloseable {
     @Override
     public Item add(Item item) {
         try (Connection connectionadd = this.connection) {
-            PreparedStatement statement = connectionadd.prepareStatement("insert into tracker.public.items(name, description) values(?,?,?) ");
-            statement.setString(1, item.getId());
-            statement.setString(2, item.getName());
-            statement.setString(3, item.getDesc());
-            statement.execute();
+            String sql = "insert into tracker.public.items(name, description) values(?,?) ";
+            PreparedStatement statement = connectionadd.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, item.getName());
+            statement.setString(2, item.getDesc());
+            statement.executeUpdate();
+            try (ResultSet keys = statement.getGeneratedKeys()) {
+                if (keys.next()) {
+                    item.setId(keys.getString(1));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return item;
     }
 
     @Override
@@ -102,6 +109,6 @@ public class TrackerSql implements ItTracker, AutoCloseable {
     public static void main(String[] args) {
         TrackerSql trackerSql = new TrackerSql();
         trackerSql.init();
-        trackerSql.add(new Item("test", "desct", 454564));
+        System.out.println(trackerSql.add(new Item("test", "desct", 454564)));
     }
 }
