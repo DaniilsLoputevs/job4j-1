@@ -72,6 +72,14 @@ public class Item {
         return name;
     }
 
+    public String[] getComments() {
+        return comments;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
     public void setDesc(String desc) {
         this.desc = desc;
     }

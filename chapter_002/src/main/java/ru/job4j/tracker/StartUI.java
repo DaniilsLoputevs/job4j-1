@@ -17,7 +17,7 @@ public class StartUI {
     /**
      * Обеспечивает хранение заявок.
      */
-    private final Tracker tracker;
+    private final ItTracker tracker;
     /**
      * Запрос данных у пользователя.
      */
@@ -33,7 +33,7 @@ public class StartUI {
      * @param tracker
      * @param output
      */
-    public StartUI(Input input, Tracker tracker, Consumer<String> output) {
+    public StartUI(Input input, ItTracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
         this.output = output;
@@ -43,7 +43,7 @@ public class StartUI {
      * Основной цикл программы.
      */
     public void init() {
-        MenuTracker menu = new MenuTracker(output, input, tracker);
+        MenuTracker menu = new MenuTracker(output, input, (Tracker) tracker);
         List<Integer> range = new ArrayList<>();
         menu.fillActions(this);
         for (int i = 0; i < menu.getActionsLentgh(); i++) {

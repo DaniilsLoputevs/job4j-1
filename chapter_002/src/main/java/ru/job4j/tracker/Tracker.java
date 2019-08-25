@@ -9,7 +9,7 @@ import java.util.List;
  * @version 0.1
  * @since 06.07.2018
  */
-public class Tracker {
+public class Tracker implements ItTracker {
     /**
      * Массив для хранение заявок.
      */
@@ -34,7 +34,7 @@ public class Tracker {
      *
      * @return
      */
-    public String generateId() {
+    public static String generateId() {
         return new Date().toString() + Math.random();
     }
 
