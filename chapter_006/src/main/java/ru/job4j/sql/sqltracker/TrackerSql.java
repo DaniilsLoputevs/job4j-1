@@ -12,10 +12,14 @@ import java.util.Properties;
 public class TrackerSql implements ItTracker, AutoCloseable {
     private Connection connection;
 
+    public TrackerSql() {
+
+    }
+
 
     @Override
     public void close() throws Exception {
-        close();
+        this.connection.close();
     }
 
     @Override
@@ -121,7 +125,20 @@ public class TrackerSql implements ItTracker, AutoCloseable {
 
     @Override
     public Item findById(String id) {
-        return null;
+        this.init();
+        Item rs = null;
+        String sql = "select * from tracker.public.items where id = ?";
+        try (PreparedStatement statement = this.connection.prepareStatement(sql)) {
+            statement.setInt(1, Integer.parseInt(id));
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Timestamp timestamp = resultSet.getTimestamp("created");
+                rs = new Item(resultSet.getString("id"), resultSet.getString("name"), resultSet.getString("description"), timestamp.getTime());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
 
@@ -165,12 +182,15 @@ public class TrackerSql implements ItTracker, AutoCloseable {
 
     }
 
+    public interface ConnectionF {
+        Connection getConnection() throws SQLException;
+    }
+
     public static void main(String[] args) {
         TrackerSql trackerSql = new TrackerSql();
-//        System.out.println(trackerSql.add(new Item("item31", "desc3")));
-//        System.out.println(trackerSql.add(new Item("item32", "desc3")));
-        System.out.println(trackerSql.add(new Item("item33", "desc3")));
-        //    trackerSql.findAll();
-        // trackerSql.findByName("item33");
+//        trackerSql.findByName("item33");
+//        trackerSql.findAll();
+        trackerSql.findById("2");
+
     }
 }
