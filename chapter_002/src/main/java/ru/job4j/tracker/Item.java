@@ -1,16 +1,29 @@
 package ru.job4j.tracker;
 
+import java.sql.Timestamp;
 import java.util.Arrays;
 
 public class Item {
     /**
      * Поля которые описывают заявки.
      */
-    public String id;
-    public String name;
-    public String desc;
-    public long created;
-    public String[] comments;
+    private String id;
+    private String name;
+    private String desc;
+    private long created;
+    private String[] comments;
+    private Timestamp create;
+
+
+
+
+
+    public Item(String id, String name, String desc, long time) {
+        this.id = id;
+        this.name = name;
+        this.desc = desc;
+        this.created = time;
+    }
 
     /**
      * Конструктор для заявки
@@ -90,6 +103,14 @@ public class Item {
 
     public long getCreated() {
         return created;
+    }
+
+    public Timestamp getCreate() {
+        return create;
+    }
+
+    public void setCreate(Timestamp create) {
+        this.create = create;
     }
 
     @Override
