@@ -1,6 +1,5 @@
 package ru.job4j.tracker;
 
-import java.sql.Timestamp;
 import java.util.Arrays;
 
 public class Item {
@@ -12,8 +11,6 @@ public class Item {
     private String desc;
     private long created;
     private String[] comments;
-    private Timestamp create;
-
 
 
 
@@ -105,12 +102,8 @@ public class Item {
         return created;
     }
 
-    public Timestamp getCreate() {
-        return create;
-    }
-
-    public void setCreate(Timestamp create) {
-        this.create = create;
+    public void setCreated(long created) {
+        this.created = created;
     }
 
     @Override

@@ -23,10 +23,12 @@ public class TrackerSql implements ItTracker, AutoCloseable {
         this.init();
         try (Connection connectionadd = this.connection) {
             String sql = "insert into tracker.public.items(name, description,created) values(?,?,?) ";
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             PreparedStatement statement = connectionadd.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, item.getName());
             statement.setString(2, item.getDesc());
-            statement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+            statement.setTimestamp(3, timestamp);
+            item.setCreated(timestamp.getTime());
             statement.executeUpdate();
             try (ResultSet keys = statement.getGeneratedKeys()) {
                 if (keys.next()) {
@@ -104,9 +106,16 @@ public class TrackerSql implements ItTracker, AutoCloseable {
         try (Connection connectionfindByname = this.connection) {
             String sql = "select * from tracker.public.items where name = ?";
             PreparedStatement statement = connectionfindByname.prepareStatement(sql);
+            statement.setString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Timestamp timestamp = resultSet.getTimestamp("created");
+                rs.add(new Item(resultSet.getString("id"), resultSet.getString("name"), resultSet.getString("description"), timestamp.getTime()));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(rs);
         return rs;
     }
 
@@ -158,9 +167,10 @@ public class TrackerSql implements ItTracker, AutoCloseable {
 
     public static void main(String[] args) {
         TrackerSql trackerSql = new TrackerSql();
-        System.out.println(trackerSql.add(new Item("item31", "desc3")));
-        System.out.println(trackerSql.add(new Item("item32", "desc3")));
+//        System.out.println(trackerSql.add(new Item("item31", "desc3")));
+//        System.out.println(trackerSql.add(new Item("item32", "desc3")));
         System.out.println(trackerSql.add(new Item("item33", "desc3")));
-        trackerSql.findAll();
+        //    trackerSql.findAll();
+        // trackerSql.findByName("item33");
     }
 }
