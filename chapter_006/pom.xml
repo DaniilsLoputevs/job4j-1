@@ -11,6 +11,22 @@
 
     <artifactId>chapter_006</artifactId>
 
+    <profiles>
+        <profile>
+            <id>travis</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <db.url>jdbc:postgresql://localhost/tracker</db.url>
+                <db.username>postgres</db.username>
+                <db.password></db.password>
+                <db.driver>org.postgresql.Driver</db.driver>
+            </properties>
+        </profile>
+
+    </profiles>
+
  <dependencies>
 
 
@@ -20,7 +36,6 @@
          <artifactId>postgresql</artifactId>
          <version>9.1-901.jdbc4</version>
      </dependency>
-
 
 
 
@@ -34,3 +49,4 @@
  </dependencies>
 
 </project>
+
