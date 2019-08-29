@@ -22,20 +22,29 @@ public class StoreSql implements AutoCloseable {
         this.init();
     }
 
-//    /**
-//     * Генерирует n количество записей в базе
-//     *
-//     * @param size - количество данных в базе
-//     */
-//    public void generate(int size) {
-//        try (PreparedStatement statement = this.connection.prepareStatement()) {
-//            statement.execute();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
+    /**
+     * Генерирует n количество записей в базе
+     *
+     * @param size - количество данных в базе
+     */
+    public void generate(int size) {
+        String sql = "insert into  acounts(field) values(?) ";
+        try (PreparedStatement statement = this.connection.prepareStatement(sql)) {
+            for (int i = 1; i <= size; i++) {
+                statement.setInt(1, i);
+                statement.execute();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+    }
+
+    /**
+     * Метод загрузки данных в таблицу и возврат коллекции Entry
+     *
+     * @return Коллекция Entry
+     */
     public List<Entry> load() {
         List<Entry> rs = new ArrayList<>();
         return rs;
@@ -70,7 +79,7 @@ public class StoreSql implements AutoCloseable {
     private void check() {
         String sqlinit = "create table  main. acounts("
                 +
-                "integer field)";
+                "field integer )";
         String sqldelete = "drop table if exists acounts";
         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:/home/eveletspb/xml.db", "sqllite", "password")) {
             PreparedStatement statement = connection.prepareStatement(sqldelete);
@@ -83,7 +92,11 @@ public class StoreSql implements AutoCloseable {
         }
     }
 
-
+    /**
+     * Метод закрывает соединение с базой.
+     *
+     * @throws Exception
+     */
     @Override
     public void close() throws Exception {
         if (Objects.nonNull(this.connection)) {
@@ -95,6 +108,7 @@ public class StoreSql implements AutoCloseable {
 
     public static void main(String[] args) {
         StoreSql storeSql = new StoreSql(new Config());
+        storeSql.generate(500);
     }
 
 
