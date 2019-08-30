@@ -119,7 +119,6 @@ public class StoreSql implements AutoCloseable {
     public static void main(String[] args) {
         StoreSql storeSql = new StoreSql(new Config());
         storeSql.generate(10);
-        System.out.println(storeSql.load());
     }
 
 
