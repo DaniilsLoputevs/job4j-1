@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -47,6 +48,15 @@ public class StoreSql implements AutoCloseable {
      */
     public List<Entry> load() {
         List<Entry> rs = new ArrayList<>();
+        String sql = "select * from acounts";
+        try (PreparedStatement statement = this.connection.prepareStatement(sql)) {
+            ResultSet set = statement.executeQuery();
+            while (set.next()) {
+                rs.add(new Entry(set.getInt(1)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return rs;
     }
 
@@ -108,7 +118,8 @@ public class StoreSql implements AutoCloseable {
 
     public static void main(String[] args) {
         StoreSql storeSql = new StoreSql(new Config());
-        storeSql.generate(500);
+        storeSql.generate(10);
+        System.out.println(storeSql.load());
     }
 
 

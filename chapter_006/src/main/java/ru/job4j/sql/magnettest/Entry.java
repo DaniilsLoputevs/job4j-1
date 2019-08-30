@@ -15,4 +15,14 @@ public class Entry {
     public void setField(int field) {
         this.field = field;
     }
+
+    @Override
+    public String toString() {
+        return "Entry{"
+                +
+                "field="
+                + field
+                +
+                '}';
+    }
 }
