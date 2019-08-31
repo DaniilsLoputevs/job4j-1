@@ -7,10 +7,7 @@ import ru.job4j.sql.sqltracker.TrackerSql;
 import java.io.File;
 import java.io.InputStream;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.*;
 
 public class StoreSql implements AutoCloseable {
     private static final Logger LOG = LogManager.getLogger(StoreSql.class.getName());
@@ -28,7 +25,7 @@ public class StoreSql implements AutoCloseable {
      * @param size - количество данных в базе
      */
     public void generate(int size) {
-        String sql = "insert into  acounts(field) values(i) ";
+        String sql = "insert into  acounts(field) values(?) ";
         try (PreparedStatement statement = this.connection.prepareStatement(sql)) {
             this.connection.setAutoCommit(false);
             for (int i = 1; i <= size; i++) {
@@ -76,7 +73,7 @@ public class StoreSql implements AutoCloseable {
             Properties cfg = new Properties();
             cfg.load(in);
             Class.forName(cfg.getProperty("driver-class-name"));
-            String url = cfg.getProperty("url") + File.separator + "xml.db";
+            String url = cfg.getProperty("url");
             this.connection = DriverManager.getConnection((url), cfg.getProperty("username"), cfg.getProperty("password"));
         } catch (Exception e) {
             throw new IllegalStateException();
@@ -94,7 +91,7 @@ public class StoreSql implements AutoCloseable {
                 +
                 "field integer )";
         String sqldelete = "drop table if exists acounts";
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:/home/eveletspb/xml.db", "sqllite", "password")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:memory:", "sqllite", "password")) {
             PreparedStatement statement = connection.prepareStatement(sqldelete);
             statement.execute();
             statement = connection.prepareStatement(sqlinit);
@@ -122,6 +119,11 @@ public class StoreSql implements AutoCloseable {
     public static void main(String[] args) {
         StoreSql storeSql = new StoreSql(new Config());
         storeSql.generate(10000);
+
+        Map<String, String> val = new HashMap<>();
+        val.put("1", "val1");
+        val.put("1", "val2");
+        System.out.println(val);
     }
 
 
