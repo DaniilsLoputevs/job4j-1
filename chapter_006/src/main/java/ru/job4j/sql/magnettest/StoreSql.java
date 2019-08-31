@@ -1,20 +1,19 @@
 package ru.job4j.sql.magnettest;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.job4j.sql.sqltracker.TrackerSql;
 
 import java.io.File;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 
 public class StoreSql implements AutoCloseable {
-
+    private static final Logger LOG = LogManager.getLogger(StoreSql.class.getName());
     private final Config config;
     private Connection connection;
 
@@ -29,7 +28,7 @@ public class StoreSql implements AutoCloseable {
      * @param size - количество данных в базе
      */
     public void generate(int size) {
-        String sql = "insert into  acounts(field) values(?) ";
+        String sql = "insert into  acounts(field) values(i) ";
         try (PreparedStatement statement = this.connection.prepareStatement(sql)) {
             this.connection.setAutoCommit(false);
             for (int i = 1; i <= size; i++) {
@@ -39,7 +38,8 @@ public class StoreSql implements AutoCloseable {
             statement.executeBatch();
             this.connection.commit();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error in generate() ", e);
+            throw new IllegalStateException(e);
         }
 
     }
