@@ -31,10 +31,13 @@ public class StoreSql implements AutoCloseable {
     public void generate(int size) {
         String sql = "insert into  acounts(field) values(?) ";
         try (PreparedStatement statement = this.connection.prepareStatement(sql)) {
+            this.connection.setAutoCommit(false);
             for (int i = 1; i <= size; i++) {
                 statement.setInt(1, i);
-                statement.execute();
+                statement.addBatch();
             }
+            statement.executeBatch();
+            this.connection.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -118,7 +121,7 @@ public class StoreSql implements AutoCloseable {
 
     public static void main(String[] args) {
         StoreSql storeSql = new StoreSql(new Config());
-        storeSql.generate(10);
+        storeSql.generate(10000);
     }
 
 

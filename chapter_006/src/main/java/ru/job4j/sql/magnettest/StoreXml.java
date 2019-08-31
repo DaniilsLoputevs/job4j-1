@@ -34,7 +34,7 @@ public class StoreXml {
 
     public static void main(String[] args) {
         StoreSql storeSql = new StoreSql(new Config());
-        storeSql.generate(10);
+        storeSql.generate(10000);
         StoreXml storeXml = new StoreXml(new File("/home/eveletspb/test.xml"));
         storeXml.savedata(storeSql.load());
     }
