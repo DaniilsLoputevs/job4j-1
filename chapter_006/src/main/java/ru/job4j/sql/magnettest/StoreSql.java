@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.job4j.sql.sqltracker.TrackerSql;
 
-import java.io.File;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
@@ -120,10 +119,6 @@ public class StoreSql implements AutoCloseable {
         StoreSql storeSql = new StoreSql(new Config());
         storeSql.generate(10000);
 
-        Map<String, String> val = new HashMap<>();
-        val.put("1", "val1");
-        val.put("1", "val2");
-        System.out.println(val);
     }
 
 
