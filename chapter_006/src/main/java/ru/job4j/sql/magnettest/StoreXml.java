@@ -34,8 +34,10 @@ public class StoreXml {
 
     public static void main(String[] args) {
         StoreSql storeSql = new StoreSql(new Config());
-        storeSql.generate(10000);
-        StoreXml storeXml = new StoreXml(new File("/home/eveletspb/test.xml"));
+        storeSql.generate(10);
+        File f = new File(System.getProperty("java.io.tmpdir") + File.separator + "tmp.xml");
+        StoreXml storeXml = new StoreXml(f);
         storeXml.savedata(storeSql.load());
+        System.out.println(System.getProperty("java.io.tmpdir"));
     }
 }

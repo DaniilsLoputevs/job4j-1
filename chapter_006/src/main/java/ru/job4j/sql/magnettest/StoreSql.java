@@ -33,10 +33,16 @@ public class StoreSql implements AutoCloseable {
             }
             statement.executeBatch();
             this.connection.commit();
+            try {
+                this.connection.rollback();
+            } catch (SQLException v) {
+                LOG.error("Query now work!", v);
+            }
         } catch (Exception e) {
             LOG.error("Error in generate() ", e);
             throw new IllegalStateException(e);
         }
+
 
     }
 
@@ -117,7 +123,7 @@ public class StoreSql implements AutoCloseable {
 
     public static void main(String[] args) {
         StoreSql storeSql = new StoreSql(new Config());
-        storeSql.generate(10000);
+        storeSql.generate(10);
 
     }
 
