@@ -2,7 +2,6 @@ package ru.job4j.sql.magnettest;
 
 import org.junit.Test;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
