@@ -30,7 +30,7 @@ public class ConvertXsqt {
         try {
             TransformerFactory tf = TransformerFactory.newInstance();
             Transformer t = tf.newTransformer(new StreamSource(scheme));
-            t.transform(new StreamSource(scheme), new StreamResult(dest));
+            t.transform(new StreamSource(input), new StreamResult(dest));
         } catch (TransformerException e) {
             LOG.error("Error in convert()", e);
             e.printStackTrace();
@@ -49,7 +49,6 @@ public class ConvertXsqt {
     }
 
     public static class Pars {
-        int count = 0;
 
         public static void parsing(File file) {
 
@@ -66,6 +65,9 @@ public class ConvertXsqt {
                 @Override
                 public void characters(char[] ch, int start, int length) throws SAXException {
                     if (check) {
+                        for (char c:ch) {
+                            System.out.println(c);
+                        }
                         check = false;
                     }
                 }
@@ -119,6 +121,7 @@ public class ConvertXsqt {
 
         convertXsqt.file(xsl);
         convertXsqt.convert(in, dest, scheme);
+        Pars.parsing(dest);
     }
 
 
