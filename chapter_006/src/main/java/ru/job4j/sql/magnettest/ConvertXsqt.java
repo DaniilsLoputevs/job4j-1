@@ -38,6 +38,10 @@ public class ConvertXsqt {
 
     }
 
+    /**
+     * Метод создает файл с схемой
+     * @param s - Схема в строковом представлении.
+     */
     public void file(String s) {
         try (FileOutputStream fileOutputStream = new FileOutputStream(new File(System.getProperty("java.io.tmpdir") + File.separator + "sheme.xsd"))) {
             byte[] v = s.getBytes();
@@ -51,6 +55,10 @@ public class ConvertXsqt {
     public static class Pars {
         static Integer rs = 0;
 
+        /**
+         * Реализация парсинга файла
+         * @param file файл требуемый для парсинга.
+         */
         public static void parsing(File file) {
             DefaultHandler defaultHandler = new DefaultHandler() {
 
