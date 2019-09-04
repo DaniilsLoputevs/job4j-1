@@ -49,44 +49,39 @@ public class ConvertXsqt {
     }
 
     public static class Pars {
+        static Integer rs = 0;
 
         public static void parsing(File file) {
-
             DefaultHandler defaultHandler = new DefaultHandler() {
-                boolean check = false;
 
                 @Override
                 public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-                    if (qName.equals("field")) {
-                        check = true;
+                    if (qName.equals("entry")) {
+                        String a = attributes.getValue("field");
+                        rs += Integer.parseInt(a);
                     }
+
                 }
 
-                @Override
-                public void characters(char[] ch, int start, int length) throws SAXException {
-                    if (check) {
-                        for (char c:ch) {
-                            System.out.println(c);
-                        }
-                        check = false;
-                    }
-                }
+
             };
 
             try {
                 SAXParserFactory spf = SAXParserFactory.newInstance();
                 SAXParser parser = spf.newSAXParser();
                 parser.parse(file, defaultHandler);
-
+                System.out.println("Сумма значений из файла: " + rs);
 
             } catch (Exception e) {
                 LOG.error("error in parsing()", e);
             }
         }
+
     }
 
 
     public static void main(String[] args) {
+
         ConvertXsqt convertXsqt = new ConvertXsqt();
         File in = new File(System.getProperty("java.io.tmpdir") + File.separator + "tmp.xml");
         File dest = new File("/home/eveletspb/one.xml");
