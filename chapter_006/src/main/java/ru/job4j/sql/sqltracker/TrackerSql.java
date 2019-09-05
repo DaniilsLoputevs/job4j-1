@@ -12,8 +12,11 @@ import java.util.Properties;
 public class TrackerSql implements ItTracker, AutoCloseable {
     private Connection connection;
 
+    public TrackerSql(Connection connection) {
+        this.connection = connection;
+    }
+
     public TrackerSql() {
-        this.init();
     }
 
 
@@ -223,6 +226,7 @@ public class TrackerSql implements ItTracker, AutoCloseable {
 
     public static void main(String[] args) {
         try (TrackerSql trackerSql = new TrackerSql()) {
+            trackerSql.init();
             trackerSql.add(new Item("Test2", "Testdesc2"));
             trackerSql.add(new Item("Test3", "Testdesc3"));
             trackerSql.findById("1");

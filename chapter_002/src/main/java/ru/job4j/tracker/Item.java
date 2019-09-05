@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Item {
     /**
@@ -11,8 +12,6 @@ public class Item {
     private String desc;
     private long created;
     private String[] comments;
-
-
 
 
     public Item(String id, String name, String desc, long time) {
@@ -37,6 +36,7 @@ public class Item {
 
     /**
      * Конструктор для заявки.
+     *
      * @param name
      * @param desc
      */
@@ -47,6 +47,7 @@ public class Item {
 
     /**
      * Конструктор для заявки.
+     *
      * @param id
      * @param name
      * @param desc
@@ -60,6 +61,7 @@ public class Item {
 
     /**
      * Сеттер для id
+     *
      * @param id
      */
     public void setId(String id) {
@@ -68,6 +70,7 @@ public class Item {
 
     /**
      * Геттер для id
+     *
      * @return
      */
     public String getId() {
@@ -76,6 +79,7 @@ public class Item {
 
     /**
      * Геттер для name
+     *
      * @return
      */
     public String getName() {
@@ -111,4 +115,30 @@ public class Item {
         return "Item{" + "id='" + id + '\'' + ", name='" + name + '\'' + ", desc='" + desc + '\'' + ", created=" + created + ", comments=" + Arrays.toString(comments) + '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Item item = (Item) o;
+        return created == item.created
+                &&
+                Objects.equals(id, item.id)
+                &&
+                Objects.equals(name, item.name)
+                &&
+                Objects.equals(desc, item.desc)
+                &&
+                Arrays.equals(comments, item.comments);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(id, name, desc, created);
+        result = 31 * result + Arrays.hashCode(comments);
+        return result;
+    }
 }
