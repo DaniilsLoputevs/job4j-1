@@ -12,7 +12,7 @@ services:
 before_install:
   - psql -c 'create database tracker;' -U postgres
 
-install: mvn install -P travis -DskipTests=true -Dmaven.javadoc.skip=true -B -V и mvn test  -B
+install: mvn install -P travis -DskipTests=true -Dmaven.javadoc.skip=true -B -V  mvn test  -B
 
 script:  mvn test -P travis -B
 
