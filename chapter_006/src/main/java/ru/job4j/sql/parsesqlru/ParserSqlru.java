@@ -7,9 +7,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-
-import java.sql.ResultSet;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +28,9 @@ public class ParserSqlru {
             Elements vac = table.select("td[class=postslisttopic]");
             for (Element element : vac) {
                 String uri = element.select("a[href]").attr("href");
-                String title = element.text();
+                String title = element.getElementsByTag("a").first().text();
+                String time = element.select("td[style=text-align:center]").addClass("altCol").text();
+                System.out.println(time);
                 System.out.println(uri);
                 System.out.println(title);
             }
