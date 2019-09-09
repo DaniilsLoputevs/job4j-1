@@ -11,14 +11,13 @@ public class DataBaseApi {
 
     private static final Logger LOG = LogManager.getLogger(ParserSqlru.class.getName());
     private Connection connection;
-    private boolean exist;
 
     public DataBaseApi(Connection connection) {
         this.connection = connection;
     }
 
     public DataBaseApi() {
-        this.exist = false;
+
     }
 
 
@@ -45,13 +44,13 @@ public class DataBaseApi {
     private void checkStruct() {
         String sql = "CREATE TABLE IF NOT EXISTS job("
                 +
-                "id serial primary key ,"
+                "id SERIAL PRIMARY KEY,"
                 +
-                "name_job varchar(200)not null ,"
+                "name_job VARCHAR(200)NOT NULL,"
                 +
-                "text varchar(200)not null ,"
+                "text VARCHAR(200)NOT NULL,"
                 +
-                "url varchar(200));";
+                "url VARCHAR(200) unique );";
         try (Connection connection = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/sqlru", "postgres", "password");
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.execute();
