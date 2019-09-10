@@ -38,14 +38,25 @@ public class ParserSqlru {
                 if (Objects.nonNull(titlevac)) {
                     title = titlevac.text();
                     u = titlevac.attr("href");
+                    Document textvac = Jsoup.connect(u).get();
+                    Elements elementtab = textvac.getElementsByTag("table");
+                    Element fmsg = elementtab.select("table.msgTable").first();
+                    Elements m = fmsg.select("tr");
+                    text = m.select("td.msgBody").last().text();
                     datevac = date.text();
-                    System.out.println(title + "-----описание вакансии");
-                    System.out.println(u + " ------ссылка на вакансию");
-                    System.out.println(datevac + " ------Время публикации");
+
+
+//                    System.out.println(title + " " + u + " url vacancy");
+//                    System.out.println();
+//                    System.out.println(text);
+//                    System.out.println();
+//                    System.out.println();
+//                    System.out.println();
+//                    System.out.println(datevac + " ------Время публикации");
+//                    System.out.println();
                 }
 
             }
-
 
 
         } catch (Exception e) {
@@ -54,10 +65,6 @@ public class ParserSqlru {
         return this.vac;
     }
 
-
-//    private boolean checkVacancy(String title){
-//        if (title.equals(""))
-//    }
 
     public static void main(String[] args) {
         ParserSqlru parserSqlru = new ParserSqlru();
