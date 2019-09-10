@@ -9,6 +9,7 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class ParserSqlru {
@@ -22,18 +23,31 @@ public class ParserSqlru {
 
     public List<Vacancy> parsing(String url) {
         Vacancy vacancy;
+        String u;
+        String title;
+        String text;
+        String datevac;
         try {
             Document document = Jsoup.connect(url).get();
-            Elements table = document.select("table[class=forumTable]");
-            Elements vac = table.select("td[class=postslisttopic]");
-            for (Element element : vac) {
-                String uri = element.select("a[href]").attr("href");
-                String title = element.getElementsByTag("a").first().text();
-                String time = element.select("td[style=text-align:center]").addClass("altCol").text();
-                System.out.println(time);
-                System.out.println(uri);
-                System.out.println(title);
+            Elements table = document.getElementsByTag("table");
+            Element ftable = table.select("table.forumTable").first();
+            Elements vac = ftable.select("tr");
+            for (Element v : vac) {
+                Element titlevac = v.select("td > a[href]").first();
+                Element date = v.select("td.altCol").last();
+                if (Objects.nonNull(titlevac)) {
+                    title = titlevac.text();
+                    u = titlevac.attr("href");
+                    datevac = date.text();
+                    System.out.println(title + "-----описание вакансии");
+                    System.out.println(u + " ------ссылка на вакансию");
+                    System.out.println(datevac + " ------Время публикации");
+                }
+
             }
+
+
+
         } catch (Exception e) {
             LOG.error("error parsing", e);
         }
