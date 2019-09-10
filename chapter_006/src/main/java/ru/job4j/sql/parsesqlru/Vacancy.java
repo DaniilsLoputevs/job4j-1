@@ -2,7 +2,7 @@ package ru.job4j.sql.parsesqlru;
 
 import java.sql.Timestamp;
 
-public class Vacancy {
+public class Vacancy extends DataType {
 
     private String url;
     private String name;

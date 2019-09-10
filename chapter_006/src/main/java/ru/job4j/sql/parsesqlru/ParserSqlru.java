@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class ParserSqlru {
+public class ParserSqlru implements ParsSite {
     private static final Logger LOG = LogManager.getLogger(ParserSqlru.class.getName());
     private List<Vacancy> vac;
 
