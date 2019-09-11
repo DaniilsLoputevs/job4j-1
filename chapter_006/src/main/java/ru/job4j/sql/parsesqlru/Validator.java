@@ -3,7 +3,7 @@ package ru.job4j.sql.parsesqlru;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
@@ -29,16 +29,19 @@ public class Validator {
         return rs;
     }
 
+    /**
+     * Метод парсит дату и преобразовывает его в long представление , используется DateTimeFormatter с custom паттернами разбора строки.
+     *
+     * @param time строковое представление даты
+     * @return long значение полученное
+     */
 
-    public long convertTime(String time) throws ParseException {
-        DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder().appendPattern("d").appendText(ChronoField.MONTH_OF_YEAR, this.moth).appendPattern("yy").toFormatter();
+    public long convertTime(String time) {
+        DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder().appendPattern("d ").appendText(ChronoField.MONTH_OF_YEAR, this.moth).appendPattern(" yy, H:mm").toFormatter();
         Long value = 0L;
-        if (time.contains("сен")) {
-            LocalDate parse = LocalDate.parse(time, dateTimeFormatter);
-            System.out.println(parse);
-            String s = parse.toString();
-            System.out.println(s);
-        }
+        LocalDateTime parse = LocalDateTime.parse(time, dateTimeFormatter);
+        value = Timestamp.valueOf(parse).getTime();
+
 
         return value;
 
@@ -58,9 +61,9 @@ public class Validator {
         this.moth.put(11L, "дек");
     }
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
         Validator validator = new Validator();
-        validator.convertTime("02-дек-15");
+        validator.convertTime("1 сен 19, 17:25");
 
     }
 }
