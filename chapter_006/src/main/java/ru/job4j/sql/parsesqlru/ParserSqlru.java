@@ -28,36 +28,36 @@ public class ParserSqlru implements ParsSite {
         String text;
         String datevac;
         try {
-            Document document = Jsoup.connect(url).get();
-            Elements table = document.getElementsByTag("table");
-            Element ftable = table.select("table.forumTable").first();
-            Elements vac = ftable.select("tr");
-            for (Element v : vac) {
-                Element titlevac = v.select("td > a[href]").first();
-                Element date = v.select("td.altCol").last();
-                if (Objects.nonNull(titlevac)) {
-                    title = titlevac.text();
-                    u = titlevac.attr("href");
-                    Document textvac = Jsoup.connect(u).get();
-                    Elements elementtab = textvac.getElementsByTag("table");
-                    Element fmsg = elementtab.select("table.msgTable").first();
-                    Elements m = fmsg.select("tr");
-                    text = m.select("td.msgBody").last().text();
-                    datevac = date.text();
+                Document document = Jsoup.connect(url).get();
+                Elements table = document.getElementsByTag("table");
+                Element ftable = table.select("table.forumTable").first();
+                Elements vac = ftable.select("tr");
+
+                for (Element v : vac) {
+                    Element titlevac = v.select("td > a[href]").first();
+                    Element date = v.select("td.altCol").last();
+                    if (Objects.nonNull(titlevac)) {
+                        title = titlevac.text();
+                        u = titlevac.attr("href");
+                        Document textvac = Jsoup.connect(u).get();
+                        Elements elementtab = textvac.getElementsByTag("table");
+                        Element fmsg = elementtab.select("table.msgTable").first();
+                        Elements m = fmsg.select("tr");
+                        text = m.select("td.msgBody").last().text();
+                        datevac = date.text();
 
 
-//                    System.out.println(title + " " + u + " url vacancy");
-//                    System.out.println();
-//                    System.out.println(text);
-//                    System.out.println();
-//                    System.out.println();
-//                    System.out.println();
-//                    System.out.println(datevac + " ------Время публикации");
-//                    System.out.println();
+                        System.out.println(title + " " + u + " url vacancy");
+                        System.out.println();
+                        System.out.println(text);
+                        System.out.println();
+                        System.out.println();
+                        System.out.println();
+                        System.out.println(datevac + " ------Время публикации");
+                        System.out.println();
+                    }
+
                 }
-
-            }
-
 
         } catch (Exception e) {
             LOG.error("error parsing", e);
