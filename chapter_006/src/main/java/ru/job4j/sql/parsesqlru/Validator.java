@@ -2,7 +2,6 @@ package ru.job4j.sql.parsesqlru;
 
 
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -17,8 +16,13 @@ public class Validator {
         this.initvalMoth();
     }
 
-
-    public static boolean checkTitle(String title) {
+    /**
+     * Метод проверяет название вакансии на соответствие
+     *
+     * @param title Название вакансии
+     * @return true/false
+     */
+    public boolean checkTitle(String title) {
         String unvalidate = "Script";
 
         boolean rs = false;
@@ -47,6 +51,9 @@ public class Validator {
 
     }
 
+    /**
+     * Служебный метод заполнения hashMap значениями для парсинга даты .
+     */
     private void initvalMoth() {
         this.moth.put(1L, "янв");
         this.moth.put(2L, "фев");
