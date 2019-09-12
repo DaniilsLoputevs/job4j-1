@@ -2,7 +2,9 @@ package ru.job4j.sql.parsesqlru;
 
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
@@ -41,10 +43,31 @@ public class Validator {
      */
 
     public long convertTime(String time) {
-        DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder().appendPattern("d ").appendText(ChronoField.MONTH_OF_YEAR, this.moth).appendPattern(" yy, H:mm").toFormatter();
         Long value = 0L;
-        LocalDateTime parse = LocalDateTime.parse(time, dateTimeFormatter);
-        value = Timestamp.valueOf(parse).getTime();
+        LocalDate localDate = LocalDate.now();
+        if (Objects.nonNull(time)) {
+            if (time.contains("сегодня")) {
+                String[] tmp = time.split(", ");
+                LocalTime timeparse = LocalTime.parse(tmp[1], DateTimeFormatter.ofPattern("H:mm"));
+                LocalDateTime rsval = localDate.atTime(timeparse);
+                value = Timestamp.valueOf(rsval).getTime();
+
+
+            }
+            if (time.contains("вчера")) {
+                String[] tmp = time.split(", ");
+                LocalTime timeparse = LocalTime.parse(tmp[1], DateTimeFormatter.ofPattern("H:mm"));
+                LocalDateTime rsval = localDate.minusDays(1).atTime(timeparse);
+                value = Timestamp.valueOf(rsval).getTime();
+
+            } else {
+                DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder().appendPattern("d ").appendText(ChronoField.MONTH_OF_YEAR, this.moth).appendPattern(" yy, H:mm").toFormatter();
+                LocalDateTime parse = LocalDateTime.parse(time, dateTimeFormatter);
+                value = Timestamp.valueOf(parse).getTime();
+            }
+
+
+        }
 
 
         return value;
@@ -68,9 +91,9 @@ public class Validator {
         this.moth.put(11L, "дек");
     }
 
-    public static void main(String[] args) {
-        Validator validator = new Validator();
-        validator.convertTime("1 сен 19, 17:25");
-
-    }
+//    public static void main(String[] args) {
+//        Validator validator = new Validator();
+//        System.out.println(validator.convertTime("вчера, 17:25"));
+//
+//    }
 }
