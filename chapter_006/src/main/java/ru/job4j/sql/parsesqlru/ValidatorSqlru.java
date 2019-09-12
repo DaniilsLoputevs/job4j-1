@@ -10,13 +10,15 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.util.*;
 
-public class Validator implements ValidateSearching, Converter {
+public class ValidatorSqlru implements ValidateSearching, Converter {
     private Map<Long, String> moth;
 
-    public Validator() {
+    public ValidatorSqlru() {
         this.moth = new HashMap<>();
         this.initvalMoth();
+
     }
+
 
     /**
      * Метод проверяет название вакансии на соответствие
@@ -26,14 +28,8 @@ public class Validator implements ValidateSearching, Converter {
      */
     @Override
     public boolean checkKeyWords(String title) {
-        String unvalidate = "Script";
-
-        boolean rs = false;
-        if (!title.contains(unvalidate)) {
-            rs = true;
-
-        }
-        return rs;
+        String s = title.toLowerCase();
+        return s.contains("java") && !s.contains("script");
     }
 
     /**
@@ -43,34 +39,34 @@ public class Validator implements ValidateSearching, Converter {
      * @return long значение полученное
      */
     @Override
-    public long convertTime(String time) {
-        Long value = 0L;
+    public LocalDateTime convertTime(String time) {
+        LocalDateTime rs = LocalDateTime.now();
         LocalDate localDate = LocalDate.now();
         if (Objects.nonNull(time)) {
             if (time.contains("сегодня")) {
                 String[] tmp = time.split(", ");
                 LocalTime timeparse = LocalTime.parse(tmp[1], DateTimeFormatter.ofPattern("H:mm"));
                 LocalDateTime rsval = localDate.atTime(timeparse);
-                value = Timestamp.valueOf(rsval).getTime();
+                rs = rsval;
 
 
             } else if (time.contains("вчера")) {
                 String[] tmp = time.split(", ");
                 LocalTime timeparse = LocalTime.parse(tmp[1], DateTimeFormatter.ofPattern("H:mm"));
-                LocalDateTime rsval = localDate.minusDays(1).atTime(timeparse);
-                value = Timestamp.valueOf(rsval).getTime();
+                LocalDateTime rsvalone = localDate.minusDays(1).atTime(timeparse);
+                rs = rsvalone;
 
             } else {
                 DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder().appendPattern("d ").appendText(ChronoField.MONTH_OF_YEAR, this.moth).appendPattern(" yy, H:mm").toFormatter();
                 LocalDateTime parse = LocalDateTime.parse(time, dateTimeFormatter);
-                value = Timestamp.valueOf(parse).getTime();
+                rs = parse;
             }
 
 
         }
 
 
-        return value;
+        return rs;
 
     }
 
@@ -92,8 +88,9 @@ public class Validator implements ValidateSearching, Converter {
     }
 
     public static void main(String[] args) {
-        Validator validator = new Validator();
-        System.out.println(validator.convertTime("вчера, 20:47"));
+        ValidatorSqlru validatorSqlru = new ValidatorSqlru();
+        System.out.println(validatorSqlru.convertTime("вчера, 20:47"));
+        System.out.println(validatorSqlru.checkKeyWords("Senior JavaScript  Developer"));
 
     }
 }

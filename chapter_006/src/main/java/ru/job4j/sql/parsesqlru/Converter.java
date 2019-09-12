@@ -1,6 +1,8 @@
 package ru.job4j.sql.parsesqlru;
 
+import java.time.LocalDateTime;
+
 public interface Converter {
 
-    long convertTime(String value);
+    LocalDateTime convertTime(String value);
 }
