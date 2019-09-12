@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.util.*;
 
-public class Validator {
+public class Validator implements ValidateSearching, Converter {
     private Map<Long, String> moth;
 
     public Validator() {
@@ -24,7 +24,8 @@ public class Validator {
      * @param title Название вакансии
      * @return true/false
      */
-    public boolean checkTitle(String title) {
+    @Override
+    public boolean checkKeyWords(String title) {
         String unvalidate = "Script";
 
         boolean rs = false;
@@ -41,7 +42,7 @@ public class Validator {
      * @param time строковое представление даты
      * @return long значение полученное
      */
-
+    @Override
     public long convertTime(String time) {
         Long value = 0L;
         LocalDate localDate = LocalDate.now();
@@ -53,8 +54,7 @@ public class Validator {
                 value = Timestamp.valueOf(rsval).getTime();
 
 
-            }
-            if (time.contains("вчера")) {
+            } else if (time.contains("вчера")) {
                 String[] tmp = time.split(", ");
                 LocalTime timeparse = LocalTime.parse(tmp[1], DateTimeFormatter.ofPattern("H:mm"));
                 LocalDateTime rsval = localDate.minusDays(1).atTime(timeparse);
@@ -91,9 +91,9 @@ public class Validator {
         this.moth.put(11L, "дек");
     }
 
-//    public static void main(String[] args) {
-//        Validator validator = new Validator();
-//        System.out.println(validator.convertTime("вчера, 17:25"));
-//
-//    }
+    public static void main(String[] args) {
+        Validator validator = new Validator();
+        System.out.println(validator.convertTime("вчера, 20:47"));
+
+    }
 }
