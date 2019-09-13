@@ -1,4 +1,4 @@
-package ru.job4j.sql.parsesqlru;
+package ru.job4j.parsing;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

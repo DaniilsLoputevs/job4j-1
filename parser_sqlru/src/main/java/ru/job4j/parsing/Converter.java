@@ -1,4 +1,4 @@
-package ru.job4j.sql.parsesqlru;
+package ru.job4j.parsing;
 
 import java.time.LocalDateTime;
 

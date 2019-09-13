@@ -81,7 +81,7 @@ public class ConvertXsqt {
                 System.out.println("Сумма значений из файла: " + rs);
 
             } catch (Exception e) {
-                LOG.error("error in parsing()", e);
+                LOG.error("error in sql()", e);
             }
         }
 

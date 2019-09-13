@@ -1,7 +1,6 @@
-package ru.job4j.sql.parsesqlru;
+package ru.job4j.parsing;
 
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -84,12 +83,13 @@ public class ValidatorSqlru implements ValidateSearching, Converter {
         this.moth.put(8L, "авг");
         this.moth.put(9L, "сен");
         this.moth.put(10L, "окт");
-        this.moth.put(11L, "дек");
+        this.moth.put(11L, "ноя");
+        this.moth.put(12L, "дек");
     }
 
     public static void main(String[] args) {
         ValidatorSqlru validatorSqlru = new ValidatorSqlru();
-        System.out.println(validatorSqlru.convertTime("вчера, 20:47"));
+        System.out.println(validatorSqlru.convertTime("24 окт 18, 10:39"));
         System.out.println(validatorSqlru.checkKeyWords("Senior JavaScript  Developer"));
 
     }
