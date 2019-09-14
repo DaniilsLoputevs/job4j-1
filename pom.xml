@@ -34,19 +34,15 @@
                 <db.username>postgres</db.username>
                 <db.password>password</db.password>
                 <db.driver>org.postgresql.Driver</db.driver>
-            </properties>
-        </profile>
 
-
-        <profile>
-            <id>travis2</id>
-            <properties>
                 <db.url>jdbc:postgresql://localhost/sqlru</db.url>
                 <db.username>postgres</db.username>
                 <db.password>password</db.password>
                 <db.driver>org.postgresql.Driver</db.driver>
             </properties>
         </profile>
+
+
 
 
 
