@@ -6,7 +6,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +16,14 @@ public class ParserSqlru implements ParsSite {
     private static final Logger LOG = LogManager.getLogger(ParserSqlru.class.getName());
     private List<Vacancy> vac;
     private ValidatorSqlru validatorSqlru;
+    private DataBaseApi dataBaseApi;
     private boolean work = true;
 
 
     public ParserSqlru() {
         this.vac = new ArrayList<>();
         this.validatorSqlru = new ValidatorSqlru();
+        this.dataBaseApi = new DataBaseApi();
     }
 
     public List<Vacancy> parsing(String url) {
@@ -49,15 +50,11 @@ public class ParserSqlru implements ParsSite {
                             String datevac = date.text();
                             this.conditionDateparsing(datevac);
                             this.vac.add(new Vacancy(u, title, text, this.validatorSqlru.convertTime(datevac)));
-
                         }
                     }
-
                 }
-
             }
-
-
+            this.outData();
         } catch (Exception e) {
             LOG.error("error sql", e);
         }
@@ -74,6 +71,15 @@ public class ParserSqlru implements ParsSite {
         }
 
         return rs;
+
+    }
+
+    private void outData() {
+        if (!this.work) {
+            this.dataBaseApi.init();
+            this.dataBaseApi.insertData(this.vac);
+        }
+
 
     }
 
