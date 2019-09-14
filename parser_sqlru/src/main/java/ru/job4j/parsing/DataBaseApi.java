@@ -87,16 +87,4 @@ public class DataBaseApi implements DataBaseUsage {
         }
 
     }
-
-
-    public static void main(String[] args) {
-        DataBaseApi dataBaseApi = new DataBaseApi();
-        dataBaseApi.init();
-        LocalDateTime localDateTime = LocalDateTime.now();
-        List<Vacancy> vacancies = new ArrayList<>();
-        vacancies.add(new Vacancy("21321312", "описание вакансии", "вакансия", localDateTime));
-        dataBaseApi.insertData(vacancies);
-    }
-
-
 }

@@ -83,13 +83,13 @@ public class ParserSqlru implements ParsSite {
 
     }
 
-
-    public static void main(String[] args) {
-        ParserSqlru parserSqlru = new ParserSqlru();
-        System.out.println(parserSqlru.parsing("https://www.sql.ru/forum/job-offers"));
-
-
-    }
+//
+//    public static void main(String[] args) {
+//        ParserSqlru parserSqlru = new ParserSqlru();
+//        System.out.println(parserSqlru.parsing("https://www.sql.ru/forum/job-offers"));
+//
+//
+//    }
 
 }
 
