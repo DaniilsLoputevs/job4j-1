@@ -34,11 +34,6 @@
                 <db.username>postgres</db.username>
                 <db.password>password</db.password>
                 <db.driver>org.postgresql.Driver</db.driver>
-
-                <db.url>jdbc:postgresql://localhost/sqlru</db.url>
-                <db.username>postgres</db.username>
-                <db.password>password</db.password>
-                <db.driver>org.postgresql.Driver</db.driver>
             </properties>
         </profile>
 
