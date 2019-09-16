@@ -6,6 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ public class ParserSqlru implements ParsSite {
     private ValidatorSqlru validatorSqlru;
     private DataBaseApi dataBaseApi;
     private boolean work = true;
+    private LocalDateTime last;
 
 
     public ParserSqlru() {
@@ -27,6 +29,7 @@ public class ParserSqlru implements ParsSite {
     }
 
     public List<Vacancy> parsing(String url) {
+        this.last = this.dataBaseApi.takeLastDataInDb();
         int i = 1;
         try {
             while (this.work) {
@@ -48,7 +51,7 @@ public class ParserSqlru implements ParsSite {
                             Elements m = fmsg.select("tr");
                             String text = m.select("td.msgBody").last().text();
                             String datevac = date.text();
-                            this.conditionDateparsing(datevac);
+                            this.conditionStopParsing(datevac);
                             this.vac.add(new Vacancy(u, title, text, this.validatorSqlru.convertTime(datevac)));
                         }
                     }
@@ -61,9 +64,9 @@ public class ParserSqlru implements ParsSite {
         return this.vac;
     }
 
-    private boolean conditionDateparsing(String time) {
+    private boolean conditionStopParsing(String time) {
         boolean rs = true;
-        LocalDateTime current = LocalDateTime.now().minusDays(180);
+        LocalDateTime current = this.conditionToParse(this.last);
         LocalDateTime check = this.validatorSqlru.convertTime(time);
         if (current.isAfter(check)) {
             rs = false;
@@ -73,6 +76,23 @@ public class ParserSqlru implements ParsSite {
         return rs;
 
     }
+
+    /**
+     * Утилитный метод условия парсинга , если таблица пустая то возвращается начало года.
+     * @param value дата последней записи в таблице
+     * @return LocalDateTime
+     */
+    private LocalDateTime conditionToParse(LocalDateTime value) {
+        LocalDateTime rs = null;
+        if (Objects.isNull(value)) {
+            rs = LocalDateTime.of(2019, 1, 1, 0, 0);
+        } else {
+            rs = LocalDateTime.now();
+        }
+
+        return rs;
+    }
+
 
     private void outputDataInDb() {
         if (!this.work) {

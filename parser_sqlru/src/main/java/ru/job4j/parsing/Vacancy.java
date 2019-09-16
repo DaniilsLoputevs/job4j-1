@@ -16,7 +16,6 @@ public class Vacancy extends DataType {
         this.text = text;
         this.localDateTime = localDateTime;
     }
-
     public String getUrl() {
         return url;
     }

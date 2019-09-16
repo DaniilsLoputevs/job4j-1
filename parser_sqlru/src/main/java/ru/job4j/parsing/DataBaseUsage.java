@@ -7,7 +7,9 @@ public interface DataBaseUsage {
 
     void insertData(List<? extends DataType> dataTypes);
 
-     List<? extends DataType> getData();
+     List<? extends DataType> getAllData();
+
+     List<?extends DataType> findByTitle(String value);
 
      void init();
 

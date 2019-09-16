@@ -57,7 +57,7 @@ public class DataBaseApi implements DataBaseUsage {
      * @return коллекция обьектов ? extends DataType
      */
     @Override
-    public List<? extends DataType> getData() {
+    public List<? extends DataType> getAllData() {
         List<Vacancy> rs = new ArrayList<>();
         String sql = "select name_job, text, url, data_vac from sqlru.public.job;";
         try (PreparedStatement statement = this.connection.prepareStatement(sql);
@@ -77,8 +77,27 @@ public class DataBaseApi implements DataBaseUsage {
         return rs;
     }
 
+    @Override
+    public List<? extends DataType> findByTitle(String value) {
+        List<Vacancy> rs = new ArrayList<>();
+        String sql = "select * from sqlru.public.job where name_job = ?;";
+        try (PreparedStatement statement = this.connection.prepareStatement(sql)) {
+            statement.setString(1, value);
+            ResultSet set = statement.executeQuery();
+            while (set.next()) {
+                Timestamp time = set.getTimestamp("data_vac");
+                rs.add(new Vacancy(set.getString(3), set.getString(1), set.getString(2), time.toLocalDateTime()));
+            }
+            set.close();
+        } catch (SQLException e) {
+            LOG.error("error in find()", e);
+        }
+        return rs;
+    }
+
     /**
      * Получение последней добавленной даты из базы данных
+     *
      * @return обьект LocalDateTime с последней датой в базе
      */
     public LocalDateTime takeLastDataInDb() {
@@ -140,5 +159,6 @@ public class DataBaseApi implements DataBaseUsage {
     public static void main(String[] args) {
         DataBaseApi dataBaseApi = new DataBaseApi();
         System.out.println(dataBaseApi.takeLastDataInDb());
+        System.out.println(dataBaseApi.findByTitle("Java"));
     }
 }
