@@ -5,7 +5,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.InputStream;
 import java.sql.*;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -20,30 +23,76 @@ public class DataBaseApi implements DataBaseUsage {
     }
 
     public DataBaseApi() {
+        this.init();
     }
 
+    /**
+     * Метод пакетным способом отправляет полученные данные из парсера в базу данных
+     * закрытие ресурсов производится в (try with resources)
+     *
+     * @param dataTypes Полученные обьекты при парсинге сайта sql.ru
+     */
 
     @Override
     public void insertData(List<? extends DataType> dataTypes) {
         String sql = "insert into sqlru.public.job(name_job, text, url,data_vac) VALUES (?,?,?,?) on conflict do nothing ";
         try (PreparedStatement statement = this.connection.prepareStatement(sql)) {
             for (DataType vacancy : dataTypes) {
-                Timestamp.valueOf(vacancy.getTime());
                 statement.setString(1, vacancy.getTitle());
                 statement.setString(2, vacancy.getText());
                 statement.setString(3, vacancy.getUrl());
                 statement.setTimestamp(4, Timestamp.valueOf(vacancy.getTime()));
-                statement.executeUpdate();
+                statement.addBatch();
             }
+            statement.executeBatch();
         } catch (SQLException e) {
             LOG.error("error in insertData()", e);
         }
 
     }
 
+    /**
+     * Получение данных из таблицы (закрытие ресурсов производится в try with resources)
+     *
+     * @return коллекция обьектов ? extends DataType
+     */
     @Override
     public List<? extends DataType> getData() {
-        return null;
+        List<Vacancy> rs = new ArrayList<>();
+        String sql = "select name_job, text, url, data_vac from sqlru.public.job;";
+        try (PreparedStatement statement = this.connection.prepareStatement(sql);
+             ResultSet set = statement.executeQuery()) {
+            while (set.next()) {
+                String title = set.getString(1);
+                String text = set.getString(2);
+                String url = set.getString(3);
+                Timestamp time = set.getTimestamp(4);
+                rs.add(new Vacancy(url, title, text, time.toLocalDateTime()));
+
+
+            }
+        } catch (SQLException e) {
+            LOG.error("error getdata in table0", e);
+        }
+        return rs;
+    }
+
+    /**
+     * Получение последней добавленной даты из базы данных
+     * @return обьект LocalDateTime с последней датой в базе
+     */
+    public LocalDateTime takeLastDataInDb() {
+        LocalDateTime rs = null;
+        String sql = "select data_vac from  sqlru.public.job order by data_vac desc limit 1";
+        try (PreparedStatement statement = this.connection.prepareStatement(sql);
+             ResultSet set = statement.executeQuery()) {
+            while (set.next()) {
+                rs = set.getTimestamp(1).toLocalDateTime();
+            }
+        } catch (SQLException e) {
+            LOG.error("error takeLastDataInDb()", e);
+        }
+        return rs;
     }
 
     /**
@@ -86,5 +135,10 @@ public class DataBaseApi implements DataBaseUsage {
             LOG.error("error check", e);
         }
 
+    }
+
+    public static void main(String[] args) {
+        DataBaseApi dataBaseApi = new DataBaseApi();
+        System.out.println(dataBaseApi.takeLastDataInDb());
     }
 }

@@ -54,7 +54,7 @@ public class ParserSqlru implements ParsSite {
                     }
                 }
             }
-            this.outData();
+            this.outputDataInDb();
         } catch (Exception e) {
             LOG.error("error sql", e);
         }
@@ -63,7 +63,7 @@ public class ParserSqlru implements ParsSite {
 
     private boolean conditionDateparsing(String time) {
         boolean rs = true;
-        LocalDateTime current = LocalDateTime.now().minusDays(365);
+        LocalDateTime current = LocalDateTime.now().minusDays(180);
         LocalDateTime check = this.validatorSqlru.convertTime(time);
         if (current.isAfter(check)) {
             rs = false;
@@ -74,22 +74,21 @@ public class ParserSqlru implements ParsSite {
 
     }
 
-    private void outData() {
+    private void outputDataInDb() {
         if (!this.work) {
-            this.dataBaseApi.init();
             this.dataBaseApi.insertData(this.vac);
         }
 
 
     }
 
-//
-//    public static void main(String[] args) {
-//        ParserSqlru parserSqlru = new ParserSqlru();
-//        System.out.println(parserSqlru.parsing("https://www.sql.ru/forum/job-offers"));
-//
-//
-//    }
+
+    public static void main(String[] args) {
+        ParserSqlru parserSqlru = new ParserSqlru();
+        System.out.println(parserSqlru.parsing("https://www.sql.ru/forum/job-offers"));
+
+
+    }
 
 }
 
