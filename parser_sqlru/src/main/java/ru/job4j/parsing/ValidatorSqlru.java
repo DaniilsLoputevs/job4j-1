@@ -87,10 +87,4 @@ public class ValidatorSqlru implements ValidateSearching, Converter {
         this.moth.put(12L, "дек");
     }
 
-    public static void main(String[] args) {
-        ValidatorSqlru validatorSqlru = new ValidatorSqlru();
-        System.out.println(validatorSqlru.convertTime("24 окт 18, 10:39"));
-        System.out.println(validatorSqlru.checkKeyWords("Senior JavaScript  Developer"));
-
-    }
 }

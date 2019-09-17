@@ -6,6 +6,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,7 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class ParserSqlru implements ParsSite {
+public class ParserSqlru implements ParsSite, Job {
     private static final Logger LOG = LogManager.getLogger(ParserSqlru.class.getName());
     private List<Vacancy> vac;
     private ValidatorSqlru validatorSqlru;
@@ -22,13 +25,14 @@ public class ParserSqlru implements ParsSite {
     private LocalDateTime last;
 
 
-    public ParserSqlru() {
+    public ParserSqlru()  {
         this.vac = new ArrayList<>();
         this.validatorSqlru = new ValidatorSqlru();
         this.dataBaseApi = new DataBaseApi();
     }
 
     public List<Vacancy> parsing(String url) {
+        System.out.println("Начало работы парсера");
         this.last = this.dataBaseApi.takeLastDataInDb();
         int i = 1;
         try {
@@ -104,12 +108,12 @@ public class ParserSqlru implements ParsSite {
     }
 
 
-    public static void main(String[] args) {
-        ParserSqlru parserSqlru = new ParserSqlru();
-        System.out.println(parserSqlru.parsing("https://www.sql.ru/forum/job-offers"));
 
+    @Override
+    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        ParserSqlru parserSqlru = new ParserSqlru();
+        parserSqlru.parsing("https://www.sql.ru/forum/job-offers");
 
     }
-
 }
 

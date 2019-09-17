@@ -25,4 +25,14 @@ public class ValidatorSqlruTest {
         assertThat(resone, is(exptwo));
 
     }
+
+    @Test
+    public void checkKeyWords1() {
+        ValidatorSqlru validatorSqlru = new ValidatorSqlru();
+        assertThat(validatorSqlru.checkKeyWords("Джава"), is(false));
+        assertThat(validatorSqlru.checkKeyWords("Java"), is(true));
+        assertThat(validatorSqlru.checkKeyWords("Java Script"), is(false));
+        assertThat(validatorSqlru.checkKeyWords("JavaScript"), is(false));
+        assertThat(validatorSqlru.checkKeyWords("java"), is(true));
+    }
 }
