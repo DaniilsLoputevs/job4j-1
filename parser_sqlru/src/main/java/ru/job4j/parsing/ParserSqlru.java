@@ -79,6 +79,7 @@ public class ParserSqlru implements ParsSite {
 
     /**
      * Утилитный метод условия парсинга , если таблица пустая то возвращается начало года.
+     *
      * @param value дата последней записи в таблице
      * @return LocalDateTime
      */
@@ -87,7 +88,7 @@ public class ParserSqlru implements ParsSite {
         if (Objects.isNull(value)) {
             rs = LocalDateTime.of(2019, 1, 1, 0, 0);
         } else {
-            rs = LocalDateTime.now();
+            rs = this.last;
         }
 
         return rs;

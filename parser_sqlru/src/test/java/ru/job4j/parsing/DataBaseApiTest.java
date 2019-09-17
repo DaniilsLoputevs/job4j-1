@@ -44,12 +44,4 @@ public class DataBaseApiTest {
         assertThat(dataBaseApi.findByTitle("testtitle").size(), is(1));
     }
 
-    @Test
-    public void getData() {
-    }
-
-    @Test
-    public void takeLastDataInDb() {
-    }
-
 }
