@@ -115,5 +115,10 @@ public class ParserSqlru implements ParsSite, Job {
         parserSqlru.parsing("https://www.sql.ru/forum/job-offers");
 
     }
+
+    public static void main(String[] args) {
+        ParserSqlru parserSqlru = new ParserSqlru();
+        parserSqlru.parsing("https://www.sql.ru/forum/job-offers");
+    }
 }
 
