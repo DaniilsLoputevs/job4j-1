@@ -17,7 +17,6 @@ public class MenuCalculator {
         this.scanner = new Scanner(System.in);
         this.calculator = calculator;
         this.work = true;
-        this.init();
 
     }
 
@@ -29,8 +28,8 @@ public class MenuCalculator {
         this.context.add(new Sub(1, "Вычитание"));
         this.context.add(new Multiply(2, "Умножение"));
         this.context.add(new Div(3, "Деление"));
-        this.context.add(new Div(4, "Последний результат"));
-        this.context.add(new Exit(5, "Выход"));
+        this.context.add(new Exit(4, "Выход"));
+
     }
 
     /**
@@ -38,7 +37,7 @@ public class MenuCalculator {
      */
     public void show() {
         for (ContextExecutor contextExecutor : this.context) {
-            System.out.println(contextExecutor.show());
+            System.out.println(contextExecutor);
         }
     }
 
@@ -63,20 +62,17 @@ public class MenuCalculator {
 
         @Override
         public void execute(Calculator calculator) {
+            System.out.println("Введите первое значение");
             double one = Double.parseDouble(scanner.next());
+            System.out.println("Ввведите второе значение");
             double two = Double.parseDouble(scanner.next());
             calculator.add(two, one);
-            System.out.println(calculator.getResult());
-        }
-
-        @Override
-        public String show() {
-            return this.showAction();
+            System.out.println("Результат " + calculator.getResult());
         }
     }
 
     /**
-     * Класс отвечает за вычитание в пункте меню выполнения пункта меню
+     * Класс отвечает за вычитание в пункте меню
      */
     private class Sub extends Action implements ContextExecutor {
 
@@ -89,12 +85,9 @@ public class MenuCalculator {
             double one = Double.parseDouble(scanner.next());
             double two = Double.parseDouble(scanner.next());
             calculator.sub(two, one);
+            System.out.println("Результат " + calculator.getResult());
         }
 
-        @Override
-        public String show() {
-            return this.showAction();
-        }
     }
 
     /**
@@ -111,14 +104,9 @@ public class MenuCalculator {
             double one = Double.parseDouble(scanner.next());
             double two = Double.parseDouble(scanner.next());
             calculator.multple(two, one);
+            System.out.println("Результат " + calculator.getResult());
 
         }
-
-        @Override
-        public String show() {
-            return this.showAction();
-        }
-
 
     }
 
@@ -133,35 +121,9 @@ public class MenuCalculator {
             double one = Double.parseDouble(scanner.next());
             double two = Double.parseDouble(scanner.next());
             calculator.div(two, one);
+            System.out.println("Результат " + calculator.getResult());
 
         }
-
-        @Override
-        public String show() {
-            return this.showAction();
-        }
-
-
-    }
-    private class Getlast extends Action implements ContextExecutor {
-
-        public Getlast(int key, String name) {
-            super(key, name);
-        }
-
-        @Override
-        public void execute(Calculator calculator) {
-            double one = Double.parseDouble(scanner.next());
-            double two = Double.parseDouble(scanner.next());
-            calculator.div(two, one);
-
-        }
-
-        @Override
-        public String show() {
-            return this.showAction();
-        }
-
 
     }
 
@@ -174,23 +136,11 @@ public class MenuCalculator {
         @Override
         public void execute(Calculator calculator) {
             work = false;
-
+            System.out.println("Программа завершена.");
         }
 
-        @Override
-        public String show() {
-            return this.showAction();
-        }
-
-
-    }
-
-
-    public static void main(String[] args) {
-        MenuCalculator menuCalculator = new MenuCalculator(new Calculator());
-        menuCalculator.init();
-        menuCalculator.show();
-        menuCalculator.select();
     }
 
 }
+
+

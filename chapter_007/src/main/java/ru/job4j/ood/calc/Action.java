@@ -9,7 +9,12 @@ public abstract class Action {
         this.name = name;
     }
 
-    public String showAction() {
+    private String showAction() {
         return String.format("%s : %s", this.key, this.name);
+    }
+
+    @Override
+    public String toString() {
+        return this.showAction();
     }
 }

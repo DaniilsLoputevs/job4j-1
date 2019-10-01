@@ -3,13 +3,14 @@ package ru.job4j.ood.calc;
 import ru.job4j.calculator.Calculator;
 
 
-public class Start {
+
+public class StartApp {
     private MenuCalculator menuCalculator;
     private Calculator calculator;
 
-    public Start() {
+    public StartApp(MenuCalculator menuCalculator) {
         this.calculator = new Calculator();
-        this.menuCalculator = new MenuCalculator(this.calculator);
+        this.menuCalculator = menuCalculator;
     }
 
 
@@ -22,8 +23,10 @@ public class Start {
     }
 
     public static void main(String[] args) {
-        Start start = new Start();
-        start.init();
+        MenuCalculator menuCalculator = new MenuCalculator(new Calculator());
+        menuCalculator.init();
+        StartApp startApp = new StartApp(menuCalculator);
+        startApp.init();
 
     }
 }
