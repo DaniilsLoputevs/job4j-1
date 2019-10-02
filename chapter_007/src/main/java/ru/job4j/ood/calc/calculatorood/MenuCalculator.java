@@ -28,13 +28,19 @@ public class MenuCalculator {
         do {
             System.out.println("Ввведите команду");
             op = scanner.next();
-            if (this.validateInput.checkInput(op)) {
+            if (this.validateInput.checkInputOperation(op)) {
                 System.out.println("введите первое число");
                 Double f = scanner.nextDouble();
                 System.out.println("введите второе число");
                 Double s = scanner.nextDouble();
                 System.out.println(this.iterCalc.operation(op, f, s));
 
+            } else if (this.validateInput.checkInputMemoryUse(op)) {
+                System.out.println("Введите команду");
+                op = scanner.next();
+                System.out.println("Введите число");
+                Double f = scanner.nextDouble();
+                System.out.println(this.iterCalc.operation(op, f));
             }
 
 

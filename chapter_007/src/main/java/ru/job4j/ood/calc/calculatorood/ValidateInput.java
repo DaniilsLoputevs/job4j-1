@@ -1,6 +1,5 @@
 package ru.job4j.ood.calc.calculatorood;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -17,11 +16,14 @@ public class ValidateInput {
         this.comands.add("-");
         this.comands.add("/");
         this.comands.add("*");
-        this.comands.add("m");
     }
 
-    public boolean checkInput(String s) {
+    public boolean checkInputOperation(String s) {
         return this.comands.contains(s);
+    }
+
+    public boolean checkInputMemoryUse(String s) {
+        return s.equals("m");
     }
 
     public boolean checkExit(String s) {
@@ -32,11 +34,11 @@ public class ValidateInput {
     public static void main(String[] args) {
         ValidateInput validateInput = new ValidateInput();
         validateInput.init();
-        System.out.println(validateInput.checkInput("10"));
+        System.out.println(validateInput.checkInputOperation("10"));
 
         Set<String> a = new TreeSet<>();
         a.add("+");
         System.out.println(a.contains("+"));
     }
-    }
+}
 
