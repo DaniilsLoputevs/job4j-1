@@ -1,5 +1,7 @@
 package ru.job4j.ood.calc.calculatorood;
 
+import ru.job4j.calculator.Calculator;
+
 import java.util.Scanner;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -60,9 +62,9 @@ public class MenuCalculator {
     }
 
     public static void main(String[] args) {
-        IterCalc iterCalc = new IterCalc();
-        iterCalc.init();
-        MenuCalculator menuCalculator = new MenuCalculator(iterCalc, Set.of("+", "-", "*", "/", "m", "exit"), new ValidateInput(Set.of("+", "-", "*", "/")), System.out::println);
+        ScientificCalc scientificCalc = new ScientificCalc(new Calculator());
+        scientificCalc.init();
+        MenuCalculator menuCalculator = new MenuCalculator(scientificCalc, Set.of("+", "-", "*", "/", "m", "sin", "cos", "exit"), new ValidateInput(Set.of("+", "-", "*", "/", "sin", "cos")), System.out::println);
         menuCalculator.show();
         menuCalculator.inputOutput();
     }

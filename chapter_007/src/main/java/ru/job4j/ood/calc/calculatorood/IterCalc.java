@@ -4,17 +4,15 @@ import ru.job4j.calculator.Calculator;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.function.Consumer;
 
 public class IterCalc {
     private Calculator calculator;
-    private Map<String, BiFunction<Double, Double, Double>> actions;
+    protected Map<String, BiFunction<Double, Double, Double>> actions;
 
 
-    public IterCalc() {
+    public IterCalc(Calculator calculator) {
         this.calculator = new Calculator();
         this.actions = new HashMap<>();
     }
@@ -44,7 +42,6 @@ public class IterCalc {
     }
 
 
-
     public void init() {
         this.actions.put("+", this::add);
         this.actions.put("-", this::sub);
@@ -68,7 +65,7 @@ public class IterCalc {
 
 
     public static void main(String[] args) {
-        IterCalc iterCalc = new IterCalc();
+        IterCalc iterCalc = new IterCalc(new Calculator());
         iterCalc.init();
         iterCalc.show();
     }
