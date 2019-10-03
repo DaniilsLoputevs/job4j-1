@@ -1,21 +1,12 @@
 package ru.job4j.ood.calc.calculatorood;
 
 import java.util.Set;
-import java.util.TreeSet;
 
 public class ValidateInput {
     private Set<String> comands;
 
-    public ValidateInput() {
-        this.comands = new TreeSet<>();
-    }
-
-
-    public void init() {
-        this.comands.add("+");
-        this.comands.add("-");
-        this.comands.add("/");
-        this.comands.add("*");
+    public ValidateInput(Set<String> menuaction) {
+        this.comands = menuaction;
     }
 
     public boolean checkInputOperation(String s) {
@@ -31,14 +22,5 @@ public class ValidateInput {
     }
 
 
-    public static void main(String[] args) {
-        ValidateInput validateInput = new ValidateInput();
-        validateInput.init();
-        System.out.println(validateInput.checkInputOperation("10"));
-
-        Set<String> a = new TreeSet<>();
-        a.add("+");
-        System.out.println(a.contains("+"));
-    }
 }
 
