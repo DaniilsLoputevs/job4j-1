@@ -1,16 +1,15 @@
 package ru.job4j.ood.warehouse.template;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public abstract class Food {
     private String title;
     private LocalDate expireDate;
     private LocalDate createDate;
-    private BigDecimal price;
-    private BigDecimal discount;
+    private int price;
+    private int discount;
 
-    public Food(String title, LocalDate expireDate, LocalDate createDate, BigDecimal price, BigDecimal discount) {
+    public Food(String title, LocalDate expireDate, LocalDate createDate, int price, int discount) {
         this.title = title;
         this.expireDate = expireDate;
         this.createDate = createDate;
