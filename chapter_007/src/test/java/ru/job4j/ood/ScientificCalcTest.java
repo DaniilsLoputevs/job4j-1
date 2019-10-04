@@ -1,7 +1,8 @@
-package ru.job4j.ood.calc.calculatorood;
+package ru.job4j.ood;
 
 import org.junit.Test;
 import ru.job4j.calculator.Calculator;
+import ru.job4j.ood.calculatorood.ScientificCalc;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -46,7 +47,7 @@ public class ScientificCalcTest {
 
     @Test
     public void init() {
-        assertThat(this.load().actions.size(), is(6));
+        assertThat(this.load().getActions().size(), is(6));
     }
 
 

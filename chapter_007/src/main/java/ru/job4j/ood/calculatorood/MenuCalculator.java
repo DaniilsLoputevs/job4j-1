@@ -1,4 +1,4 @@
-package ru.job4j.ood.calc.calculatorood;
+package ru.job4j.ood.calculatorood;
 
 import ru.job4j.calculator.Calculator;
 

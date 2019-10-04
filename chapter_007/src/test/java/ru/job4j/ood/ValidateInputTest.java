@@ -1,6 +1,7 @@
-package ru.job4j.ood.calc.calculatorood;
+package ru.job4j.ood;
 
 import org.junit.Test;
+import ru.job4j.ood.calculatorood.ValidateInput;
 
 import java.util.Set;
 
