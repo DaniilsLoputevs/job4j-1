@@ -7,13 +7,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-public class IterCalc {
+public class IterCalc implements Calculation {
     private Calculator calculator;
     protected Map<String, BiFunction<Double, Double, Double>> actions;
 
 
     public IterCalc(Calculator calculator) {
-        this.calculator = new Calculator();
+        this.calculator = calculator;
         this.actions = new HashMap<>();
     }
 
@@ -49,11 +49,13 @@ public class IterCalc {
         this.actions.put("/", this::div);
     }
 
+    @Override
     public double operation(String op, Double f, Double s) {
         this.actions.get(op).apply(f, s);
-        return calculator.getResult();
+        return this.calculator.getResult();
     }
 
+    @Override
     public double operation(String op, Double s) {
         this.actions.get(op).apply(calculator.getResult(), s);
         return calculator.getResult();

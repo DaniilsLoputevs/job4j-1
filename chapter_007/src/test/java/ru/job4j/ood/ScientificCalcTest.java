@@ -2,13 +2,13 @@ package ru.job4j.ood;
 
 import org.junit.Test;
 import ru.job4j.calculator.Calculator;
+import ru.job4j.ood.calculatorood.IterCalc;
 import ru.job4j.ood.calculatorood.ScientificCalc;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class ScientificCalcTest {
-
 
 
     @Test
@@ -52,7 +52,7 @@ public class ScientificCalcTest {
 
 
     private ScientificCalc load() {
-        ScientificCalc s = new ScientificCalc(new Calculator());
+        ScientificCalc s = new ScientificCalc(new IterCalc(new Calculator()));
         s.init();
         return s;
     }

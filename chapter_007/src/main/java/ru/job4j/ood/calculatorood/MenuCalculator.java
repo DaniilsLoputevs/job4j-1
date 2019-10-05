@@ -7,15 +7,15 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 public class MenuCalculator {
-    private IterCalc iterCalc;
+    private Calculation calculation;
     private Set<String> menu;
     private Scanner scanner;
     private ValidateInput validateInput;
     private Consumer<String> output;
     boolean work;
 
-    public MenuCalculator(IterCalc iterCalc, Set<String> menu, ValidateInput validateInput, Consumer<String> output) {
-        this.iterCalc = iterCalc;
+    public MenuCalculator(Calculation calculation, Set<String> menu, ValidateInput validateInput, Consumer<String> output) {
+        this.calculation = calculation;
         this.menu = menu;
         this.scanner = new Scanner(System.in);
         this.validateInput = validateInput;
@@ -40,7 +40,7 @@ public class MenuCalculator {
                 f = scanner.nextDouble();
                 this.output.accept("введите второе число");
                 s = scanner.nextDouble();
-                result = this.iterCalc.operation(op, f, s);
+                result = this.calculation.operation(op, f, s);
                 output.accept(result.toString());
 
             } else if (this.validateInput.checkInputMemoryUse(op)) {
@@ -48,7 +48,7 @@ public class MenuCalculator {
                 op = scanner.next();
                 output.accept("Введите число");
                 f = scanner.nextDouble();
-                result = this.iterCalc.operation(op, f);
+                result = this.calculation.operation(op, f);
                 output.accept(result.toString());
             }
 
@@ -62,9 +62,9 @@ public class MenuCalculator {
     }
 
     public static void main(String[] args) {
-        ScientificCalc scientificCalc = new ScientificCalc(new Calculator());
-        scientificCalc.init();
-        MenuCalculator menuCalculator = new MenuCalculator(scientificCalc, Set.of("+", "-", "*", "/", "m", "sin", "cos", "exit"), new ValidateInput(Set.of("+", "-", "*", "/", "sin", "cos")), System.out::println);
+        IterCalc iterCalc = new IterCalc(new Calculator());
+        iterCalc.init();
+        MenuCalculator menuCalculator = new MenuCalculator(iterCalc, Set.of("+", "*", "/", "-", "exit", "m"), new ValidateInput(Set.of("*", "-", "/", "+")), System.out::println);
         menuCalculator.show();
         menuCalculator.inputOutput();
     }

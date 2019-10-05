@@ -5,69 +5,68 @@ import ru.job4j.calculator.Calculator;
 
 import java.util.Set;
 
-public class ScientificCalc extends IterCalc {
+public class ScientificCalc implements Calculation {
+    private IterCalc iterCalc;
 
-    public ScientificCalc(Calculator calculator) {
-        super(calculator);
+
+    public ScientificCalc(IterCalc iterCalc) {
+        this.iterCalc = iterCalc;
     }
 
-    @Override
     public Set<String> getActions() {
-        return super.getActions();
+        return this.iterCalc.getActions();
     }
 
-    @Override
+
     public double add(double first, double second) {
-        return super.add(first, second);
+        return this.iterCalc.add(first, second);
     }
 
-    @Override
     public double sub(double first, double second) {
-        return super.sub(first, second);
+        return this.iterCalc.sub(first, second);
     }
 
-    @Override
+
     public double multiply(double first, double second) {
-        return super.multiply(first, second);
+        return this.iterCalc.multiply(first, second);
     }
 
-    @Override
+
     public double div(double first, double second) {
-        return super.div(first, second);
+        return this.iterCalc.div(first, second);
     }
 
     public double sin(double first, double second) {
-        return super.div(first, second);
+        return this.iterCalc.div(first, second);
     }
 
     public double cos(double leg, double hypotenuse) {
-        return super.div(leg, hypotenuse);
+        return this.iterCalc.div(leg, hypotenuse);
     }
 
-    @Override
+
     public void init() {
-        super.init();
-        this.actions.put("sin", this::sin);
-        this.actions.put("cos", this::cos);
+        this.iterCalc.init();
+        this.iterCalc.actions.put("sin", this::sin);
+        this.iterCalc.actions.put("cos", this::cos);
     }
 
-    @Override
+
     public double operation(String op, Double f, Double s) {
-        return super.operation(op, f, s);
+        return this.iterCalc.operation(op, f, s);
     }
 
-    @Override
+
     public double operation(String op, Double s) {
-        return super.operation(op, s);
+        return this.iterCalc.operation(op, s);
     }
 
-    @Override
     public void show() {
-        super.show();
+        this.iterCalc.show();
     }
 
     public static void main(String[] args) {
-        ScientificCalc s = new ScientificCalc(new Calculator());
+        ScientificCalc s = new ScientificCalc(new IterCalc(new Calculator()));
         s.init();
         s.getActions().forEach(System.out::println);
     }
