@@ -23,10 +23,16 @@ public class MenuCalculator {
         this.work = true;
     }
 
+    /**
+     * Метод отображения меню
+     */
     public void show() {
         this.menu.forEach(output);
     }
 
+    /**
+     * Метод ввода и вывода данных
+     */
     public void inputOutput() {
         String op;
         Double f;
@@ -61,12 +67,5 @@ public class MenuCalculator {
         return menu;
     }
 
-    public static void main(String[] args) {
-        IterCalc iterCalc = new IterCalc(new Calculator());
-        iterCalc.init();
-        MenuCalculator menuCalculator = new MenuCalculator(iterCalc, Set.of("+", "*", "/", "-", "exit", "m"), new ValidateInput(Set.of("*", "-", "/", "+")), System.out::println);
-        menuCalculator.show();
-        menuCalculator.inputOutput();
-    }
 
 }
