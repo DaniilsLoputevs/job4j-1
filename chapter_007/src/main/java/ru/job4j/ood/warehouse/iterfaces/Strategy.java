@@ -1,8 +1,13 @@
 package ru.job4j.ood.warehouse.iterfaces;
 
+
 import ru.job4j.ood.warehouse.template.Food;
+
+import java.time.LocalDate;
 
 public interface Strategy {
 
-    void checker(Food food);
+    boolean operation(Food food);
+
+    double percent();
 }
