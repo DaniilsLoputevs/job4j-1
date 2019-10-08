@@ -6,7 +6,7 @@ import ru.job4j.ood.warehouse.template.AbstractStorage;
 
 import java.util.List;
 
-public class SimpleWareHouse extends AbstractStorage implements Strategy {
+public class SimpleWareHouse extends AbstractStorage {
 
     public SimpleWareHouse(String title, List<Food> foodlist, Strategy strategy) {
         super(title, foodlist, strategy);
@@ -14,11 +14,10 @@ public class SimpleWareHouse extends AbstractStorage implements Strategy {
 
     @Override
     public void insert(Food food) {
-        this.getFoodlist().add(food);
+        if (this.getStrategy().checkState(food)) {
+            this.getFoodlist().add(food);
+        }
+
     }
 
-    @Override
-    public void operation(Food food) {
-        this.getFoodlist().add(food);
-    }
 }

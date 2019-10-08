@@ -1,13 +1,11 @@
 package ru.job4j.ood.warehouse.implementation;
 
 
-import ru.job4j.ood.warehouse.iterfaces.Strategy;
 import ru.job4j.ood.warehouse.template.Food;
 
 import java.time.LocalDate;
 
 public class ControlQuality {
-    Strategy strategy;
 
 
     public void check(Food food) {
