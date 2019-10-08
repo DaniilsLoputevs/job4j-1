@@ -14,7 +14,9 @@ public class SimpleStore extends AbstractStorage {
 
     @Override
     public void insert(Food food) {
-        this.getFoodlist().add(food);
+        if (this.getStrategy().checkState(food)) {
+            this.getFoodlist().add(food);
+        }
 
     }
 
