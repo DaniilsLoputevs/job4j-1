@@ -11,7 +11,6 @@ public class TrashStrategy implements Strategy {
         double period = food.getExpireDate().toEpochDay() - food.getCreateDate().toEpochDay();
         double endsperiod = (food.getExpireDate().toEpochDay() - LocalDate.now().toEpochDay());
         double rs = (endsperiod / period * 100);
-        System.out.println(rs);
         return rs <= 25.0;
     }
 }

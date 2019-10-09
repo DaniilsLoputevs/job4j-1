@@ -26,10 +26,8 @@ public class SimpleWareHouseTest {
 
     private List<Food> initialList() {
         List<Food> a = new ArrayList<>();
-        LocalDate created = LocalDate.now();
-        System.out.println(created);
+        LocalDate created = LocalDate.now().minusDays(2);
         LocalDate expired = created.plusDays(10);
-        System.out.println(expired);
         a.add(new Beef("beef", expired, created, 2000, 10));
         a.add(new Beef("beef", expired, created.minusDays(10), 2000, 10));
         return a;

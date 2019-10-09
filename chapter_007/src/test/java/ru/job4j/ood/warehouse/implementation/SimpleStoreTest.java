@@ -26,8 +26,8 @@ public class SimpleStoreTest {
 
     private List<Food> initialList() {
         List<Food> a = new ArrayList<>();
-        LocalDate created = LocalDate.now();
-        LocalDate expired = created.plusDays(30);
+        LocalDate created = LocalDate.now().minusDays(7);
+        LocalDate expired = created.plusDays(28);
         a.add(new Beef("test", expired, created, 2000, 10));
         a.add(new Beef("val", expired, created, 3000, 10));
         return a;

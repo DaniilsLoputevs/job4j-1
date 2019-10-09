@@ -12,9 +12,9 @@ public class ShopStrategy implements Strategy {
         double period = food.getExpireDate().toEpochDay() - food.getCreateDate().toEpochDay();
         double endsperiod = (food.getExpireDate().toEpochDay() - LocalDate.now().toEpochDay());
         double rs = (endsperiod / period * 100);
-        if (rs > 75.0) {
+        if (rs >= 75.0) {
             food.setPrice(food.getPrice() - (food.getPrice() * (food.getDiscount() / 100)));
         }
-        return rs >= 25.0 && rs > 75.0;
+        return rs >= 25.0 && rs <= 75.0;
     }
 }

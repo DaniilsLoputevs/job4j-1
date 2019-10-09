@@ -14,7 +14,7 @@ public class FreshStrategy implements Strategy {
         double period = food.getExpireDate().toEpochDay() - food.getCreateDate().toEpochDay();
         double endsperiod = (food.getExpireDate().toEpochDay() - LocalDate.now().toEpochDay());
         double rs = (endsperiod / period * 100);
-        return rs >= 75.0;
+        return rs > 75.0;
     }
 
 
