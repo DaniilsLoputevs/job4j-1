@@ -9,6 +9,17 @@ public abstract class Food {
     private double price;
     private double discount;
 
+    private boolean reprod;
+
+    public Food(String title, LocalDate expireDate, LocalDate createDate, int price, int discount, boolean reprod) {
+        this.title = title;
+        this.expireDate = expireDate;
+        this.createDate = createDate;
+        this.price = price;
+        this.discount = discount;
+        this.reprod = reprod;
+    }
+
     public Food(String title, LocalDate expireDate, LocalDate createDate, int price, int discount) {
         this.title = title;
         this.expireDate = expireDate;
@@ -19,7 +30,6 @@ public abstract class Food {
     public LocalDate getExpireDate() {
         return expireDate;
     }
-
     public LocalDate getCreateDate() {
         return createDate;
     }
@@ -38,6 +48,10 @@ public abstract class Food {
 
     public void setDiscount(double discount) {
         this.discount = discount;
+    }
+
+    public boolean isReprod() {
+        return reprod;
     }
 
     @Override

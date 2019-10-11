@@ -2,6 +2,7 @@ package ru.job4j.ood.warehouse.implementation;
 
 import org.junit.Test;
 import ru.job4j.ood.warehouse.strategys.FreshStrategy;
+import ru.job4j.ood.warehouse.strategys.ReproduceStrategy;
 import ru.job4j.ood.warehouse.strategys.ShopStrategy;
 import ru.job4j.ood.warehouse.strategys.TrashStrategy;
 import ru.job4j.ood.warehouse.template.AbstractStorage;
@@ -24,6 +25,7 @@ public class ControlQualityTest {
         assertThat(controlQuality.getAbstractStorages().get(0).getFoodlist().size(), is(1));
         assertThat(controlQuality.getAbstractStorages().get(1).getFoodlist().size(), is(1));
         assertThat(controlQuality.getAbstractStorages().get(2).getFoodlist().size(), is(1));
+        assertThat(controlQuality.getAbstractStorages().get(3).getFoodlist().size(), is(0));
 
 
     }
@@ -33,6 +35,7 @@ public class ControlQualityTest {
         abs.add(new SimpleStore("teststore", new ArrayList<>(), new ShopStrategy()));
         abs.add(new SimpleTrash("testtrash", new ArrayList<>(), new TrashStrategy()));
         abs.add(new SimpleWareHouse("testwarehouse", new ArrayList<>(), new FreshStrategy()));
+        abs.add(new RepTrash(new SimpleTrash("testdec", new ArrayList<>(), new TrashStrategy()), "testreproducer", new ArrayList<>(), new ReproduceStrategy()));
         return abs;
     }
 
@@ -47,7 +50,6 @@ public class ControlQualityTest {
         LocalDate createdwarehouse = LocalDate.now().minusDays(2);
         LocalDate expiredWarehouse = LocalDate.now().plusDays(12);
         a.add(new Beef("warehousebeef", expiredWarehouse, createdwarehouse, 2000, 10));
-
         return a;
     }
 }
