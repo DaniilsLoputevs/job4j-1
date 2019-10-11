@@ -2,10 +2,8 @@ package ru.job4j.ood.warehouse.implementation;
 
 import org.junit.Test;
 import ru.job4j.ood.warehouse.strategys.ReproduceStrategy;
-
 import ru.job4j.ood.warehouse.template.Food;
 import ru.job4j.ood.warehouse.template.Vegetables;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
