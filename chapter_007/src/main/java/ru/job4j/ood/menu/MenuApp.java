@@ -44,7 +44,7 @@ public class MenuApp implements Adding, AddingSub, MenuChoise {
     }
 
     /**
-     * Метод отображения спмска меню.
+     * Метод отображения списка меню.
      */
     public void show() {
         parentmenuList.stream().forEach(System.out::println);

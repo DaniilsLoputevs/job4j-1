@@ -203,7 +203,7 @@ public class TrackerSql implements ItTracker, AutoCloseable {
     private static class CheckerDB {
 
         private static void checkDb() throws SQLException {
-            try (Connection connection1 = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/tracker", "postgres", "password");) {
+            try (Connection connection1 = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/tracker", "postgres", "password")) {
                 Statement st = connection1.createStatement();
                 st.execute("create table if not exists items ("
                         +
