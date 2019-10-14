@@ -1,8 +1,8 @@
 package ru.job4j.ood.warehouse.strategys;
 
 
-import ru.job4j.ood.warehouse.iterfaces.Strategy;
 import ru.job4j.ood.warehouse.template.Food;
+import ru.job4j.ood.warehouse.iterfaces.Strategy;
 
 import java.time.LocalDate;
 

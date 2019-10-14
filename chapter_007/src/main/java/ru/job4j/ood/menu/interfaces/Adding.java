@@ -1,4 +1,4 @@
-package ru.job4j.ood.menu;
+package ru.job4j.ood.menu.interfaces;
 
 public interface Adding {
 

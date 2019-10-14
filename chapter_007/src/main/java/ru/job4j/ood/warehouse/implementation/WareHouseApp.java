@@ -1,5 +1,8 @@
 package ru.job4j.ood.warehouse.implementation;
 
+import ru.job4j.ood.warehouse.implementation.SimpleStore;
+import ru.job4j.ood.warehouse.implementation.SimpleTrash;
+import ru.job4j.ood.warehouse.implementation.SimpleWareHouse;
 import ru.job4j.ood.warehouse.iterfaces.StorageInterface;
 import ru.job4j.ood.warehouse.template.Food;
 
