@@ -2,6 +2,7 @@ package ru.job4j.ood.parking;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Parking implements ParkingInterface {
     private int autocount;
@@ -16,7 +17,11 @@ public class Parking implements ParkingInterface {
         this.parkplace = new ArrayList<>();
     }
 
-
+    /**
+     * Проверка свободного места на парковке и паркует автомобиль
+     * @param vehicle - обьекты реализующие интерфейс Vehicle
+     * @return true/false .
+     */
     @Override
     public boolean manageParking(Vehicle vehicle) {
         boolean rs = false;
@@ -29,9 +34,24 @@ public class Parking implements ParkingInterface {
         return rs;
     }
 
-    public static void main(String[] args) {
-        Parking parking = new Parking(1, 1);
-        System.out.println(parking.manageParking(new Auto(1)));
-        System.out.println(parking.manageParking(new Auto(2)));
+    /**
+     * Возвращает свободное место на парковке
+     * @return int значение
+     */
+    @Override
+    public int freeplace() {
+        return sumplace;
+    }
+
+    /**
+     * Освобождает место на парковке по номеру автомобиля.
+     * @param carnumber номер автомобиля.
+     * @return true/false
+     */
+    @Override
+    public boolean unplace(String carnumber) {
+        Optional<Vehicle> val = parkplace.stream().filter(vehicle -> vehicle.numberCar().equals(carnumber)).findFirst();
+        val.ifPresent(vehicle -> sumplace += vehicle.findplace());
+        return parkplace.removeIf(vehicle -> vehicle.numberCar().equals(carnumber));
     }
 }
