@@ -26,6 +26,24 @@ public class ControlQualityTest {
         assertThat(controlQuality.getAbstractStorages().get(1).getFoodlist().size(), is(1));
         assertThat(controlQuality.getAbstractStorages().get(2).getFoodlist().size(), is(1));
         assertThat(controlQuality.getAbstractStorages().get(3).getFoodlist().size(), is(0));
+        controlQuality.refresh();
+
+
+    }
+
+    @Test
+    public void testingRefresh() {
+        ControlQuality controlQuality = new ControlQuality(this.initialList());
+        controlQuality.distribution(this.initialFoodList());
+        assertThat(controlQuality.getAbstractStorages().get(0).getFoodlist().size(), is(1));
+        assertThat(controlQuality.getAbstractStorages().get(1).getFoodlist().size(), is(1));
+        assertThat(controlQuality.getAbstractStorages().get(2).getFoodlist().size(), is(1));
+        assertThat(controlQuality.getAbstractStorages().get(3).getFoodlist().size(), is(0));
+        controlQuality.refresh();
+        assertThat(controlQuality.getAbstractStorages().get(0).getFoodlist().size(), is(1));
+        assertThat(controlQuality.getAbstractStorages().get(1).getFoodlist().size(), is(1));
+        assertThat(controlQuality.getAbstractStorages().get(2).getFoodlist().size(), is(1));
+        assertThat(controlQuality.getAbstractStorages().get(3).getFoodlist().size(), is(0));
 
 
     }
