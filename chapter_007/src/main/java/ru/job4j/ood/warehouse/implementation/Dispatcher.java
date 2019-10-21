@@ -11,17 +11,17 @@ import java.util.List;
 /**
  * Класс описывает Контролер качества и распределения продуктов по различным структурам.
  */
-public class ControlQuality implements Refreshing {
+public class Dispatcher implements Refreshing {
 
-    private List<AbstractStorage> abstractStorages;
+    private List<AbstractStorage> storages;
 
     /**
      * Конструктор принимающий List
      *
-     * @param abstractStorages
+     * @param storages
      */
-    public ControlQuality(List<AbstractStorage> abstractStorages) {
-        this.abstractStorages = abstractStorages;
+    public Dispatcher(List<AbstractStorage> storages) {
+        this.storages = storages;
     }
 
     /**
@@ -30,7 +30,7 @@ public class ControlQuality implements Refreshing {
      * @param food - обьект продукта
      */
     public void distribution(Food food) {
-        this.abstractStorages.forEach(abstractStorage -> abstractStorage.insert(food));
+        this.storages.forEach(abstractStorage -> abstractStorage.insert(food));
     }
 
     /**
@@ -39,12 +39,12 @@ public class ControlQuality implements Refreshing {
      * @param foods список продуктов
      */
     public void distribution(List<Food> foods) {
-        this.abstractStorages.forEach(abstractStorage -> foods.forEach(abstractStorage::insert));
+        this.storages.forEach(abstractStorage -> foods.forEach(abstractStorage::insert));
     }
 
 
-    public List<AbstractStorage> getAbstractStorages() {
-        return abstractStorages;
+    public List<AbstractStorage> getStorages() {
+        return storages;
     }
 
     /**
@@ -54,8 +54,8 @@ public class ControlQuality implements Refreshing {
     @Override
     public void refresh() {
         List<Food> tmp = new ArrayList<>();
-        abstractStorages.forEach(abstractStorage -> tmp.addAll(abstractStorage.getFoodlist()));
-        abstractStorages.forEach(abstractStorage -> abstractStorage.getFoodlist().clear());
+        storages.forEach(abstractStorage -> tmp.addAll(abstractStorage.getFoodlist()));
+        storages.forEach(abstractStorage -> abstractStorage.getFoodlist().clear());
         tmp.forEach(this::distribution);
     }
 }

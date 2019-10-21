@@ -12,16 +12,16 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-public class SimpleStoreTest {
+public class StoreTest {
 
     @Test
     public void testInsertingValueAndCheckDiscount() {
         List<Food> test = this.initialList();
-        SimpleStore simpleStore = new SimpleStore("teststore", new ArrayList<>(), new ShopStrategy());
-        test.forEach(food -> simpleStore.insert(food));
-        assertThat(simpleStore.getFoodlist().size(), is(2));
-        assertThat(simpleStore.getFoodlist().get(0).getPrice(), is(1800.0));
-        assertThat(simpleStore.getFoodlist().get(1).getPrice(), is(2700.0));
+        Store store = new Store("teststore", new ArrayList<>(), new ShopStrategy());
+        test.forEach(food -> store.insert(food));
+        assertThat(store.getFoodlist().size(), is(2));
+        assertThat(store.getFoodlist().get(0).getPrice(), is(1800.0));
+        assertThat(store.getFoodlist().get(1).getPrice(), is(2700.0));
     }
 
     private List<Food> initialList() {

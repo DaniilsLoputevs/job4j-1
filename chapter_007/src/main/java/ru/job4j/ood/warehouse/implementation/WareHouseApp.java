@@ -1,15 +1,12 @@
 package ru.job4j.ood.warehouse.implementation;
 
-import ru.job4j.ood.warehouse.implementation.SimpleStore;
-import ru.job4j.ood.warehouse.implementation.SimpleTrash;
-import ru.job4j.ood.warehouse.implementation.SimpleWareHouse;
 import ru.job4j.ood.warehouse.iterfaces.StorageInterface;
 import ru.job4j.ood.warehouse.template.Food;
 
 public class WareHouseApp implements StorageInterface {
-    private SimpleWareHouse wareHouse;
-    private SimpleStore store;
-    private SimpleTrash trash;
+    private Warehouse wareHouse;
+    private Store store;
+    private Trash trash;
 
     @Override
     public void insert(Food food) {

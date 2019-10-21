@@ -6,9 +6,9 @@ import ru.job4j.ood.warehouse.template.Food;
 
 import java.util.List;
 
-public class SimpleTrash extends AbstractStorage {
+public class Store extends AbstractStorage {
 
-    public SimpleTrash(String title, List<Food> foodlist, Strategy strategy) {
+    public Store(String title, List<Food> foodlist, Strategy strategy) {
         super(title, foodlist, strategy);
     }
 
@@ -17,5 +17,8 @@ public class SimpleTrash extends AbstractStorage {
         if (this.getStrategy().checkState(food)) {
             this.getFoodlist().add(food);
         }
+
     }
+
+
 }

@@ -15,7 +15,7 @@ public class RepTrashTest {
 
     @Test
     public void insert() {
-        RepTrash repTrash = new RepTrash(new SimpleTrash("trash", new ArrayList<>(), new ReproduceStrategy()), "testrepro", new ArrayList<>(), new ReproduceStrategy());
+        RepTrash repTrash = new RepTrash(new Trash("trash", new ArrayList<>(), new ReproduceStrategy()), "testrepro", new ArrayList<>(), new ReproduceStrategy());
         List<Food> a = this.initialList();
         a.forEach(repTrash::insert);
         assertThat(repTrash.getFoodlist().size(), is(1));

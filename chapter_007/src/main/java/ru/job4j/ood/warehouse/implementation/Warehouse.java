@@ -6,9 +6,9 @@ import ru.job4j.ood.warehouse.template.Food;
 
 import java.util.List;
 
-public class SimpleWareHouse extends AbstractStorage {
+public class Warehouse extends AbstractStorage {
 
-    public SimpleWareHouse(String title, List<Food> foodlist, Strategy strategy) {
+    public Warehouse(String title, List<Food> foodlist, Strategy strategy) {
         super(title, foodlist, strategy);
     }
 

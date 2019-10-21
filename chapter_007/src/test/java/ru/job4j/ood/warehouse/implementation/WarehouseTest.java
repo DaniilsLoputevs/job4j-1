@@ -12,14 +12,14 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-public class SimpleWareHouseTest {
+public class WarehouseTest {
 
     @Test
     public void insertTwoFoodValueAndWareHouselogicInsertOneValue() {
         List<Food> test = this.initialList();
-        SimpleWareHouse simpleWareHouse = new SimpleWareHouse("Warehouse", new ArrayList<>(), new FreshStrategy());
-        test.forEach(food -> simpleWareHouse.insert(food));
-        assertThat(simpleWareHouse.getFoodlist().size(), is(1));
+        Warehouse warehouse = new Warehouse("Warehouse", new ArrayList<>(), new FreshStrategy());
+        test.forEach(food -> warehouse.insert(food));
+        assertThat(warehouse.getFoodlist().size(), is(1));
 
     }
 
