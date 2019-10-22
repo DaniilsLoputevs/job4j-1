@@ -1,6 +1,5 @@
 package ru.job4j.ood.gen;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -56,23 +55,5 @@ public class SimpleGenerator implements Generator {
         if (map.size() != 0) {
             throw new IllegalStateException("extra keys available");
         }
-    }
-
-    /**
-     * "I am a ${name}, Who are ${subject}? "
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        Pattern pattern = Pattern.compile("(\\$\\{\\w+\\})");
-        Matcher matcher = pattern.matcher("I am a ${name}, Who are ${subject}?");
-        System.out.println(matcher.find());
-        Map<String, String> map = new HashMap<>();
-        map.put("${name}", "Vik");
-        map.put("${subject}", "you");
-
-        SimpleGenerator simpleGenerator = new SimpleGenerator(pattern, map);
-        System.out.println(simpleGenerator.generate("I am a ${name}, Who are ${subject}?"));
-
     }
 }
