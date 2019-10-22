@@ -20,10 +20,6 @@ public abstract class AbstractStorage implements StorageInterface {
         return foodlist;
     }
 
-    public void setFoodlist(List<Food> foodlist) {
-        this.foodlist = foodlist;
-    }
-
     public String getTitle() {
         return title;
     }
