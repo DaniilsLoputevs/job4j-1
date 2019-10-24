@@ -8,6 +8,7 @@ public class RectangleMove implements Runnable {
 
     public RectangleMove(Rectangle rect) {
         this.rect = rect;
+
     }
 
     /**
@@ -18,7 +19,7 @@ public class RectangleMove implements Runnable {
     @Override
     public void run() {
         int step = 2;
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             if (PingPong.getX() >= this.rect.getX()) {
                 step *= -1;
             }
@@ -29,7 +30,7 @@ public class RectangleMove implements Runnable {
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
 
         }
