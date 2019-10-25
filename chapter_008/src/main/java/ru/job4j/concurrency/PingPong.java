@@ -10,8 +10,8 @@ import javafx.stage.Stage;
 
 public class PingPong extends Application {
     private static final String JOB4J = "Пинг-понг www.job4j.ru";
-    private static final int X = 300;
-    private static final int Y = 300;
+    public static final int X = 300;
+    public static final int Y = 300;
 
 
     @Override
@@ -29,9 +29,6 @@ public class PingPong extends Application {
         stage.show();
     }
 
-    public static int getX() {
-        return X;
-    }
 
 
 }

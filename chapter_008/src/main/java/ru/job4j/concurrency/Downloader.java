@@ -23,11 +23,12 @@ public class Downloader implements Runnable {
             String filename = url.getFile();
             filename = filename.substring(filename.lastIndexOf("/") + 1);
             HttpURLConnection h = (HttpURLConnection) url.openConnection();
+            long sizefile = h.getContentLength();
             byte[] buffer = new byte[4096];
             int r = 0;
-            File file = new File(System.getProperty("java.io.tmpdir") + File.separator + filename);
+            File outfile = new File(System.getProperty("java.io.tmpdir") + File.separator + filename);
             try (InputStream in = h.getInputStream();
-                 FileOutputStream f = new FileOutputStream(file)) {
+                 FileOutputStream f = new FileOutputStream(outfile)) {
                 while ((r = in.read(buffer)) != -1) {
                     f.write(buffer, 0, r);
                 }

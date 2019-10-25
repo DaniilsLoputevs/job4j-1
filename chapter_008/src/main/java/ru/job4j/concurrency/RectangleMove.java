@@ -20,7 +20,7 @@ public class RectangleMove implements Runnable {
     public void run() {
         int step = 2;
         while (!Thread.currentThread().isInterrupted()) {
-            if (PingPong.getX() >= this.rect.getX()) {
+            if (PingPong.X >= this.rect.getX()) {
                 step *= -1;
             }
             if (0 <= this.rect.getX()) {
