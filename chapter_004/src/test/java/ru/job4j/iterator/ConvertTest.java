@@ -3,10 +3,7 @@ package ru.job4j.iterator;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -77,9 +74,9 @@ public class ConvertTest {
 
     @Test
     public void hasNextShouldReturnFalseInCaseOfEmptyIterators() {
-        Iterator<Integer> it1 = (new ArrayList<Integer>()).iterator();
-        Iterator<Integer> it2 = (new ArrayList<Integer>()).iterator();
-        Iterator<Integer> it3 = (new ArrayList<Integer>()).iterator();
+        Iterator<Integer> it1 = Collections.emptyIterator();
+        Iterator<Integer> it2 = Collections.emptyIterator();
+        Iterator<Integer> it3 = Collections.emptyIterator();
         Iterator<Iterator<Integer>> its = Arrays.asList(it1, it2, it3).iterator();
         Convert iteratorOfIterators = new Convert();
         it = iteratorOfIterators.convert(its);

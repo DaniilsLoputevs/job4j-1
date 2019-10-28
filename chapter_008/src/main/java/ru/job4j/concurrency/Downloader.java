@@ -3,7 +3,6 @@ package ru.job4j.concurrency;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.LocalTime;
 
 public class Downloader implements Runnable {
     private String url;
@@ -12,10 +11,15 @@ public class Downloader implements Runnable {
 
     public Downloader(String url, int limit) {
         this.url = url;
-        this.limit = limit;
+        this.limit = limit * 1024;
     }
 
-
+    /**
+     * Метод скачивает файл по указанной ссылке в конструкторе с ограничением указанным в кбайтах
+     * Алгоритм : Суммирующая переменная считает кол скаченных байтов и проверяет в методе cheksum() дошли ли до ограничения limit
+     * Внутреннее условие проверяет прошло ли меньше 1 секунды пока суммирующая переменная набирает определенное значение байтов.
+     * Поток засыпает если условие возвращает true.
+     */
     @Override
     public void run() {
         try {
@@ -23,14 +27,25 @@ public class Downloader implements Runnable {
             String filename = url.getFile();
             filename = filename.substring(filename.lastIndexOf("/") + 1);
             HttpURLConnection h = (HttpURLConnection) url.openConnection();
-            long sizefile = h.getContentLength();
-            int r = 0;
             outfile = new File(System.getProperty("java.io.tmpdir") + File.separator + filename);
+            byte[] bytes = new byte[4096];
+            int r = 0;
+            long sum = 0;
             try (InputStream in = h.getInputStream();
-                 FileWriter f = new FileWriter(outfile)) {
-                while ((r = in.read()) != -1) {
-                    f.write(r);
-
+                 OutputStream f = new FileOutputStream(outfile)) {
+                long start = System.currentTimeMillis();
+                while ((r = in.read(bytes)) != -1) {
+                    f.write(bytes, 0, r);
+                    sum += r;
+                    if (checksum(sum)) {
+                        System.out.println("Лимит по скорости достигнут:" + sum);
+                        if (sleepcondition(start)) {
+                            Thread.sleep(1000L - (System.currentTimeMillis() - start));
+                            System.out.println("Поток уснул");
+                        }
+                        start = System.currentTimeMillis();
+                        sum = 0;
+                    }
                 }
 
             }
@@ -39,41 +54,24 @@ public class Downloader implements Runnable {
         }
     }
 
-    private long checksize(long value, File f) {
-        return f.length() - value;
+    /**
+     * Утилитный метод принимающий значение скаченых байтов в сумме.
+     *
+     * @param value сумма байтов поступивших их потока
+     * @return true/false
+     */
+    private boolean checksum(long value) {
+        return value >= limit;
     }
 
-    public File getOutfile() {
-        return outfile;
+    /**
+     * Утилитный метод  для условия усыпления потока
+     *
+     * @param value - временное значение для проверки
+     * @return true/false
+     */
+    private boolean sleepcondition(long value) {
+        return ((System.currentTimeMillis() - value) <= 1000L);
     }
-
-//    private boolean sleepcondition(long filelenght) {
-//        int now = LocalTime.now().getSecond();
-//        int upd = 0;
-//        boolean rs = false;
-//        do {
-//            if (filelenght > limit) {
-//                rs = true;
-//                upd = LocalTime.now().getSecond();
-//            }
-//        } while (now - upd > -1);
-//        return rs;
-//    }
-
-
-    private long sizedownload(long source, long dest) {
-        long updsource = source - dest;
-        int now = LocalTime.now().getSecond();
-        int upd = 0;
-        long result = 0;
-        do {
-            result = (dest - updsource);
-            upd = LocalTime.now().getSecond();
-        } while (now - upd > -1);
-        return result;
-    }
-
 
 }
-//такт 1 4 мбайт - 2000мб = 1996мб
-//такт 2 8 мбайт - 2000мб = 199

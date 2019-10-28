@@ -23,7 +23,7 @@ public class Tracker implements ItTracker {
      * @return новая заявка.
      */
     public Item add(Item item) {
-        item.setId(this.generateId());
+        item.setId(generateId());
         items.add(item);
 
         return item;
