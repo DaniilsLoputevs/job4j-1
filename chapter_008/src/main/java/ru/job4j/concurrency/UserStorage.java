@@ -15,15 +15,15 @@ public class UserStorage {
         this.chm = new ConcurrentHashMap<>();
     }
 
-    public void add(User user) {
+    public synchronized void add(User user) {
         chm.put(user.getId(), user);
     }
 
-    public boolean update(int id, User user) {
+    public synchronized boolean update(int id, User user) {
         return Objects.nonNull(chm.replace(id, user));
     }
 
-    public boolean delete(User user) {
+    public synchronized boolean delete(User user) {
         return Objects.nonNull(chm.remove(user.getId()));
     }
 
@@ -32,7 +32,7 @@ public class UserStorage {
         return chm;
     }
 
-    public boolean transfer(int sourceid, int desctinationid, int amount) {
+    public synchronized boolean transfer(int sourceid, int desctinationid, int amount) {
         boolean cantransfer = false;
         Optional<User> src = Optional.ofNullable(chm.get(sourceid));
         Optional<User> dst = Optional.ofNullable(chm.get(desctinationid));
