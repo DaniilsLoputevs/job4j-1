@@ -23,7 +23,7 @@ public class SimpleBlockingQueue<T> {
 
     public void offer(T value) {
         synchronized (this) {
-            while (canWork) {
+            while (queue.size() == size) {
                 try {
                     wait();
                 } catch (InterruptedException e) {
@@ -32,8 +32,9 @@ public class SimpleBlockingQueue<T> {
             }
             queue.offer(value);
             canWork = true;
+            System.out.println("Занесено значение в очередь " + value);
             notify();
-            System.out.println("Занесено значение в очередь" + value);
+
         }
 
     }
@@ -41,7 +42,7 @@ public class SimpleBlockingQueue<T> {
     public T poll() {
         T rs = null;
         synchronized (this) {
-            while (!canWork) {
+            while (queue.size() == 0) {
                 try {
                     wait();
                 } catch (InterruptedException e) {
@@ -52,7 +53,7 @@ public class SimpleBlockingQueue<T> {
             canWork = false;
             notify();
         }
-        System.out.println("выведенное из очереди" + rs);
+        System.out.println("выведенное из очереди " + rs);
         return rs;
     }
 
@@ -67,11 +68,14 @@ public class SimpleBlockingQueue<T> {
 
         Thread b = new Thread(() -> {
             while (true) {
+                System.out.println("Тред " + Thread.currentThread().getName());
                 queue.poll();
+
             }
         });
         b.start();
         a.start();
+
     }
 
 }
