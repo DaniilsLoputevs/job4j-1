@@ -11,65 +11,67 @@ public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
     private Queue<T> queue;
     private boolean canWork;
+    private final int size;
+    private final Object object = new Object();
 
-    public SimpleBlockingQueue() {
+    public SimpleBlockingQueue(int size) {
+        this.size = size;
         this.queue = new LinkedList<>();
+        System.out.println(queue.size());
         canWork = false;
     }
 
-    public synchronized void offer(T value) {
-        while (canWork) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    public void offer(T value) {
+        synchronized (this) {
+            while (canWork) {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-
+            queue.offer(value);
+            canWork = true;
+            notify();
+            System.out.println("Занесено значение в очередь" + value);
         }
-        queue.offer(value);
-        canWork = true;
-        notify();
-        System.out.println("Ввведено значение в очередь " + value);
+
     }
 
-    public synchronized T poll() {
+    public T poll() {
         T rs = null;
-        while (!canWork) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        synchronized (this) {
+            while (!canWork) {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+            rs = queue.poll();
+            canWork = false;
+            notify();
         }
-        rs = queue.poll();
-        canWork = false;
-        notify();
-        System.out.println("Значение из очереди " + rs);
+        System.out.println("выведенное из очереди" + rs);
         return rs;
     }
 
-    public static void main(String[] args) {
-        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>();
-        Thread a = new Thread(() -> {
-            while (true) {
-                int i = 1;
-                queue.offer(i++);
 
+    public static void main(String[] args) {
+        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue(5);
+        Thread a = new Thread(() -> {
+            for (int i = 0; i < 4; i++) {
+                queue.offer(i);
             }
         });
+
         Thread b = new Thread(() -> {
             while (true) {
-                System.out.println(queue.poll());
+                queue.poll();
             }
         });
-        a.start();
         b.start();
-        try {
-            a.join();
-            b.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        a.start();
     }
+
 }
