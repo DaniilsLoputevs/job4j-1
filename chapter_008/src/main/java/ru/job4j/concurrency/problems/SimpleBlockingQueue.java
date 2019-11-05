@@ -9,16 +9,13 @@ import java.util.Queue;
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
-    private Queue<T> queue;
-    private boolean canWork;
+    private final Queue<T> queue;
     private final int size;
-    private final Object object = new Object();
 
     public SimpleBlockingQueue(int size) {
         this.size = size;
         this.queue = new LinkedList<>();
         System.out.println(queue.size());
-        canWork = false;
     }
 
     public void offer(T value) {
@@ -31,7 +28,6 @@ public class SimpleBlockingQueue<T> {
                 }
             }
             queue.offer(value);
-            canWork = true;
             System.out.println("Занесено значение в очередь " + value);
             notify();
 
@@ -40,7 +36,6 @@ public class SimpleBlockingQueue<T> {
     }
 
     public T poll() {
-        T rs = null;
         synchronized (this) {
             while (queue.size() == 0) {
                 try {
@@ -49,12 +44,11 @@ public class SimpleBlockingQueue<T> {
                     e.printStackTrace();
                 }
             }
-            rs = queue.poll();
-            canWork = false;
+            T rs = queue.poll();
+            System.out.println("Выведено из очереди " + rs);
             notify();
+            return rs;
         }
-        System.out.println("выведенное из очереди " + rs);
-        return rs;
     }
 
 
