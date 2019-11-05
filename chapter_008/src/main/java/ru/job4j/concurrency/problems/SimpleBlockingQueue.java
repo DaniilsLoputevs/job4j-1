@@ -51,25 +51,10 @@ public class SimpleBlockingQueue<T> {
         }
     }
 
-
-    public static void main(String[] args) {
-        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue(5);
-        Thread a = new Thread(() -> {
-            for (int i = 0; i < 4; i++) {
-                queue.offer(i);
-            }
-        });
-
-        Thread b = new Thread(() -> {
-            while (true) {
-                System.out.println("Тред " + Thread.currentThread().getName());
-                queue.poll();
-
-            }
-        });
-        b.start();
-        a.start();
+    public boolean isEmpty() {
+        synchronized (this) {
+            return queue.isEmpty();
+        }
 
     }
-
 }
