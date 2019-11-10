@@ -5,16 +5,25 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Unblock {
-    private ConcurrentHashMap<Integer, Base> map;
+    private final ConcurrentHashMap<Integer, Base> map;
 
     public Unblock() {
         this.map = new ConcurrentHashMap<>();
     }
 
+    /**
+     * Добавление модели в кеш.
+     * @param value модель
+     */
     public void add(Base value) {
         map.put(value.getId(), value);
     }
 
+    /**
+     * Обновление модели в мапе , если версии не совпадает при изменении , пробрасывается исключение.
+     * @param value модель
+     * @return true/false
+     */
     public boolean update(Base value) {
         boolean rs = false;
         Optional<Base> a = Optional.ofNullable(map.get(value.getId()));
@@ -22,7 +31,6 @@ public class Unblock {
             if (a.get().getVersion() == value.getVersion()) {
                 int v = a.get().getVersion();
                 value.setVersion(++v);
-                System.out.println(value.getVersion());
                 map.computeIfPresent(value.getId(), ((integer, base) -> base = value));
                 rs = true;
             } else {
@@ -31,6 +39,18 @@ public class Unblock {
         }
 
         return rs;
+    }
+
+    /**
+     * Удаление модели из кеша
+     * @param value модель
+     */
+    public void delete(Base value) {
+        map.remove(value.getId());
+    }
+
+    public ConcurrentHashMap<Integer, Base> getMap() {
+        return map;
     }
 
     public static void main(String[] args) {
