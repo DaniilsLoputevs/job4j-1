@@ -13,6 +13,7 @@ public class Unblock {
 
     /**
      * Добавление модели в кеш.
+     *
      * @param value модель
      */
     public void add(Base value) {
@@ -21,28 +22,25 @@ public class Unblock {
 
     /**
      * Обновление модели в мапе , если версии не совпадает при изменении , пробрасывается исключение.
+     *
      * @param value модель
      * @return true/false
      */
-    public boolean update(Base value) {
-        boolean rs = false;
-        Optional<Base> a = Optional.ofNullable(map.get(value.getId()));
-        if (a.isPresent()) {
-            if (a.get().getVersion() == value.getVersion()) {
-                int v = a.get().getVersion();
-                value.setVersion(++v);
-                map.computeIfPresent(value.getId(), ((integer, base) -> base = value));
-                rs = true;
+    public void update(Base value) {
+        map.computeIfPresent(value.getId(), (integer, base) -> {
+            if (base.getVersion() == value.getVersion()) {
+                int tmp = base.getVersion();
+                value.setVersion(++tmp);
             } else {
                 throw new OptimisticException();
             }
-        }
-
-        return rs;
+            return value;
+        });
     }
 
     /**
      * Удаление модели из кеша
+     *
      * @param value модель
      */
     public void delete(Base value) {
