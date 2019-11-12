@@ -28,12 +28,11 @@ public class Unblock {
      */
     public void update(Base value) {
         map.computeIfPresent(value.getId(), (integer, base) -> {
-            if (base.getVersion() == value.getVersion()) {
-                int tmp = base.getVersion();
-                value.setVersion(++tmp);
-            } else {
+            if (base.getVersion() != value.getVersion()) {
                 throw new OptimisticException();
             }
+            int tmp = base.getVersion();
+            value.setVersion(++tmp);
             return value;
         });
     }

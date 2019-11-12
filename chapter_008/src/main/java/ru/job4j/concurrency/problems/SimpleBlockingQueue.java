@@ -20,6 +20,7 @@ public class SimpleBlockingQueue<T> {
 
     public void offer(T value) {
         synchronized (this) {
+            System.out.println(this);
             while (queue.size() == size) {
                 try {
                     wait();
@@ -57,4 +58,5 @@ public class SimpleBlockingQueue<T> {
         }
 
     }
+
 }
