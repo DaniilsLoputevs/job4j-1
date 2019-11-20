@@ -1,16 +1,17 @@
 package ru.job4j.servletapi.crud;
 
-import java.util.List;
+
+import java.util.Map;
 
 public interface Store {
 
     void add(Model model);
 
-    boolean update(Model model);
+    void update(int id, Model model);
 
     boolean delete(Model model);
 
     Model findById(int id);
 
-    List<Model> findAll();
+    Map<Integer, Model> findAll();
 }
