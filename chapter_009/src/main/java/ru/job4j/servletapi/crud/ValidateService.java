@@ -1,5 +1,7 @@
 package ru.job4j.servletapi.crud;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class ValidateService implements Validate {
@@ -20,6 +22,7 @@ public class ValidateService implements Validate {
     @Override
     public void add(Model model) {
 
+
     }
 
     @Override
@@ -38,7 +41,9 @@ public class ValidateService implements Validate {
     }
 
     @Override
-    public void findAll(Model model) {
+    public List<Model> findAll() {
+        List<Model> rs = new ArrayList<>(store.findAll().values());
+        return rs;
 
     }
 }

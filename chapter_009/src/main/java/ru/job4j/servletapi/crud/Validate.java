@@ -1,5 +1,7 @@
 package ru.job4j.servletapi.crud;
 
+import java.util.List;
+
 public interface Validate {
 
     void add(Model model);
@@ -10,6 +12,6 @@ public interface Validate {
 
     void findById(Model model);
 
-    void findAll(Model model);
+    List<Model> findAll();
 
 }

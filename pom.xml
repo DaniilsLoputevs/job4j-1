@@ -20,10 +20,10 @@
         <module>chapter_004</module>
         <module>chapter_005</module>
         <module>chapter_006</module>
-        <module>parser_sqlru</module>
         <module>chapter_007</module>
         <module>chapter_008</module>
         <module>chapter_009</module>
+        <module>parser_sqlru</module>
     </modules>
 
     <profiles>
@@ -40,11 +40,6 @@
             </properties>
         </profile>
 
-
-
-
-
-
         <profile>
             <id>test</id>
             <properties>
@@ -54,8 +49,6 @@
                 <db.driver>org.postgresql.Driver</db.driver>
             </properties>
         </profile>
-
-
 
         <profile>
             <id>production</id>
@@ -69,9 +62,6 @@
 
     </profiles>
     <build>
-
-
-
 
         <plugins>
             <plugin>
@@ -121,8 +111,6 @@
                 <version>3.0.0</version>
             </plugin>
         </plugins>
-
-
     </build>
 	
 	<dependencies>
@@ -202,6 +190,4 @@
         </dependency>
 
     </dependencies>
-
-
 </project>
