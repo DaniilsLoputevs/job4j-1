@@ -21,5 +21,6 @@ public class DispatchAction {
     private void init() {
         map.put("add", validate::add);
         map.put("update", validate::update);
+        map.put("delete", validate::delete);
     }
 }

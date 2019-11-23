@@ -41,7 +41,9 @@ public class ValidateService implements Validate {
 
     @Override
     public boolean delete(Model model) {
-        return true;
+        Optional<Model> finded = Optional.ofNullable(store.findById(model.getId()));
+       finded.ifPresent(model1 -> store.delete(model));
+        return finded.isPresent();
 
     }
 

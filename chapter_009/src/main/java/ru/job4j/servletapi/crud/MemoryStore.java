@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MemoryStore implements Store {
@@ -33,7 +34,8 @@ public class MemoryStore implements Store {
 
     @Override
     public boolean delete(Model model) {
-        return false;
+        Optional<Model> removed = Optional.ofNullable(users.remove(model.getId()));
+        return removed.isPresent();
     }
 
     @Override
