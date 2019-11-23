@@ -1,16 +1,17 @@
 package ru.job4j.servletapi.crud;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 
 public class Model {
-    private int id;
+    private String id;
     private String name;
     private String login;
     private String email;
     private LocalDateTime localDateTime;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -30,21 +31,21 @@ public class Model {
         return localDateTime;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Model(String name, String login, String email, LocalDateTime localDateTime) {
+    public Model(String id, String name, String login, String email) {
+        this.id = id;
         this.name = name;
         this.login = login;
         this.email = email;
-        this.localDateTime = localDateTime;
-        this.id = (int) System.currentTimeMillis();
+        this.localDateTime = LocalDateTime.now();
     }
 
     @Override
     public String toString() {
-        return "Model{"
+        return "User{"
                 +
                 "id="
                 + id
@@ -65,5 +66,30 @@ public class Model {
                 + localDateTime
                 +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Model model = (Model) o;
+        return id == model.id
+                &&
+                Objects.equals(name, model.name)
+                &&
+                Objects.equals(login, model.login)
+                &&
+                Objects.equals(email, model.email)
+                &&
+                Objects.equals(localDateTime, model.localDateTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, login, email, localDateTime);
     }
 }

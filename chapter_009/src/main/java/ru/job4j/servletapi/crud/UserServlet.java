@@ -6,9 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Objects;
+
 
 public class UserServlet extends HttpServlet {
-    private Validate validate = ValidateService.getInstance();
+    private final Validate validate = ValidateService.getInstance();
+    private final DispatchAction dispatchAction = new DispatchAction();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,6 +27,10 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+        Model tmp = new Model(req.getParameter("id"), req.getParameter("name"), req.getParameter("login"), req.getParameter("email"));
+        dispatchAction.getMap().get(action).apply(tmp);
+
 
     }
 }

@@ -1,12 +1,14 @@
 package ru.job4j.servletapi.crud;
 
+import java.util.Collection;
+
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MemoryStore implements Store {
     private static Store instance;
-    private final Map<Integer, Model> users = new ConcurrentHashMap<>();
+    private final Map<String, Model> users = new ConcurrentHashMap<>();
 
     private MemoryStore() {
     }
@@ -25,9 +27,8 @@ public class MemoryStore implements Store {
     }
 
     @Override
-    public void update(int id, Model model) {
-        Model replace = findById(id);
-        users.replace(replace.getId(), model);
+    public void update(String id, Model model) {
+        users.replace(model.getId(), model);
     }
 
     @Override
@@ -36,13 +37,13 @@ public class MemoryStore implements Store {
     }
 
     @Override
-    public Model findById(int id) {
+    public Model findById(String id) {
         return users.get(id);
     }
 
     @Override
-    public Map<Integer, Model> findAll() {
-        return users;
+    public Collection<Model> findAll() {
+        return users.values();
     }
 }
 
