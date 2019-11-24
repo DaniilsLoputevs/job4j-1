@@ -7,7 +7,7 @@ public interface Store {
 
     void add(Model model);
 
-    void update(String id, Model model);
+    boolean update(String id, Model model);
 
     boolean delete(Model model);
 

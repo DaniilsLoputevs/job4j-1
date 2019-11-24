@@ -30,30 +30,27 @@ public class ValidateService implements Validate {
 
     @Override
     public boolean update(Model model) {
-        boolean rs = false;
-        Model find = store.findById(model.getId());
-        if (Objects.nonNull(find)) {
-            store.update(model.getId(), model);
-            rs = true;
-        }
-        return rs;
+        Optional<Model> finded = Optional.of(store.findById(model.getId()));
+        return store.update(finded.get().getId(), model);
     }
 
     @Override
     public boolean delete(Model model) {
         Optional<Model> finded = Optional.ofNullable(store.findById(model.getId()));
-       finded.ifPresent(model1 -> store.delete(model));
+        finded.ifPresent(model1 -> store.delete(model));
         return finded.isPresent();
 
     }
 
     @Override
-    public Model findById(Model model) {
-        return store.findById(model.getId());
+    public boolean findById(Model model) {
+        Optional<Model> finded = Optional.ofNullable(store.findById(model.getId()));
+        return finded.isPresent();
     }
 
     @Override
     public Collection<Model> findAll() {
+
         return store.findAll();
 
     }

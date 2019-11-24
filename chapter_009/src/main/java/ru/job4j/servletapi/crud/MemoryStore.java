@@ -28,8 +28,9 @@ public class MemoryStore implements Store {
     }
 
     @Override
-    public void update(String id, Model model) {
-        users.replace(model.getId(), model);
+    public boolean update(String id, Model model) {
+        Optional<Model> updated = Optional.ofNullable(users.replace(id, model));
+        return updated.isPresent();
     }
 
     @Override

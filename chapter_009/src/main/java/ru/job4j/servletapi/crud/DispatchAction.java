@@ -22,5 +22,7 @@ public class DispatchAction {
         map.put("add", validate::add);
         map.put("update", validate::update);
         map.put("delete", validate::delete);
+        map.put("findbyid", validate::findById);
+
     }
 }
