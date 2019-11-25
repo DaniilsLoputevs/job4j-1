@@ -3,18 +3,15 @@ package ru.job4j.servletapi.crud;
 import java.util.*;
 
 public class ValidateService implements Validate {
-    private static Validate instance;
+    private static final Validate INSTANCE = new ValidateService();
     private final Store store = MemoryStore.getInstance();
 
     private ValidateService() {
 
     }
 
-    public static synchronized Validate getInstance() {
-        if (Objects.isNull(instance)) {
-            instance = new ValidateService();
-        }
-        return instance;
+    public static Validate getInstance() {
+        return INSTANCE;
     }
 
     @Override
