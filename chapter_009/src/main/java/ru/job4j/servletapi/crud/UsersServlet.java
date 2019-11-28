@@ -15,12 +15,7 @@ public class UsersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter pr = resp.getWriter();
-        StringBuilder sb = new StringBuilder("<table>");
-        for (Model var : validate.findAll()) {
-            sb.append("<td><tr>" + var.toString() + "</tr></td>");
-        }
-        sb.append("</table>");
-        pr.append("<!DOCTYPE html>"
+        StringBuilder sb = new StringBuilder("<!DOCTYPE html>"
                 +
                 "<html lang=\"en\">"
                 +
@@ -32,23 +27,22 @@ public class UsersServlet extends HttpServlet {
                 +
                 "</head>"
                 +
-                "<body>"
-                +
-                "<form action='"
-                + req.getContextPath()
-                + "'/list' method='post'>"
-                +
-                "Name: <input type= text 'name='login'/>"
-                +
-                "<input type='submit'>"
-                +
-                "</body>"
-                +
-                "<br/"
-                +
-                sb.toString()
-                +
-                "</html>");
+                "<body>");
+        for (Model var : validate.findAll()) {
+            sb.append("<td><tr>" + var.toString() + "</tr></td>").append("<form action="
+                    + req.getContextPath()
+                    + "/edit method='get'>"
+                    +
+                    "<button type=\"url\">edit</button>"
+                    +
+                    "<button type=\"url\">delete</button>"
+                    +
+                    "</body>"
+                    +
+                    "<br/");
+        }
+        sb.append("</html>");
+        pr.append(sb.toString());
         pr.flush();
     }
 
