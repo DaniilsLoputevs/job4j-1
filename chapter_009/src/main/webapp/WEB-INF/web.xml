@@ -12,6 +12,10 @@
         <servlet-name>UsersServlet</servlet-name>
         <servlet-class>ru.job4j.servletapi.crud.UsersServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UsersCreateServ</servlet-name>
+        <servlet-class>ru.job4j.servletapi.crud.UsersCreateServ</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/echo</url-pattern>
@@ -19,5 +23,9 @@
     <servlet-mapping>
         <servlet-name>UsersServlet</servlet-name>
         <url-pattern>/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsersCreateServ</servlet-name>
+        <url-pattern>/add</url-pattern>
     </servlet-mapping>
 </web-app>

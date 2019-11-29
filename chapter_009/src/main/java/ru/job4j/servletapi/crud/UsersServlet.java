@@ -33,7 +33,7 @@ public class UsersServlet extends HttpServlet {
                     + req.getContextPath()
                     + "/edit method='get'>"
                     +
-                    "<button type=\"url\">edit</button>"
+                    "<button type=\"url\">edit</buttton>"
                     +
                     "<button type=\"url\">delete</button>"
                     +
