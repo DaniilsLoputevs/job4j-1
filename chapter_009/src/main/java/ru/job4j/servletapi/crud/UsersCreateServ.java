@@ -31,17 +31,17 @@ public class UsersCreateServ extends HttpServlet {
                 +
                 "<form method='post' action='create'>"
                 +
-                "<input type='text'placeholder=\"id\"name=\"id\">"
+                "<input type='text'placeholder='id'name='id'>"
                 +
-                "<input type=\"text\"placeholder=\"name\"name=\"name\">"
+                "<input type='text'placeholder='name'name='name'>"
                 +
-                "<input type=\"text\"placeholder=\"login\"name=\"login\">"
+                "<input type='text'placeholder='login'name='login'>"
                 +
-                "<input type=\"text\"placeholder=\"email\"name=\"email\">"
+                "<input type='text'placeholder='email'name='email'>"
                 +
-                "<input type=\"submit\"name=\"sub\"value=\"enter\">"
+                "<input type='submit'name='sub'value='enter'>"
                 +
-                "<input type =\"hidden\"name=\"action\"value='add'>"
+                "<input type ='hidden'name='action'value='add'>"
                 +
                 "</form>"
         );
