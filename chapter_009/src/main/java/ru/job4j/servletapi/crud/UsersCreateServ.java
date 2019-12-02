@@ -27,39 +27,24 @@ public class UsersCreateServ extends HttpServlet {
                 +
                 "</head>"
                 +
-                "      <form action=" + req.getContextPath() + "method=\"post\">\n"
+                "<body>"
                 +
-                "            <div>\n"
+                "<form method='post' action='create'>"
                 +
-                "                    <input type=\"text\"placeholder=\" id\"name=\"id\">\n"
+                "<input type='text'placeholder=\"id\"name=\"id\">"
                 +
-                "                </div>\n"
+                "<input type=\"text\"placeholder=\"name\"name=\"name\">"
                 +
-                "                <div> \n"
+                "<input type=\"text\"placeholder=\"login\"name=\"login\">"
                 +
-                "                    <input type=\"text\"placeholder =\" username\"name =\"name=\">\n"
+                "<input type=\"text\"placeholder=\"email\"name=\"email\">"
                 +
-                "                </div>\n"
+                "<input type=\"submit\"name=\"sub\"value=\"enter\">"
                 +
-                "                  <div>\n"
+                "<input type =\"hidden\"name=\"action\"value='add'>"
                 +
-                "                     <input type=\"text\" placeholder=\" email\"name=\"email\">\n"
-                +
-                "                  </div>\n"
-                +
-                "                 <div>\n"
-                +
-                "                    <input type=\"text\" placeholder=\" login\"name=\"login\">\n"
-                +
-                "                 </div>\n"
-                +
-                "                 <input type=\"submit\">\n"
-                +
-                "\n"
-                +
-                "       </form>"
-                +
-                "<body>");
+                "</form>"
+        );
         sb.append("</body>").append("</html>");
         pr.append(sb.toString());
         pr.flush();
@@ -67,8 +52,7 @@ public class UsersCreateServ extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = "add";
-        System.out.println(action);
+        String action = req.getParameter("action");
         String id = req.getParameter("id");
         String name = req.getParameter("name");
         String login = req.getParameter("login");

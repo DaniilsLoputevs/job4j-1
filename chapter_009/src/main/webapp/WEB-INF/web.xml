@@ -26,6 +26,6 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UsersCreateServ</servlet-name>
-        <url-pattern>/add</url-pattern>
+        <url-pattern>/create</url-pattern>
     </servlet-mapping>
 </web-app>
