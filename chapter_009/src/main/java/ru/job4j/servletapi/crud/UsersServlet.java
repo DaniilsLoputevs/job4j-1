@@ -29,13 +29,11 @@ public class UsersServlet extends HttpServlet {
                 +
                 "<body>");
         for (Model var : validate.findAll()) {
-            sb.append("<td><tr>" + var.toString() + "</tr></td>").append("<form action="
-                    + req.getContextPath()
-                    + "/edit method='post'>"
+            sb.append("<td><tr>" + var.toString() + "</tr></td>").append("<form action='edit'method='get'>"
                     +
                     " <form method=\"get\">\n"
                     +
-                    "          <button type=\"url\">edit</button>\n"
+                    "          <input type=\"url\">edit</button>\n"
                     +
                     "          <input type=\"hidden\" name=\"edit\"value=\"update\">\n"
                     +
@@ -52,10 +50,4 @@ public class UsersServlet extends HttpServlet {
         pr.flush();
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-        System.out.println(action);
-
-    }
 }
