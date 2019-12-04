@@ -11,6 +11,18 @@ public class Model {
     private String email;
     private LocalDateTime localDateTime;
 
+    public Model(String id, String name, String login, String email) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.localDateTime = LocalDateTime.now();
+    }
+
+    public Model(String id) {
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }
@@ -33,14 +45,6 @@ public class Model {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Model(String id, String name, String login, String email) {
-        this.id = id;
-        this.name = name;
-        this.login = login;
-        this.email = email;
-        this.localDateTime = LocalDateTime.now();
     }
 
     @Override

@@ -8,43 +8,44 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class UpdateServlet extends HttpServlet {
+    private Validate validate = ValidateService.getInstance();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Model model = new Model(req.getParameter("id"), req.getParameter("name"), req.getParameter("login"), req.getParameter("email"));
-        System.out.println(model);
+        Model model = ModelConstruct.model(req);
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
         StringBuilder stringBuilder = new StringBuilder("<!DOCTYPE html>\n"
                 +
-                "<html lang=\"en\">\n"
+                "<html lang='en'>"
                 +
-                "<head>\n"
+                "<head>"
                 +
-                "    <meta charset=\"UTF-8\">\n"
+                "    <meta charset='UTF-8'>"
                 +
-                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+                "    <meta name='viewport' content='width=device-width, initial-scale=1.0'>"
                 +
-                "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n"
+                "    <meta http-equiv='X-UA-Compatible' content='ie=edge'>\n"
                 +
-                "    <title>Document</title>\n"
+                "    <title>Document</title>"
                 +
-                "</head>\n"
+                "</head>"
                 +
                 "<body>");
-        stringBuilder.append(" <form action=\"list\" method=\"post\">\n"
+        stringBuilder.append(" <form action='' method='post'>"
                 +
-                "            <input type=\"text\"placeholder=\"id\"name=\"id\"value=" + model.getId()
+                "            <input type='text'placeholder='id'name='id'value=" + model.getId()
                 + ">"
                 +
-                "            <input type=\"text\"placeholder=\"name\"name=\"name\">\n"
+                "            <input type='text'placeholder='name'name='name'>"
                 +
-                "            <input type=\"text\"placeholder=\"login\"name=\"login\">\n"
+                "            <input type='text'placeholder='login'name='login'>"
                 +
-                "            <input type=\"text\"placeholder=\"email\"name=\"email\">\n"
+                "            <input type='text'placeholder='email'name='email'>"
                 +
-                "            <input type=\"submit\"name=\"add\"value=\"add\">\n"
+                "            <input type='submit'name='add'value='add'>"
                 +
-                "            <input type=\"hidden\" name=\"action\" value=\"edit\">\n"
+                "            <input type='hidden' name='action' value='edit'>"
                 +
                 "       </form>");
 
@@ -54,5 +55,8 @@ public class UpdateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        validate.update(ModelConstruct.model(req));
+
+
     }
 }
