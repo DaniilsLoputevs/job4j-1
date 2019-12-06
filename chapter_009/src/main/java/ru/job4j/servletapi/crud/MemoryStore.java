@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class MemoryStore implements Store {
     private static final Store INSTANCE = new MemoryStore();
-    private final Map<String, Model> users = new ConcurrentHashMap<>();
+    private final Map<String, User> users = new ConcurrentHashMap<>();
 
     private MemoryStore() {
     }
@@ -20,30 +20,30 @@ public class MemoryStore implements Store {
 
 
     @Override
-    public void add(Model model) {
-        users.put(model.getId(), model);
+    public void add(User user) {
+        users.put(user.getId(), user);
 
     }
 
     @Override
-    public boolean update(String id, Model model) {
-        Optional<Model> updated = Optional.ofNullable(users.replace(id, model));
+    public boolean update(String id, User user) {
+        Optional<User> updated = Optional.ofNullable(users.replace(id, user));
         return updated.isPresent();
     }
 
     @Override
-    public boolean delete(Model model) {
-        Optional<Model> removed = Optional.ofNullable(users.remove(model.getId()));
+    public boolean delete(User user) {
+        Optional<User> removed = Optional.ofNullable(users.remove(user.getId()));
         return removed.isPresent();
     }
 
     @Override
-    public Model findById(String id) {
+    public User findById(String id) {
         return users.get(id);
     }
 
     @Override
-    public Collection<Model> findAll() {
+    public Collection<User> findAll() {
         return users.values();
     }
 }

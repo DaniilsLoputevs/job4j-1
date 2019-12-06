@@ -6,15 +6,15 @@ import java.util.Collection;
 
 public interface Validate {
 
-    boolean add(Model model);
+    boolean add(User user);
 
-    boolean update(Model model);
+    boolean update(User user);
 
-    boolean delete(Model model);
+    boolean delete(User user);
 
-    boolean findById(Model model);
+    boolean findById(User user);
 
-   Collection<Model> findAll();
+   Collection<User> findAll();
 
 
 

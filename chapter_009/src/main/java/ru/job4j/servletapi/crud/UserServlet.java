@@ -28,7 +28,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        Model tmp = new Model(req.getParameter("id"), req.getParameter("name"), req.getParameter("login"), req.getParameter("email"));
+        User tmp = new User(req.getParameter("id"), req.getParameter("name"), req.getParameter("login"), req.getParameter("email"));
         dispatchAction.getMap().get(action).apply(tmp);
 
 

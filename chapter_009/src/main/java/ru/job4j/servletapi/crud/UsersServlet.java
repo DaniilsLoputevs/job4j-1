@@ -28,7 +28,7 @@ public class UsersServlet extends HttpServlet {
                 "</head>"
                 +
                 "<body>");
-        for (Model var : validate.findAll()) {
+        for (User var : validate.findAll()) {
             sb.append("<td><tr>" + var.toString() + "</tr></td>").append("<form action=").append(req.getContextPath())
                     .append("/edit method='get'>")
                     .append("<button type='submit'>Edit</button>")
@@ -49,7 +49,7 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        dispatchAction.getMap().get(action).apply(ModelConstruct.model(req));
+        dispatchAction.getMap().get(action).apply(Extract.extracting(req));
     }
 
 }

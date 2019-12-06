@@ -5,13 +5,13 @@ import java.util.Collection;
 
 public interface Store {
 
-    void add(Model model);
+    void add(User user);
 
-    boolean update(String id, Model model);
+    boolean update(String id, User user);
 
-    boolean delete(Model model);
+    boolean delete(User user);
 
-    Model findById(String id);
+    User findById(String id);
 
-    Collection<Model> findAll();
+    Collection<User> findAll();
 }

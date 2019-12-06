@@ -57,7 +57,7 @@ public class UsersCreateServ extends HttpServlet {
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String email = req.getParameter("email");
-        Model tmp = new Model(id, name, login, email);
+        User tmp = new User(id, name, login, email);
         dispatchAction.getMap().get(action).apply(tmp);
     }
 }

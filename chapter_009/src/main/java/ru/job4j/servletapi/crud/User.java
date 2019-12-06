@@ -4,14 +4,14 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 
-public class Model {
+public class User {
     private String id;
     private String name;
     private String login;
     private String email;
     private LocalDateTime localDateTime;
 
-    public Model(String id, String name, String login, String email) {
+    public User(String id, String name, String login, String email) {
         this.id = id;
         this.name = name;
         this.login = login;
@@ -19,7 +19,7 @@ public class Model {
         this.localDateTime = LocalDateTime.now();
     }
 
-    public Model(String id) {
+    public User(String id) {
         this.id = id;
     }
 
@@ -80,16 +80,16 @@ public class Model {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Model model = (Model) o;
-        return id == model.id
+        User user = (User) o;
+        return id == user.id
                 &&
-                Objects.equals(name, model.name)
+                Objects.equals(name, user.name)
                 &&
-                Objects.equals(login, model.login)
+                Objects.equals(login, user.login)
                 &&
-                Objects.equals(email, model.email)
+                Objects.equals(email, user.email)
                 &&
-                Objects.equals(localDateTime, model.localDateTime);
+                Objects.equals(localDateTime, user.localDateTime);
     }
 
     @Override

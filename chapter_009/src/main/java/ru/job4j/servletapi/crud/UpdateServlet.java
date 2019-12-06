@@ -12,7 +12,7 @@ public class UpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Model model = ModelConstruct.model(req);
+        User user = Extract.extracting(req);
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();
         StringBuilder stringBuilder = new StringBuilder("<!DOCTYPE html>\n"
@@ -34,7 +34,7 @@ public class UpdateServlet extends HttpServlet {
                 "<body>");
         stringBuilder.append(" <form action='' method='post'>"
                 +
-                "            <input type='text'placeholder='id'name='id'value=" + model.getId()
+                "            <input type='text'placeholder='id'name='id'value=" + user.getId()
                 + ">"
                 +
                 "            <input type='text'placeholder='name'name='name'>"
@@ -55,7 +55,7 @@ public class UpdateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        validate.update(ModelConstruct.model(req));
+        validate.update(Extract.extracting(req));
 
 
     }

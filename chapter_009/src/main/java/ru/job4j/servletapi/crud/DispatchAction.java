@@ -6,14 +6,14 @@ import java.util.function.Function;
 
 public class DispatchAction {
     private final Validate validate = ValidateService.getInstance();
-    private final Map<String, Function<Model, Boolean>> map = new HashMap<>();
+    private final Map<String, Function<User, Boolean>> map = new HashMap<>();
 
     public DispatchAction() {
         init();
     }
 
 
-    public Map<String, Function<Model, Boolean>> getMap() {
+    public Map<String, Function<User, Boolean>> getMap() {
         return map;
     }
 

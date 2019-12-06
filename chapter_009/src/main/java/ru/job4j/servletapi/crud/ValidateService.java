@@ -15,38 +15,38 @@ public class ValidateService implements Validate {
     }
 
     @Override
-    public boolean add(Model model) {
+    public boolean add(User user) {
         boolean rs = false;
-        if (Objects.nonNull(model.getName()) && Objects.nonNull(model.getLogin()) && Objects.nonNull(model.getEmail())) {
+        if (Objects.nonNull(user.getName()) && Objects.nonNull(user.getLogin()) && Objects.nonNull(user.getEmail())) {
             rs = true;
-            model.setId(model.getId());
-            store.add(model);
+            user.setId(user.getId());
+            store.add(user);
         }
         return rs;
     }
 
     @Override
-    public boolean update(Model model) {
-        Optional<Model> finded = Optional.of(store.findById(model.getId()));
-        return store.update(finded.get().getId(), model);
+    public boolean update(User user) {
+        Optional<User> finded = Optional.of(store.findById(user.getId()));
+        return store.update(finded.get().getId(), user);
     }
 
     @Override
-    public boolean delete(Model model) {
-        Optional<Model> finded = Optional.ofNullable(store.findById(model.getId()));
-        finded.ifPresent(model1 -> store.delete(model));
+    public boolean delete(User user) {
+        Optional<User> finded = Optional.ofNullable(store.findById(user.getId()));
+        finded.ifPresent(model1 -> store.delete(user));
         return finded.isPresent();
 
     }
 
     @Override
-    public boolean findById(Model model) {
-        Optional<Model> finded = Optional.ofNullable(store.findById(model.getId()));
+    public boolean findById(User user) {
+        Optional<User> finded = Optional.ofNullable(store.findById(user.getId()));
         return finded.isPresent();
     }
 
     @Override
-    public Collection<Model> findAll() {
+    public Collection<User> findAll() {
 
         return store.findAll();
 
