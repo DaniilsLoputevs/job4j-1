@@ -30,6 +30,7 @@ public class Calculator {
     }
 
 
+    @SuppressWarnings("checkstyle:WhitespaceAround")
     public static void main(String[] args) {
         Calculator calc = new Calculator();
         calc.multiple(
@@ -49,7 +50,7 @@ public class Calculator {
                     System.out.printf("Add %s + %s = %s %n", value, index, result);
                     return result;
                 },
-                result-> System.out.println(result)
+                result -> System.out.println(result)
 
         );
     }
