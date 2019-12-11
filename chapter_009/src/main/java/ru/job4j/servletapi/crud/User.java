@@ -11,6 +11,14 @@ public class User {
     private String email;
     private LocalDateTime localDateTime;
 
+    public User(String id, String name, String login, String email, LocalDateTime localDateTime) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.localDateTime = localDateTime;
+    }
+
     public User(String id, String name, String login, String email) {
         this.id = id;
         this.name = name;

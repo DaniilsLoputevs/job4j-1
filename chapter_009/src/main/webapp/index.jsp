@@ -10,7 +10,6 @@
     <b>Добавление пользователя</b>
 </h2>
 <form action="<%=request.getContextPath()%>/create" method="post">
-    ID:<input type="text" name="id"><br>
     Name:<input type="text" name="name"><br>
     Login:<input type="text" name="login"><br>
     Email:<input type="text" name="email"><br>
@@ -55,6 +54,14 @@
     <input type="text" name="email" placeholder="email"><br>
     <input type="submit" update><br>
     <input type="hidden" name="action" value="edit">
+</form>
+
+<h2><b>Удаление пользователя</b></h2>
+<form action="<%=request.getContextPath()%>/delete" method="post">
+    <input type="text" name="id" placeholder="insert id">
+    <input type="submit" delete>
+    <input type="hidden" name="action" value="delete">
+
 </form>
 
 </body>

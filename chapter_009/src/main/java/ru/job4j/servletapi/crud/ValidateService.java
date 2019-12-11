@@ -4,7 +4,7 @@ import java.util.*;
 
 public class ValidateService implements Validate {
     private static final Validate INSTANCE = new ValidateService();
-    private final Store store = MemoryStore.getInstance();
+    private final Store store = DbStore.getinstance();
 
     private ValidateService() {
 
