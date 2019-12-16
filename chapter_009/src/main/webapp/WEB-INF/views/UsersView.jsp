@@ -9,7 +9,7 @@
 <h2>
     <b>Добавление пользователя</b>
 </h2>
-<form action="<%=request.getContextPath()%>/create" method="post">
+<form action="<%=request.getContextPath()%>/" method="post">
     Name:<input type="text" name="name"><br>
     Login:<input type="text" name="login"><br>
     Email:<input type="text" name="email"><br>

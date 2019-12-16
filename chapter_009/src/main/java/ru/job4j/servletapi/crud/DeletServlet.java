@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public class DeletServlet extends HttpServlet {
     private Validate validate = ValidateService.getInstance();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = Extract.extracting(req);
@@ -17,6 +18,6 @@ public class DeletServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         validate.delete(Extract.extracting(req));
-        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
+        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

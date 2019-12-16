@@ -26,6 +26,6 @@ public class UsersCreateServ extends HttpServlet {
         String email = req.getParameter("email");
         User tmp = new User(id, name, login, email);
         dispatchAction.getMap().get(action).apply(tmp);
-        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
+        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }
