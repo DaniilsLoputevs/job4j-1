@@ -9,8 +9,9 @@ public class User {
     private String name;
     private String login;
     private String email;
-    private LocalDateTime localDateTime;
+    private String photoid;
 
+    private LocalDateTime localDateTime;
     public User(String id, String name, String login, String email, LocalDateTime localDateTime) {
         this.id = id;
         this.name = name;
@@ -53,6 +54,14 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getPhotoid() {
+        return photoid;
+    }
+
+    public void setPhotoid(String photoid) {
+        this.photoid = photoid;
     }
 
     @Override

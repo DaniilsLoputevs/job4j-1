@@ -17,6 +17,13 @@
     Email:<input type="text" name="email"><br>
     <input type="hidden" name="action" value="add">
     <input type="submit">
+
+    <form action="${pageContext.servletContext.contextPath}/upload"method="post" enctype="multipart/form-data">
+        <div class="checkbox">
+            <input type="file"name="file">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
 </form>
 <br>
 
@@ -28,6 +35,7 @@
     <td>Login</td>
     <td>Email</td>
     <td>action</td>
+    <td>image</td>
     <c:forEach items="${users}" var="user">
 
         <tr>
@@ -38,6 +46,8 @@
             <td><c:out value="${user.login}"> </c:out>
             </td>
             <td><c:out value="${user.email}"> </c:out>
+            </td>
+            <td><c:out value="${user.photoid}"> </c:out>
             </td>
 
         </tr>

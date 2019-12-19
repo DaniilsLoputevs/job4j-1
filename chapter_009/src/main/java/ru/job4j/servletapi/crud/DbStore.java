@@ -169,7 +169,6 @@ public class DbStore implements Store {
                     "email varchar(200) not null ,"
                     +
                     "created timestamp);");
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

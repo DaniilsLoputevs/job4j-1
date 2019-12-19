@@ -24,6 +24,16 @@
         <servlet-name>DeleteServlet</servlet-name>
         <servlet-class>ru.job4j.servletapi.crud.DeletServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>ru.job4j.servletapi.crud.UploadServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>DownloadServlet</servlet-name>
+        <servlet-class>ru.job4j.servletapi.crud.DownloadServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/echo</url-pattern>
@@ -43,5 +53,13 @@
     <servlet-mapping>
         <servlet-name>DeleteServlet</servlet-name>
         <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadServlet</servlet-name>
+        <url-pattern>/download</url-pattern>
     </servlet-mapping>
 </web-app>
