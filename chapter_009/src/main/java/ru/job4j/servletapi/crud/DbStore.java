@@ -166,11 +166,33 @@ public class DbStore implements Store {
                     +
                     "login varchar(200) not null,"
                     +
+                    "password varchar(13)not null, "
+                    +
                     "email varchar(200) not null ,"
                     +
                     "created timestamp);");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean userExist(String login, String password) {
+        boolean rs = false;
+        try (Connection connection = SOURCE.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("select login,password from users_servlets.public.users_servlets where login =? and password = ?");
+            statement.setString(1, login);
+            statement.setString(2, password);
+            ResultSet s = statement.executeQuery();
+            while (s.next()) {
+                String resultlogin = s.getString("login");
+                String resultpassword = s.getString("password");
+                if (resultlogin.equals(login) && resultpassword.equals(password)) {
+                    rs = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 }

@@ -31,28 +31,28 @@ public class UploadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
-        ServletContext servletContext = this.getServletConfig().getServletContext();
-        File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
-        ServletFileUpload upload = new ServletFileUpload(diskFileItemFactory);
-        diskFileItemFactory.setRepository(repository);
-        try {
-            List<FileItem> items = upload.parseRequest(req);
-            File folder = new File("images");
-            if (!folder.exists()) {
-                folder.mkdir();
-            }
-            for (FileItem item : items) {
-                if (item.isFormField()) {
-                    File file = new File(folder + File.separator + item.getName());
-                    try (FileOutputStream out = new FileOutputStream(file)) {
-                        out.write(item.getInputStream().readAllBytes());
-                    }
-                }
-            }
-        } catch (FileUploadException e) {
-            e.printStackTrace();
-        }
-        doGet(req, resp);
+//        DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
+//        ServletContext servletContext = this.getServletConfig().getServletContext();
+//        File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
+//        ServletFileUpload upload = new ServletFileUpload(diskFileItemFactory);
+//        diskFileItemFactory.setRepository(repository);
+//        try {
+//            List<FileItem> items = upload.parseRequest(req);
+//            File folder = new File("images");
+//            if (!folder.exists()) {
+//                folder.mkdir();
+//            }
+//            for (FileItem item : items) {
+//                if (item.isFormField()) {
+//                    File file = new File(folder + File.separator + item.getName());
+//                    try (FileOutputStream out = new FileOutputStream(file)) {
+//                        out.write(item.getInputStream().readAllBytes());
+//                    }
+//                }
+//            }
+//        } catch (FileUploadException e) {
+//            e.printStackTrace();
+//        }
+//        doGet(req, resp);
     }
 }

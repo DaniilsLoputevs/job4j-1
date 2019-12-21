@@ -1,6 +1,3 @@
-<%@ page import="ru.job4j.servletapi.crud.User" %>
-<%@ page import="ru.job4j.servletapi.crud.ValidateService" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -8,23 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-<h2>
-    <b>Добавление пользователя</b>
-</h2>
-<form action="${pageContext.servletContext.contextPath}/" method="post">
-    Name:<input type="text" name="name"><br>
-    Login:<input type="text" name="login"><br>
-    Email:<input type="text" name="email"><br>
-    <input type="hidden" name="action" value="add">
-    <input type="submit">
-
-    <form action="${pageContext.servletContext.contextPath}/upload"method="post" enctype="multipart/form-data">
-        <div class="checkbox">
-            <input type="file"name="file">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-</form>
 <br>
 
 <h2><b>Таблица пользователей</b></h2>
@@ -37,9 +17,10 @@
     <td>action</td>
     <td>image</td>
     <c:forEach items="${users}" var="user">
-
         <tr>
-            <td><c:out value="${user.id}"> </c:out>
+            <td><c:out value="${user.id}">
+
+            </c:out>
             </td>
             <td><c:out value="${user.name}"> </c:out>
             </td>
@@ -52,13 +33,23 @@
 
         </tr>
 
-
         </th>
 
     </c:forEach>
 
 </table>
 <br>
+<h2>
+    <b>Добавление пользователя</b>
+</h2>
+<form action="${pageContext.servletContext.contextPath}/" method="post">
+    Name:<input type="text" name="name"><br>
+    Login:<input type="text" name="login"><br>
+    Email:<input type="text" name="email"><br>
+    <input type="hidden" name="action" value="add">
+    <input type="submit">
+
+</form>
 <br>
 <br>
 <h2><b>Редактирование пользователя </b></h2>
