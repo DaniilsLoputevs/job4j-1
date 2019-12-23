@@ -21,7 +21,7 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        dispatchAction.getMap().get(action).apply(Extract.extracting(req));
+        dispatchAction.getMap().get(action).apply(Extract.extractingUser(req));
         doGet(req, resp);
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
 

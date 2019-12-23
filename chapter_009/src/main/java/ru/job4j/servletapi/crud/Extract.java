@@ -5,9 +5,13 @@ import javax.servlet.http.HttpServletRequest;
 
 public class Extract {
 
-    static User extracting(HttpServletRequest request) {
-        User user = new User(request.getParameter("id"), request.getParameter("name"), request.getParameter("login"), request.getParameter("email"));
-        return user;
-
+    static User extractingUser(HttpServletRequest request) {
+        String id = request.getParameter("id");
+        String name = request.getParameter("name");
+        String login = request.getParameter("login");
+        String email = request.getParameter("email");
+        String roleStrat = request.getParameter("role");
+        return new User(id, name, login, email, new Role(roleStrat));
     }
+
 }

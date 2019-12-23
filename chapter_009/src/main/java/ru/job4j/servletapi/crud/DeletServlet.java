@@ -11,13 +11,13 @@ public class DeletServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = Extract.extracting(req);
+        User user = Extract.extractingUser(req);
         resp.setContentType("text/html");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        validate.delete(Extract.extracting(req));
+        validate.delete(Extract.extractingUser(req));
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

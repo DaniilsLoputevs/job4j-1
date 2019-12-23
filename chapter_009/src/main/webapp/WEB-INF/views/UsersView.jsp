@@ -14,8 +14,7 @@
     <td>Name</td>
     <td>Login</td>
     <td>Email</td>
-    <td>action</td>
-    <td>image</td>
+    <td>Role</td>
     <c:forEach items="${users}" var="user">
         <tr>
             <td><c:out value="${user.id}">
@@ -27,10 +26,7 @@
             <td><c:out value="${user.login}"> </c:out>
             </td>
             <td><c:out value="${user.email}"> </c:out>
-            </td>
-            <td><c:out value="${user.photoid}"> </c:out>
-            </td>
-
+            <td><c:out value="${user.role}"> </c:out>
         </tr>
 
         </th>
@@ -42,10 +38,15 @@
 <h2>
     <b>Добавление пользователя</b>
 </h2>
-<form action="${pageContext.servletContext.contextPath}/" method="post">
+<form action="${pageContext.servletContext.contextPath}/create" method="post">
     Name:<input type="text" name="name"><br>
     Login:<input type="text" name="login"><br>
+    Password<input type="password"name="password"><br>
     Email:<input type="text" name="email"><br>
+    Role:<select name="role">
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+    </select>
     <input type="hidden" name="action" value="add">
     <input type="submit">
 
@@ -70,6 +71,5 @@
     <input type="hidden" name="action" value="delete">
 
 </form>
-
 </body>
 </html>

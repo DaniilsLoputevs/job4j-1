@@ -12,13 +12,13 @@ public class UpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = Extract.extracting(req);
+        User user = Extract.extractingUser(req);
         resp.setContentType("text/html");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        validate.update(Extract.extracting(req));
+        validate.update(Extract.extractingUser(req));
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
 
 

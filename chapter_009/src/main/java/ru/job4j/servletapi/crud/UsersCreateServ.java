@@ -1,7 +1,6 @@
 package ru.job4j.servletapi.crud;
 
 
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +23,9 @@ public class UsersCreateServ extends HttpServlet {
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String email = req.getParameter("email");
-        User tmp = new User(id, name, login, email);
+        String password = req.getParameter("password");
+        Role role = new Role((req.getParameter("role")));
+        User tmp = new User(id, name, login, password, email, role);
         dispatchAction.getMap().get(action).apply(tmp);
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }

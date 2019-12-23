@@ -10,27 +10,41 @@ public class User {
     private String login;
     private String password;
     private String email;
-    private String photoid;
-
+    private Role role;
     private LocalDateTime localDateTime;
-    public User(String id, String name, String login, String email, LocalDateTime localDateTime) {
+
+    public User(String id, String name, String login, String password, String email, Role role) {
         this.id = id;
         this.name = name;
         this.login = login;
+        this.password = password;
         this.email = email;
-        this.localDateTime = localDateTime;
+        this.role = role;
     }
 
-    public User(String id, String name, String login, String email) {
+    public User(String id, String name, String login, String email, LocalDateTime localDateTime, Role role) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.email = email;
+        this.role = role;
         this.localDateTime = LocalDateTime.now();
     }
 
-    public User(String id) {
+    public User(String id, String name, String login, String email, Role role) {
         this.id = id;
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.role = role;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getId() {
@@ -49,20 +63,20 @@ public class User {
         return email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public LocalDateTime getLocalDateTime() {
         return localDateTime;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getPhotoid() {
-        return photoid;
-    }
-
-    public void setPhotoid(String photoid) {
-        this.photoid = photoid;
     }
 
     @Override
