@@ -1,11 +1,14 @@
 package ru.job4j.servletapi.crud;
 
+import ru.job4j.servletapi.crud.models.Role;
+import ru.job4j.servletapi.crud.models.User;
+
 import javax.servlet.http.HttpServletRequest;
 
 
 public class Extract {
 
-    static User extractingUser(HttpServletRequest request) {
+   public static User extractingUser(HttpServletRequest request) {
         String id = request.getParameter("id");
         String name = request.getParameter("name");
         String login = request.getParameter("login");

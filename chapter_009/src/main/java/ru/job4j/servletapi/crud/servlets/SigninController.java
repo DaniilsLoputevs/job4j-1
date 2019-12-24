@@ -1,4 +1,6 @@
-package ru.job4j.servletapi.crud;
+package ru.job4j.servletapi.crud.servlets;
+
+import ru.job4j.servletapi.crud.store.DbStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,11 +17,14 @@ public class SigninController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
         String login = req.getParameter("login");
+        session.setAttribute("login", login);
         String password = req.getParameter("password");
+        session.setAttribute("password", password);
+        String role = String.valueOf(DbStore.getinstance().getroleid(login));
+        session.setAttribute("role", role);
         if (DbStore.getinstance().userExist(login, password)) {
-            HttpSession session = req.getSession();
-            session.setAttribute("login", login);
             resp.sendRedirect(String.format("%s/", req.getContextPath()));
         } else {
             req.setAttribute("error", "Invalid login or password");

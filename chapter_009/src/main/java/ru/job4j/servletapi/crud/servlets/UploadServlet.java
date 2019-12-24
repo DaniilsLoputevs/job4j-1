@@ -1,4 +1,4 @@
-package ru.job4j.servletapi.crud;
+package ru.job4j.servletapi.crud.servlets;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;

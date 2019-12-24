@@ -1,5 +1,9 @@
 package ru.job4j.servletapi.crud;
 
+import ru.job4j.servletapi.crud.models.User;
+import ru.job4j.servletapi.crud.store.DbStore;
+import ru.job4j.servletapi.crud.store.Store;
+
 import java.util.*;
 
 public class ValidateService implements Validate {

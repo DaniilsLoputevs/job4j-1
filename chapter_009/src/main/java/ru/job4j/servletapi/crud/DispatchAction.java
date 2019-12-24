@@ -1,5 +1,7 @@
 package ru.job4j.servletapi.crud;
 
+import ru.job4j.servletapi.crud.models.User;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;

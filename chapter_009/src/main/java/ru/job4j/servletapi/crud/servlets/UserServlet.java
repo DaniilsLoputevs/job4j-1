@@ -1,4 +1,10 @@
-package ru.job4j.servletapi.crud;
+package ru.job4j.servletapi.crud.servlets;
+
+import ru.job4j.servletapi.crud.DispatchAction;
+import ru.job4j.servletapi.crud.Validate;
+import ru.job4j.servletapi.crud.ValidateService;
+import ru.job4j.servletapi.crud.models.Role;
+import ru.job4j.servletapi.crud.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

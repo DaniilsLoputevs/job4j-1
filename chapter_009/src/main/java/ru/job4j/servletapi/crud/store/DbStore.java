@@ -1,6 +1,8 @@
-package ru.job4j.servletapi.crud;
+package ru.job4j.servletapi.crud.store;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import ru.job4j.servletapi.crud.models.Role;
+import ru.job4j.servletapi.crud.models.User;
 
 
 import java.io.InputStream;
@@ -211,6 +213,7 @@ public class DbStore implements Store {
         return rs;
     }
 
+
     private int roleid(String rolename) {
         Integer rs = null;
         try (Connection connection = SOURCE.getConnection()) {
@@ -225,4 +228,20 @@ public class DbStore implements Store {
         }
         return rs;
     }
+
+    public Integer getroleid(String login) {
+        int rs = 0;
+        try (Connection connection = SOURCE.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("select role_id from users_servlets.public.users where login = ?");
+            statement.setString(1, login);
+            ResultSet set = statement.executeQuery();
+            while (set.next()) {
+                rs = set.getInt("role_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
 }

@@ -6,45 +6,55 @@
          version="2.4">
     <filter>
         <filter-name>AuthFilter</filter-name>
-        <filter-class>ru.job4j.servletapi.crud.AuthFilter</filter-class>
+        <filter-class>ru.job4j.servletapi.crud.filters.AuthFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>AccesFilter</filter-name>
+        <filter-class>ru.job4j.servletapi.crud.filters.AccessFilter</filter-class>
     </filter>
     <servlet>
         <servlet-name>UserServlet</servlet-name>
-        <servlet-class>ru.job4j.servletapi.crud.UserServlet</servlet-class>
+        <servlet-class>ru.job4j.servletapi.crud.servlets.UserServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UsersServlet</servlet-name>
-        <servlet-class>ru.job4j.servletapi.crud.UsersServlet</servlet-class>
+        <servlet-class>ru.job4j.servletapi.crud.servlets.UsersServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UsersCreateServ</servlet-name>
-        <servlet-class>ru.job4j.servletapi.crud.UsersCreateServ</servlet-class>
+        <servlet-class>ru.job4j.servletapi.crud.servlets.UsersCreateServ</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateServlet</servlet-name>
-        <servlet-class>ru.job4j.servletapi.crud.UpdateServlet</servlet-class>
+        <servlet-class>ru.job4j.servletapi.crud.servlets.UpdateServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteServlet</servlet-name>
-        <servlet-class>ru.job4j.servletapi.crud.DeletServlet</servlet-class>
+        <servlet-class>ru.job4j.servletapi.crud.servlets.DeletServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UploadServlet</servlet-name>
-        <servlet-class>ru.job4j.servletapi.crud.UploadServlet</servlet-class>
+        <servlet-class>ru.job4j.servletapi.crud.servlets.UploadServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>DownloadServlet</servlet-name>
-        <servlet-class>ru.job4j.servletapi.crud.DownloadServlet</servlet-class>
+        <servlet-class>ru.job4j.servletapi.crud.servlets.DownloadServlet</servlet-class>
     </servlet>
 <servlet>
     <servlet-name>SigninServlet</servlet-name>
-    <servlet-class>ru.job4j.servletapi.crud.SigninController</servlet-class>
+    <servlet-class>ru.job4j.servletapi.crud.servlets.SigninController</servlet-class>
 </servlet>
 
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
         <url-pattern>*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>AccesFilter</filter-name>
+        <url-pattern>/</url-pattern>
     </filter-mapping>
 
     <servlet-mapping>

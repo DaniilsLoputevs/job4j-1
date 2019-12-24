@@ -1,5 +1,7 @@
-package ru.job4j.servletapi.crud;
+package ru.job4j.servletapi.crud.store;
 
+
+import ru.job4j.servletapi.crud.models.User;
 
 import java.util.Collection;
 
