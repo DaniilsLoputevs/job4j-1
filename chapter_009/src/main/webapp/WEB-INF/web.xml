@@ -38,14 +38,16 @@
         <servlet-class>ru.job4j.servletapi.crud.servlets.UploadServlet</servlet-class>
     </servlet>
 
+
     <servlet>
-        <servlet-name>DownloadServlet</servlet-name>
-        <servlet-class>ru.job4j.servletapi.crud.servlets.DownloadServlet</servlet-class>
+        <servlet-name>SigninServlet</servlet-name>
+        <servlet-class>ru.job4j.servletapi.crud.servlets.SigninController</servlet-class>
     </servlet>
-<servlet>
-    <servlet-name>SigninServlet</servlet-name>
-    <servlet-class>ru.job4j.servletapi.crud.servlets.SigninController</servlet-class>
-</servlet>
+    
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>ru.job4j.servletapi.crud.servlets.AdminServlet</servlet-class>
+    </servlet>
 
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
@@ -54,39 +56,46 @@
 
     <filter-mapping>
         <filter-name>AccesFilter</filter-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/admin</url-pattern>
     </filter-mapping>
 
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/echo</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>UsersServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>UsersCreateServ</servlet-name>
         <url-pattern>/create</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>UpdateServlet</servlet-name>
         <url-pattern>/edit</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>DeleteServlet</servlet-name>
         <url-pattern>/delete</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>UploadServlet</servlet-name>
         <url-pattern>/upload</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DownloadServlet</servlet-name>
-        <url-pattern>/download</url-pattern>
-    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>SigninServlet</servlet-name>
         <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
 </web-app>

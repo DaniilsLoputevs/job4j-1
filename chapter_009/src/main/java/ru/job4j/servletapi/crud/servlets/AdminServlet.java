@@ -4,7 +4,6 @@ import ru.job4j.servletapi.crud.DispatchAction;
 import ru.job4j.servletapi.crud.Extract;
 import ru.job4j.servletapi.crud.Validate;
 import ru.job4j.servletapi.crud.ValidateService;
-import ru.job4j.servletapi.crud.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,24 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-public class UserServlet extends HttpServlet {
+public class AdminServlet extends HttpServlet {
     private final Validate validate = ValidateService.getInstance();
     private final DispatchAction dispatchAction = new DispatchAction();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
+        req.setAttribute("users", validate.findAll());
+        req.getRequestDispatcher("/WEB-INF/views/AdminView.jsp").forward(req, resp);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        User tmp = Extract.extractingUser(req);
-        dispatchAction.getMap().get(action).apply(tmp);
-
-
+        dispatchAction.getMap().get(action).apply(Extract.extractingUser(req));
+        doGet(req, resp);
+        resp.sendRedirect(String.format("%s/admin", req.getContextPath()));
     }
 }

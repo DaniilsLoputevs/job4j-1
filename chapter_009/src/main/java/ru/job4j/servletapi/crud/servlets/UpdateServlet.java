@@ -23,6 +23,7 @@ public class UpdateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
         validate.update(Extract.extractingUser(req));
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
 

@@ -41,13 +41,13 @@ public class DbStore implements Store {
     @Override
     public void add(User user) {
         try (Connection connection = SOURCE.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("insert into users_servlets.public.users(name, login,password, email, created,role_id) values (?,?,?,?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("insert into users_servlets.public.users(name, login,password, email, created,role) values (?,?,?,?,?,?)");
             statement.setString(1, user.getName());
             statement.setString(2, user.getLogin());
             statement.setString(3, user.getPassword());
             statement.setString(4, user.getEmail());
             statement.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
-            statement.setInt(6, roleid(user.getRole().getIdrole()));
+            statement.setString(6, user.getRole().name());
             statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -103,11 +103,17 @@ public class DbStore implements Store {
     public User findById(String id) {
         User user = null;
         try (Connection connection = SOURCE.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("select id, name, login, email, created,role_id from users_servlets.public.users where id =?");
+            PreparedStatement statement = connection.prepareStatement("select id, name, login, email, created,role from users_servlets.public.users where id =?");
             statement.setInt(1, Integer.parseInt(id));
             ResultSet set = statement.executeQuery();
             while (set.next()) {
-                user = new User(set.getString("id"), set.getString("name"), set.getString("login"), set.getString("email"), set.getTimestamp("created").toLocalDateTime(), new Role(set.getString("role_id")));
+                String userid = set.getString("id");
+                String name = set.getString("name");
+                String login = set.getString("login");
+                String email = set.getString("email");
+                Timestamp created = set.getTimestamp("created");
+
+                user = new User(userid, name, login, email, created.toLocalDateTime(), Role.USER);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,7 +130,7 @@ public class DbStore implements Store {
     public Collection<User> findAll() {
         Collection<User> rs = new ArrayList<>();
         try (Connection connection = SOURCE.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("select id, name, login, email, created,role_id from users_servlets.public.users");
+            PreparedStatement statement = connection.prepareStatement("select id, name, login, email, created,role from users_servlets.public.users");
             ResultSet set = statement.executeQuery();
             while (set.next()) {
                 String id = set.getString(1);
@@ -132,8 +138,8 @@ public class DbStore implements Store {
                 String login = set.getString(3);
                 String email = set.getString(4);
                 Timestamp timestamp = set.getTimestamp(5);
-                String rolestrat = set.getString(6);
-                rs.add(new User(id, name, login, email, timestamp.toLocalDateTime(), new Role(rolestrat)));
+                String role = set.getString(6);
+                rs.add(new User(id, name, login, email, timestamp.toLocalDateTime(), Role.valueOf(role)));
             }
             set.close();
         } catch (SQLException e) {
@@ -162,16 +168,7 @@ public class DbStore implements Store {
      * Утилитный метод проверяющий структуру в базе данных на наличие таблицы.
      */
     private void checkdb() {
-        try (Connection connection = SOURCE.getConnection();
-             Connection connection1 = SOURCE.getConnection()) {
-            Statement statement = connection1.createStatement();
-            statement.execute("create table if not exists role ("
-                    +
-                    "id_role serial primary key ,"
-                    +
-                    "role_strat varchar(200)"
-                    +
-                    ");");
+        try (Connection connection = SOURCE.getConnection()) {
             Statement statement1 = connection.createStatement();
             statement1.execute("create table if not exists users("
                     +
@@ -185,7 +182,7 @@ public class DbStore implements Store {
                     +
                     "email varchar(200) not null ,"
                     +
-                    "role_id int references role (id_role),"
+                    "role varchar(10) not null ,"
                     +
                     "created timestamp);");
         } catch (SQLException e) {
@@ -214,14 +211,14 @@ public class DbStore implements Store {
     }
 
 
-    private int roleid(String rolename) {
-        Integer rs = null;
+    public String getRole(String login) {
+        String rs = null;
         try (Connection connection = SOURCE.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("select id_role from users_servlets.public.role where role_strat = ?");
-            statement.setString(1, rolename);
+            PreparedStatement statement = connection.prepareStatement("select role from users_servlets.public.users where login = ?");
+            statement.setString(1, login);
             ResultSet set = statement.executeQuery();
             while (set.next()) {
-                rs = set.getInt("id_role");
+                rs = set.getString("role");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -229,19 +226,5 @@ public class DbStore implements Store {
         return rs;
     }
 
-    public Integer getroleid(String login) {
-        int rs = 0;
-        try (Connection connection = SOURCE.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("select role_id from users_servlets.public.users where login = ?");
-            statement.setString(1, login);
-            ResultSet set = statement.executeQuery();
-            while (set.next()) {
-                rs = set.getInt("role_id");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rs;
-    }
 
 }

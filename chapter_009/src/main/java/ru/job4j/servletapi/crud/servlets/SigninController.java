@@ -22,9 +22,11 @@ public class SigninController extends HttpServlet {
         session.setAttribute("login", login);
         String password = req.getParameter("password");
         session.setAttribute("password", password);
-        String role = String.valueOf(DbStore.getinstance().getroleid(login));
+        String role = (DbStore.getinstance().getRole(login));
         session.setAttribute("role", role);
-        if (DbStore.getinstance().userExist(login, password)) {
+        if (role.equals("ADMIN")) {
+            resp.sendRedirect(String.format("%s/admin", req.getContextPath()));
+        } else if (role.equals("USER")) {
             resp.sendRedirect(String.format("%s/", req.getContextPath()));
         } else {
             req.setAttribute("error", "Invalid login or password");

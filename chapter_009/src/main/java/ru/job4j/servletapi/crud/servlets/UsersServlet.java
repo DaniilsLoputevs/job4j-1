@@ -19,8 +19,9 @@ public class UsersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            req.setAttribute("users", validate.findAll());
-            req.getRequestDispatcher("/WEB-INF/views/UsersView.jsp").forward(req, resp);
+        req.setAttribute("users", validate.findAll());
+        req.getRequestDispatcher("/WEB-INF/views/UsersView.jsp").forward(req, resp);
+
     }
 
     @Override

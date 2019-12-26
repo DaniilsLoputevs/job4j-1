@@ -128,4 +128,16 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, name, login, email, localDateTime);
     }
+
+    public static void main(String[] args) {
+        User user = new User("1", "name", "login", "password", Role.ADMIN);
+        String role = null;
+        role = Role.valueOf("ADMI").name();
+        System.out.println(role);
+
+    }
+
 }
+
+
+

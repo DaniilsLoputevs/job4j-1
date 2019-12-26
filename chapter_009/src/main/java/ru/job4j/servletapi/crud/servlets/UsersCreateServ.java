@@ -30,8 +30,8 @@ public class UsersCreateServ extends HttpServlet {
         String login = req.getParameter("login");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        Role role = new Role((req.getParameter("role")));
-        User tmp = new User(id, name, login, password, email, role);
+        String role = req.getParameter("role");
+        User tmp = new User(id, name, login, password, email, Role.valueOf(role));
         dispatchAction.getMap().get(action).apply(tmp);
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
