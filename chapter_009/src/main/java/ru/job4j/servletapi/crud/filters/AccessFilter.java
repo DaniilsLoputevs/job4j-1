@@ -22,6 +22,8 @@ public class AccessFilter implements Filter {
         if (!role.equals("ADMIN")) {
             ((HttpServletResponse) resp).sendRedirect(String.format("%s/signin", ((HttpServletRequest) req).getContextPath()));
             session.invalidate();
+        } else {
+            chain.doFilter(req, resp);
         }
     }
 
