@@ -45,30 +45,9 @@
     Email:<input type="text" name="email"><br>
     Role:<select name="role">
         <option value="USER">User</option>
-        <option value="ADMIN">Admin</option>
     </select>
     <input type="hidden" name="action" value="add">
     <input type="submit">
-
-</form>
-<br>
-<br>
-<h2><b>Редактирование пользователя </b></h2>
-
-<form action="${pageContext.servletContext.contextPath}/edit" method="post">
-    <input type="text" name="id" placeholder="id"><br>
-    <input type="text" name="name" placeholder="name"><br>
-    <input type="text" name="login" placeholder="login"><br>
-    <input type="text" name="email" placeholder="email"><br>
-    <input type="submit" update><br>
-    <input type="hidden" name="action" value="edit">
-</form>
-
-<h2><b>Удаление пользователя</b></h2>
-<form action="${pageContext.servletContext.contextPath}/delete" method="post">
-    <input type="text" name="id" placeholder="insert id">
-    <input type="submit" delete>
-    <input type="hidden" name="action" value="delete">
 
 </form>
 </body>
