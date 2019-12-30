@@ -19,7 +19,9 @@ public class DispatchAction {
         return map;
     }
 
-
+    /**
+     * Init map for key func
+     */
     private void init() {
         map.put("add", validate::add);
         map.put("update", validate::update);

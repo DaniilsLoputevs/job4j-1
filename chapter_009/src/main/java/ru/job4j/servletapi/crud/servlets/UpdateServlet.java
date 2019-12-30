@@ -21,6 +21,13 @@ public class UpdateServlet extends HttpServlet {
         resp.setContentType("text/html");
     }
 
+    /**
+     * Extracting user data  and update on storage
+     * @param req req
+     * @param resp resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");

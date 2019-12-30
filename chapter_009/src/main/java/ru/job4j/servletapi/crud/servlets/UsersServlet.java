@@ -17,6 +17,14 @@ public class UsersServlet extends HttpServlet {
     private final Validate validate = ValidateService.getInstance();
     private final DispatchAction dispatchAction = new DispatchAction();
 
+    /**
+     * return all Users in storage . using UsersView.jsp
+     *
+     * @param req  request by user
+     * @param resp response by server
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("users", validate.findAll());
@@ -24,6 +32,14 @@ public class UsersServlet extends HttpServlet {
 
     }
 
+    /**
+     * Get action when user send post method and execute work in dispatchAction
+     *
+     * @param req  request by
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");

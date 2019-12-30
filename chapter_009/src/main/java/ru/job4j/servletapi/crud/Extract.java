@@ -8,7 +8,11 @@ import javax.servlet.http.HttpSession;
 
 
 public class Extract {
-
+    /**
+     * Extracting User on request , checking by parameters
+     * @param request request by user
+     * @return User includ all data by req
+     */
     public static User extractingUser(HttpServletRequest request) {
         String id = request.getParameter("id");
         String name = request.getParameter("name");

@@ -13,10 +13,7 @@
         <filter-name>AccesFilter</filter-name>
         <filter-class>ru.job4j.servletapi.crud.filters.AccessFilter</filter-class>
     </filter>
-    <servlet>
-        <servlet-name>UserServlet</servlet-name>
-        <servlet-class>ru.job4j.servletapi.crud.servlets.UserServlet</servlet-class>
-    </servlet>
+
     <servlet>
         <servlet-name>UsersServlet</servlet-name>
         <servlet-class>ru.job4j.servletapi.crud.servlets.UsersServlet</servlet-class>
@@ -31,13 +28,8 @@
     </servlet>
     <servlet>
         <servlet-name>DeleteServlet</servlet-name>
-        <servlet-class>ru.job4j.servletapi.crud.servlets.DeletServlet</servlet-class>
+        <servlet-class>ru.job4j.servletapi.crud.servlets.DeleteServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>UploadServlet</servlet-name>
-        <servlet-class>ru.job4j.servletapi.crud.servlets.UploadServlet</servlet-class>
-    </servlet>
-
 
     <servlet>
         <servlet-name>SigninServlet</servlet-name>
@@ -60,11 +52,6 @@
     </filter-mapping>
 
     <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/echo</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
         <servlet-name>UsersServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
@@ -82,11 +69,6 @@
     <servlet-mapping>
         <servlet-name>DeleteServlet</servlet-name>
         <url-pattern>/delete</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>UploadServlet</servlet-name>
-        <url-pattern>/upload</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

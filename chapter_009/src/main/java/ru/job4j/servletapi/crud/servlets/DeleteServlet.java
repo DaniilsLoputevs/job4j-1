@@ -1,6 +1,5 @@
 package ru.job4j.servletapi.crud.servlets;
 
-import ru.job4j.servletapi.crud.DispatchAction;
 import ru.job4j.servletapi.crud.Extract;
 import ru.job4j.servletapi.crud.Validate;
 import ru.job4j.servletapi.crud.ValidateService;
@@ -12,24 +11,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-public class UserServlet extends HttpServlet {
-    private final Validate validate = ValidateService.getInstance();
-    private final DispatchAction dispatchAction = new DispatchAction();
+public class DeleteServlet extends HttpServlet {
+    private Validate validate = ValidateService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = Extract.extractingUser(req);
         resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
-
     }
 
+    /**
+     * Extracting User on storage and delete
+     * @param req request
+     * @param resp response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-        User tmp = Extract.extractingUser(req);
-        dispatchAction.getMap().get(action).apply(tmp);
-
-
+        validate.delete(Extract.extractingUser(req));
+        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

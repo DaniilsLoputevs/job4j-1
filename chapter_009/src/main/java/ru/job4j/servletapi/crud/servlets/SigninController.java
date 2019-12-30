@@ -10,11 +10,25 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class SigninController extends HttpServlet {
+    /**
+     * Use Authview.jsp when new user visit login page
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/views/Authview.jsp").forward(req, resp);
     }
 
+    /**
+     * Send all auh information and set all parameters
+     * @param req req
+     * @param resp resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();

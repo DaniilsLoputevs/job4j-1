@@ -13,6 +13,14 @@ public class AuthFilter implements Filter {
 
     }
 
+    /**
+     * Checking role and redirect resp
+     * @param req req
+     * @param response resp
+     * @param filterChain filerchain
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void doFilter(ServletRequest req, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;

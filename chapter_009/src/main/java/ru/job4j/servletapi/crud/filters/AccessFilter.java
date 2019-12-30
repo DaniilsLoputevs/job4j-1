@@ -13,6 +13,14 @@ public class AccessFilter implements Filter {
 
     }
 
+    /**
+     * Filter all request on signin and redirect
+     * @param req req
+     * @param resp resp
+     * @param chain chainfiler
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
