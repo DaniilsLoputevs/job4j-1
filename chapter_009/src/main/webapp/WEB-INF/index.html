@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function validate() {
+            var result = true;
+            var name = $('#usr').val();
+            var pwd =  $('#pwd').val();
+            console.log(name);
+            console.log(pwd);
+            if (name == ' '){
+                result = false;
+            }
+            if (pwd == ' '){
+                result = false;
+            }
+            if (!result){
+                alert("please input correct data")
+            }
+            return result;
+
+        }
+    </script>
+</head>
+<body>
+
+<div class="container-fluid">
+    <h1>Простая страница входа в систему</h1>
+</div>
+
+
+<div class="container">
+    <h2>Form control: input</h2>
+    <p>The form below contains two input elements; one of type text and one of type password:</p>
+    <form action="index.html" method="post">
+        <div class="form-group">
+            <label for="usr">Name:</label>
+            <input type="text" class="form-control" title="Enter user name." id="usr">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd">
+        </div>
+        <button type="button" class="btn btn-default" onclick="return validate();">Submit</button>
+    </form>
+</div>
+
+
+<div class="container">
+    <h2>Users Table</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Petr</td>
+            <td>Arsentev</td>
+            <td>chief@jobj.ru</td>
+        </tr>
+        <tr>
+            <td>Sergey</td>
+            <td>Bolshanin</td>
+            <td>sbol@example.com</td>
+        </tr>
+        <tr>
+            <td>Andrey</td>
+            <td>Hincu</td>
+            <td>andrey@example.com</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>

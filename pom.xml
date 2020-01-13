@@ -24,6 +24,7 @@
         <module>chapter_008</module>
         <module>chapter_009</module>
         <module>parser_sqlru</module>
+        <module>chapter_010</module>
     </modules>
 
     <profiles>

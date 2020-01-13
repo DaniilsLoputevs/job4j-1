@@ -1,0 +1,11 @@
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name="ru.job4j.hibernate.todo.model.Item" table="items">
+        <id name="id" column="id">
+            <generator class="identity"></generator>
+        </id>
+        <property name="name" column="name"></property>
+        <property name="desc" column="description"></property>
+        <property name="created" column="created"></property>
+    </class>
+
+</hibernate-mapping>
