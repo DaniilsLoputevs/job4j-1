@@ -9,16 +9,18 @@ public class Item {
     private String desc;
     private Timestamp created;
 
-    public Item(){
+    public Item() {
 
-    };
+    }
+
 
     public Item(String name, String desc, Timestamp created) {
         this.name = name;
         this.desc = desc;
         this.created = created;
     }
-    public Item(Integer id,String name, String desc, Timestamp created) {
+
+    public Item(Integer id, String name, String desc, Timestamp created) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -58,7 +60,6 @@ public class Item {
     }
 
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -70,12 +71,12 @@ public class Item {
         Item item = (Item) o;
         return
                 Objects.equals(id, item.id)
-                &&
-                Objects.equals(name, item.name)
-                &&
-                Objects.equals(desc, item.desc)
-                &&
-                Objects.equals(created, item.created);
+                        &&
+                        Objects.equals(name, item.name)
+                        &&
+                        Objects.equals(desc, item.desc)
+                        &&
+                        Objects.equals(created, item.created);
     }
 
     @Override
