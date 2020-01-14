@@ -8,15 +8,13 @@ import ru.job4j.hibernate.todo.model.Item;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.List;
 
 public class DbStorage implements Store {
+    private static final DbStorage INSTANCE = new DbStorage();
     private final SessionFactory sessionFactory;
 
-    public DbStorage() {
+    private DbStorage() {
         this.sessionFactory = new Configuration().configure().buildSessionFactory();
     }
 
@@ -60,12 +58,12 @@ public class DbStorage implements Store {
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(Item.class);
         criteriaQuery.from(Item.class);
-        List<Item> rs = session.createQuery(criteriaQuery).getResultList();
-        return rs;
+        return session.createQuery(criteriaQuery).getResultList();
     }
 
     /**
      * delete entity by id
+     *
      * @param item deleted entity
      */
     @Override
@@ -77,8 +75,16 @@ public class DbStorage implements Store {
 
     }
 
+    @Override
+    public Item findById(Item item) {
+        Session session = getConnection();
+        session.getTransaction();
+        session.load(Item.class, item.getId());
+        return session.load(Item.class, item.getId());
+    }
+
     /**
-     * util func return new session
+     * servlets func return new session
      *
      * @return session
      */
@@ -86,11 +92,16 @@ public class DbStorage implements Store {
         return sessionFactory.openSession();
     }
 
-    public static void main(String[] args) {
-        DbStorage dbStorage = new DbStorage();
-        dbStorage.add(new Item("Repare", "TASDASDasdssad", Timestamp.valueOf(LocalDateTime.now())));
-        dbStorage.replace(new Item(1, "Repareddddd", "TASDASDasdssad", Timestamp.valueOf(LocalDateTime.now())));
-        System.out.println(dbStorage.findAll());
-        dbStorage.delete(new Item(1, "Repareddddd", "TASDASDasdssad", Timestamp.valueOf(LocalDateTime.now())));
+    public static DbStorage getInstance() {
+        return INSTANCE;
     }
+
+//    public static void main(String[] args) {
+//        DbStorage dbStorage = new DbStorage();
+//        dbStorage.add(new Item("Repare", "TASDASDasdssad", Timestamp.valueOf(LocalDateTime.now())));
+//        dbStorage.replace(new Item(1, "Repareddddd", "TASDASDasdssad", Timestamp.valueOf(LocalDateTime.now()), false));
+//        System.out.println(dbStorage.findAll());
+//        System.out.println(dbStorage.findById(new Item(1)));
+////        dbStorage.delete(new Item(1, "Repareddddd", "TASDASDasdssad", Timestamp.valueOf(LocalDateTime.now()),false));
+//    }
 }

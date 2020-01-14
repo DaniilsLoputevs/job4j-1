@@ -14,4 +14,6 @@ public interface Store {
 
     void delete(Item item);
 
+    Item findById(Item item);
+
 }
