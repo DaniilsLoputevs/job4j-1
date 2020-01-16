@@ -1,4 +1,5 @@
 package ru.job4j.hibernate.todo.model;
+
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -32,6 +33,13 @@ public class Item {
 
     public Item(Integer id, String name, String desc, Timestamp created, boolean done) {
         this.id = id;
+        this.name = name;
+        this.desc = desc;
+        this.created = created;
+        this.done = done;
+    }
+
+    public Item(String name, String desc, Timestamp created, boolean done) {
         this.name = name;
         this.desc = desc;
         this.created = created;

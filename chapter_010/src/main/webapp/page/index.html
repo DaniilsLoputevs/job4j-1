@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        $(
+            $.ajax({
+                    url: 'all',
+                    method: 'GET',
+                    complete: function (data) {
+                        console.log(data);
+                        var items = JSON.parse(data.responseText);
+                        var result = " <tr>\n" +
+                            "            <th>Name</th>\n" +
+                            "            <th>Description</th>\n" +
+                            "            <th>Created</th>\n" +
+                            "            <th>Complete</th>\n" +
+                            "        </tr>";
+                        for (var i = 0; i != items.lenght; ++i) {
+                            result += "<tr>"
+                                + "<td>" + items[i].name + "</td>" +
+                                +"<td>" + items[i].description + "</td>" +
+                                +"<td>" + items[i].created + "</td>" +
+                                +"<td>" + items[i].complete + "</td>" +
+                                "</tr>"
+                        }
+                        var table = document.getElementsByName("items");
+                        table.innerHTML = result;
+                    }
+                }
+            )
+        );
+    </script>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Basic Table</h2>
+    <table class="table" id="items">
+        <thead>
+        <tr id="header-items"></tr>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created</th>
+            <th>Complete</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

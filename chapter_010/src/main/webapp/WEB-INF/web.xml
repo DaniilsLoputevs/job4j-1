@@ -6,11 +6,24 @@
         version="2.4">
 
     <servlet>
-        <servlet-name>CostumerView</servlet-name>
-        <servlet-class>ru.job4j.hibernate.todo.servlets.CostumerViewController</servlet-class>
+        <servlet-name>AddController</servlet-name>
+        <servlet-class>ru.job4j.hibernate.todo.servlets.AddServletController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListView</servlet-name>
+        <servlet-class>ru.job4j.hibernate.todo.servlets.DataServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CostumerView</servlet-name>
-        <url-pattern>/todo</url-pattern>
+        <servlet-name>AddController</servlet-name>
+        <url-pattern>/page/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListView</servlet-name>
+        <url-pattern>/page/all</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/page/*</url-pattern>
     </servlet-mapping>
 </web-app>
