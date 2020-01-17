@@ -2,20 +2,18 @@ package ru.job4j.hibernate.todo.storage;
 
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import ru.job4j.hibernate.todo.model.Item;
+import org.hibernate.Transaction;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
+import ru.job4j.hibernate.todo.model.Item;
+import ru.job4j.hibernate.todo.util.HiberUtil;
+
 import java.util.Collection;
+import java.util.function.Function;
 
 public class DbStorage implements Store {
     private static final DbStorage INSTANCE = new DbStorage();
-    private final SessionFactory sessionFactory;
 
     private DbStorage() {
-        this.sessionFactory = new Configuration().configure().buildSessionFactory();
     }
 
     /**
@@ -24,13 +22,9 @@ public class DbStorage implements Store {
      * @param item entity value
      */
     @Override
-    public void add(Item item) {
-        Session s = getConnection();
-        s.beginTransaction();
-        s.save(item);
-        s.getTransaction().commit();
-
-
+    public Item add(Item item) {
+        tx(session -> session.save(item));
+        return item;
     }
 
     /**
@@ -49,16 +43,12 @@ public class DbStorage implements Store {
 
     /**
      * @return all data in database
-     * @see "https://stackoverflow.com/questions/43037814/how-to-get-all-data-in-the-table-with-hibernate"
+     * 3
      */
     @SuppressWarnings("unchecked")
     @Override
     public Collection<Item> findAll() {
-        Session session = getConnection();
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(Item.class);
-        criteriaQuery.from(Item.class);
-        return session.createQuery(criteriaQuery).getResultList();
+        return tx(session -> HiberUtil.getSessionFactory().openSession().createQuery("from Item ")).list();
     }
 
     /**
@@ -88,20 +78,27 @@ public class DbStorage implements Store {
      *
      * @return session
      */
-    private Session getConnection() {
-        return sessionFactory.openSession();
+    private  Session getConnection() {
+        return HiberUtil.getSessionFactory().openSession();
     }
 
     public static DbStorage getInstance() {
         return INSTANCE;
     }
 
-//    public static void main(String[] args) {
-//        DbStorage dbStorage = new DbStorage();
-//        dbStorage.add(new Item("Repare", "TASDASDasdssad", Timestamp.valueOf(LocalDateTime.now())));
-//        dbStorage.replace(new Item(1, "Repareddddd", "TASDASDasdssad", Timestamp.valueOf(LocalDateTime.now()), false));
-//        System.out.println(dbStorage.findAll());
-//        System.out.println(dbStorage.findById(new Item(1)));
-////        dbStorage.delete(new Item(1, "Repareddddd", "TASDASDasdssad", Timestamp.valueOf(LocalDateTime.now()),false));
-//    }
+    private <T> T tx(final Function<Session, T> command) {
+        final Session session = HiberUtil.getSessionFactory().openSession();
+        final Transaction tx = session.beginTransaction();
+        try {
+            T rsl = command.apply(session);
+            tx.commit();
+            return rsl;
+        } catch (final Exception e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+
 }

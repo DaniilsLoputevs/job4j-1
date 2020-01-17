@@ -17,7 +17,7 @@ public class ValidateService implements Validate {
     }
 
     /**
-     * func add entity but before check item object
+     * func add entity but before check item object and set current time
      * <p>
      * see -> checkModel()
      *
@@ -28,9 +28,10 @@ public class ValidateService implements Validate {
     public boolean add(Item item) {
         boolean rs = checkModel(item);
         if (rs) {
+            item.setCreated(Timestamp.valueOf(LocalDateTime.now()));
             storage.add(item);
         }
-        return rs;
+        return checkModel(item);
     }
 
     /**
@@ -81,7 +82,7 @@ public class ValidateService implements Validate {
      */
     private boolean checkModel(Item item) {
         boolean rs = false;
-        if (Objects.nonNull(item.getName()) && Objects.nonNull(item.getDesc()) && Objects.nonNull(item.getCreated())) {
+        if (Objects.nonNull(item.getName()) && Objects.nonNull(item.getDesc())) {
             rs = true;
         }
         return rs;

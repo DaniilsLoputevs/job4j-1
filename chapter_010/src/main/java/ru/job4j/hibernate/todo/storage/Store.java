@@ -6,7 +6,7 @@ import java.util.Collection;
 
 public interface Store {
 
-    void add(Item item);
+    Item add(Item item);
 
     void replace(Item item);
 
