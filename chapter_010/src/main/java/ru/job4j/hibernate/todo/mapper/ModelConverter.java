@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collection;
 
-
+/**
+ * Converting JSON to Model and Model to Json
+ * @see  //github.com/FasterXML/jackson
+ */
 public class ModelConverter {
     private final static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 

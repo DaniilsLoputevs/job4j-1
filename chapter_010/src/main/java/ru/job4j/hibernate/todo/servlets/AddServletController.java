@@ -13,7 +13,13 @@ import java.io.IOException;
 public class AddServletController extends HttpServlet {
     private final ValidateService validateService = ValidateService.getValidateService();
 
-
+    /**
+     * Adding new item and -> on validate service .
+     * @param req request
+     * @param resp response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Item value = ModelConverter.convertJsontoModel(req);

@@ -13,6 +13,13 @@ import java.io.IOException;
 public class DataServlet extends HttpServlet {
     private final ValidateService validateService = ValidateService.getValidateService();
 
+    /**
+     * DataServlete return all data in db when user visit index.html
+     * @param req request
+     * @param resp response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/json");
@@ -25,8 +32,4 @@ public class DataServlet extends HttpServlet {
 
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
-    }
 }

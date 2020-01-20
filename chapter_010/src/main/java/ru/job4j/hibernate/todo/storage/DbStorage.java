@@ -3,7 +3,6 @@ package ru.job4j.hibernate.todo.storage;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import ru.job4j.hibernate.todo.model.Item;
 import ru.job4j.hibernate.todo.util.HiberUtil;
 
@@ -23,7 +22,7 @@ public class DbStorage implements Store {
      */
     @Override
     public Item add(Item item) {
-        tx(session -> session.save(item));
+        funcApplyCommand(session -> session.save(item));
         return item;
     }
 
@@ -34,11 +33,10 @@ public class DbStorage implements Store {
      */
     @Override
     public void replace(Item item) {
-        Session s = getConnection();
-        s.getTransaction();
-        s.update(item);
-        s.beginTransaction().commit();
-
+        funcApplyCommand(session -> {
+            session.update(item);
+            return item;
+        });
     }
 
     /**
@@ -48,7 +46,7 @@ public class DbStorage implements Store {
     @SuppressWarnings("unchecked")
     @Override
     public Collection<Item> findAll() {
-        return tx(session -> HiberUtil.getSessionFactory().openSession().createQuery("from Item ")).list();
+        return funcApplyCommand(session -> session.createQuery("from Item order by created").list());
     }
 
     /**
@@ -58,35 +56,27 @@ public class DbStorage implements Store {
      */
     @Override
     public void delete(Item item) {
-        Session session = getConnection();
-        session.getTransaction();
-        session.delete(item);
-        session.beginTransaction().commit();
-
+        funcApplyCommand(session -> {
+            session.delete(item);
+            return item;
+        });
     }
 
     @Override
     public Item findById(Item item) {
-        Session session = getConnection();
-        session.getTransaction();
-        session.load(Item.class, item.getId());
-        return session.load(Item.class, item.getId());
-    }
 
-    /**
-     * servlets func return new session
-     *
-     * @return session
-     */
-    private  Session getConnection() {
-        return HiberUtil.getSessionFactory().openSession();
+        return funcApplyCommand(session -> {
+            Item rs = null;
+            rs = session.get(Item.class, item.getId());
+            return rs;
+        });
     }
 
     public static DbStorage getInstance() {
         return INSTANCE;
     }
 
-    private <T> T tx(final Function<Session, T> command) {
+    private <T> T funcApplyCommand(final Function<Session, T> command) {
         final Session session = HiberUtil.getSessionFactory().openSession();
         final Transaction tx = session.beginTransaction();
         try {
@@ -100,5 +90,11 @@ public class DbStorage implements Store {
             session.close();
         }
     }
+
+    public static void main(String[] args) {
+        DbStorage storage = new DbStorage();
+        System.out.println(storage.findById(new Item(1)));
+    }
+
 
 }
