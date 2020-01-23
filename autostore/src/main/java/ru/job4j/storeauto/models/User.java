@@ -1,12 +1,20 @@
 package ru.job4j.storeauto.models;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
-
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
+    @Column(name = "login")
     private String login;
+    @Column(name = "password")
     private String password;
+    @OneToMany(mappedBy = "users")
+    @JoinColumn(name = "advert_id")
     private List<Advert> advertList;
 
     public User() {

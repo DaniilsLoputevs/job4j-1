@@ -22,7 +22,7 @@ public class UserDao implements Store<User> {
     }
 
     @Override
-    public List<User> findall() {
+    public List<User> findAll() {
         return null;
     }
 }

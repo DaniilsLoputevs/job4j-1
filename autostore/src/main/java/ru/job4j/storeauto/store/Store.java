@@ -10,6 +10,6 @@ public interface Store<T> {
 
     void delete(T value);
 
-    List<T> findall();
+    List<T> findAll();
 
 }

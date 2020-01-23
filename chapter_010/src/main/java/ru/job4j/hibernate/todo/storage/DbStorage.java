@@ -91,10 +91,5 @@ public class DbStorage implements Store {
         }
     }
 
-    public static void main(String[] args) {
-        DbStorage storage = new DbStorage();
-        System.out.println(storage.findById(new Item(1)));
-    }
-
 
 }
