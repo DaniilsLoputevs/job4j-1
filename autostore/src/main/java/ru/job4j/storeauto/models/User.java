@@ -1,8 +1,10 @@
 package ru.job4j.storeauto.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -13,17 +15,16 @@ public class User {
     private String login;
     @Column(name = "password")
     private String password;
-    @OneToMany(mappedBy = "users")
-    @JoinColumn(name = "advert_id")
+    @OneToMany(mappedBy = "users", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
     private List<Advert> advertList;
 
     public User() {
     }
 
-    public User(String login, String password, List<Advert> advertList) {
+    public User(String login, String password) {
         this.login = login;
         this.password = password;
-        this.advertList = advertList;
+        this.advertList = new ArrayList<>();
     }
 
     public String getId() {

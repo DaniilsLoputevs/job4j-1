@@ -75,7 +75,6 @@ public class DbStorage implements Store {
     public static DbStorage getInstance() {
         return INSTANCE;
     }
-
     private <T> T funcApplyCommand(final Function<Session, T> command) {
         final Session session = HiberUtil.getSessionFactory().openSession();
         final Transaction tx = session.beginTransaction();
@@ -90,6 +89,7 @@ public class DbStorage implements Store {
             session.close();
         }
     }
+
 
 
 }

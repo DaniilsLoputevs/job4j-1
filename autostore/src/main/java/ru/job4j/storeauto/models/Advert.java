@@ -11,11 +11,20 @@ public class Advert {
     private String id;
     @Column(name = "price")
     private String price;
+
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "users__id")
     private User user;
 
     public Advert() {
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getId() {
