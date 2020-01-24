@@ -15,6 +15,7 @@
         <property name="connection.driver_class">org.postgresql.Driver</property> <!-- DB Driver -->
         <property name="connection.username">postgres</property> <!-- DB User -->
         <property name="connection.password">password</property> <!-- DB Password -->
+        <property name="hbm2ddl.auto">create</property> <!-- create / create-drop / update -->
         <property name="show_sql">true</property>
         <mapping resource="ru.job4j.hibernate.todo.model/Item.hbm.xml"/>
 

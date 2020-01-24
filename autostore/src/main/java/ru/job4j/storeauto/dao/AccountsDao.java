@@ -1,25 +1,25 @@
 package ru.job4j.storeauto.dao;
 
 import ru.job4j.storeauto.hiberutils.FuncSessionOpen;
-import ru.job4j.storeauto.models.User;
+import ru.job4j.storeauto.models.Account;
 import ru.job4j.storeauto.store.Store;
 
 import java.util.List;
 
-public class UserDao implements Store<User> {
-    private static final UserDao INSTANCE = new UserDao();
+public class AccountsDao implements Store<Account> {
+    private static final AccountsDao INSTANCE = new AccountsDao();
 
-    private UserDao() {
+    private AccountsDao() {
     }
 
     @Override
-    public void add(User value) {
+    public void add(Account value) {
         FuncSessionOpen.funcApplyCommand(session -> session.save(value));
 
     }
 
     @Override
-    public void replace(User value) {
+    public void replace(Account value) {
         FuncSessionOpen.funcApplyCommand(session -> {
             session.update(value);
             return value;
@@ -28,7 +28,7 @@ public class UserDao implements Store<User> {
     }
 
     @Override
-    public void delete(User value) {
+    public void delete(Account value) {
         FuncSessionOpen.funcApplyCommand(session -> {
             session.delete(value);
             return value;
@@ -38,17 +38,12 @@ public class UserDao implements Store<User> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<User> findAll() {
-        return FuncSessionOpen.funcApplyCommand(session -> session.createQuery("from User ").list());
+    public List<Account> findAll() {
+        return FuncSessionOpen.funcApplyCommand(session -> session.createQuery("from Account ").list());
     }
 
-    public static UserDao getINSTANCE() {
+    public static AccountsDao getINSTANCE() {
         return INSTANCE;
     }
 
-    public static void main(String[] args) {
-        UserDao dao = UserDao.getINSTANCE();
-        dao.add(new User("test", "psw"));
-
-    }
 }

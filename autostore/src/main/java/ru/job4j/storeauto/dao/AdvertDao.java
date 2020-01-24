@@ -2,12 +2,22 @@ package ru.job4j.storeauto.dao;
 
 import ru.job4j.storeauto.hiberutils.FuncSessionOpen;
 import ru.job4j.storeauto.models.Advert;
+
 import ru.job4j.storeauto.store.Store;
 
 import java.util.List;
 
 
 public class AdvertDao implements Store<Advert> {
+    private final static AdvertDao INSTANCE = new AdvertDao();
+
+    private AdvertDao() {
+    }
+
+    public static AdvertDao getINSTANCE() {
+        return INSTANCE;
+    }
+
     @Override
     public void add(Advert value) {
         FuncSessionOpen.funcApplyCommand(session -> session.save(value));
@@ -35,5 +45,7 @@ public class AdvertDao implements Store<Advert> {
     public List<Advert> findAll() {
        return FuncSessionOpen.funcApplyCommand(session -> session.createQuery("from Advert").list());
     }
+
+
 
 }

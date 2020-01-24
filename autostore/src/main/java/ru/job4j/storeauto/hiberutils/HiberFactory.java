@@ -9,4 +9,6 @@ public class HiberFactory {
     public static SessionFactory getSessionFactory() {
         return SESSION_FACTORY;
     }
+
+
 }

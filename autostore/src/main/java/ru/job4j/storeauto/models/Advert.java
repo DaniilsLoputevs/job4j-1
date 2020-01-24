@@ -1,37 +1,31 @@
 package ru.job4j.storeauto.models;
 
 import javax.persistence.*;
-import java.util.Objects;
+
 
 @Entity
 @Table(name = "adverts")
 public class Advert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
+    @Column(name = "title")
+    private String title;
     @Column(name = "price")
     private String price;
-
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "users__id")
-    private User user;
+    @JoinColumn(name = "acount_id")
+    private Account account;
 
     public Advert() {
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -43,24 +37,4 @@ public class Advert {
         this.price = price;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Advert advert = (Advert) o;
-        return Objects.equals(id, advert.id)
-                &&
-                Objects.equals(price, advert.price)
-                &&
-                Objects.equals(user, advert.user);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, price, user);
-    }
 }
