@@ -17,8 +17,9 @@
         <property name="connection.password">password</property> <!-- DB Password -->
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">update</property> <!-- create / create-drop / update -->
-        <mapping class="ru.job4j.storeauto.models.Account"/>
+        <mapping class="ru.job4j.storeauto.models.Car"/>
         <mapping class="ru.job4j.storeauto.models.Advert"/>
+        <mapping class="ru.job4j.storeauto.models.Account"/>
 
     </session-factory>
 </hibernate-configuration>

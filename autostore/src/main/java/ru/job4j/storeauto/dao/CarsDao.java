@@ -1,33 +1,25 @@
 package ru.job4j.storeauto.dao;
 
 import ru.job4j.storeauto.hiberutils.FuncSessionOpen;
-import ru.job4j.storeauto.models.Account;
-import ru.job4j.storeauto.models.Advert;
-
 import ru.job4j.storeauto.models.Car;
-import ru.job4j.storeauto.models.CarBody;
 import ru.job4j.storeauto.store.Store;
 
 import java.util.List;
 
+public class CarsDao implements Store<Car> {
+    private static final CarsDao INSTANCE = new CarsDao();
 
-public class AdvertDao implements Store<Advert> {
-    private final static AdvertDao INSTANCE = new AdvertDao();
-
-    private AdvertDao() {
-    }
-
-    public static AdvertDao getINSTANCE() {
-        return INSTANCE;
+    private CarsDao() {
     }
 
     @Override
-    public void add(Advert value) {
+    public void add(Car value) {
         FuncSessionOpen.funcApplyCommand(session -> session.save(value));
+
     }
 
     @Override
-    public void replace(Advert value) {
+    public void replace(Car value) {
         FuncSessionOpen.funcApplyCommand(session -> {
             session.update(value);
             return value;
@@ -36,7 +28,7 @@ public class AdvertDao implements Store<Advert> {
     }
 
     @Override
-    public void delete(Advert value) {
+    public void delete(Car value) {
         FuncSessionOpen.funcApplyCommand(session -> {
             session.delete(value);
             return value;
@@ -46,9 +38,12 @@ public class AdvertDao implements Store<Advert> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Advert> findAll() {
-        return FuncSessionOpen.funcApplyCommand(session -> session.createQuery("from Advert").list());
+    public List<Car> findAll() {
+        return FuncSessionOpen.funcApplyCommand(session -> session.createQuery("from Car ").list());
     }
 
+    public static CarsDao getINSTANCE() {
+        return INSTANCE;
+    }
 
 }

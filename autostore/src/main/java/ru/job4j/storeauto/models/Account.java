@@ -2,27 +2,27 @@ package ru.job4j.storeauto.models;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
-
-@Entity
-@Table(name = "account")
+@Entity(name = "account")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "login", unique = true)
-    private String login;
+    private String email;
     @Column(name = "password")
     private String password;
-    @OneToMany(mappedBy = "account", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Advert> advertList;
+    @OneToMany()
+    List<Advert> advertList;
 
-    public Account() {
+    public Account(String email, String password, List<Advert> advertList) {
+        this.email = email;
+        this.password = password;
+        this.advertList = advertList;
     }
 
-    public Account(String login, String password) {
-        this.login = login;
-        this.password = password;
+    public Account() {
     }
 
     public Integer getId() {
@@ -33,12 +33,12 @@ public class Account {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -49,5 +49,34 @@ public class Account {
         this.password = password;
     }
 
+    public List<Advert> getAdvertList() {
+        return advertList;
+    }
 
+    public void setAdvertList(List<Advert> advertList) {
+        this.advertList = advertList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Account account = (Account) o;
+        return Objects.equals(id, account.id)
+                &&
+                Objects.equals(email, account.email)
+                &&
+                Objects.equals(password, account.password)
+                &&
+                Objects.equals(advertList, account.advertList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email, password, advertList);
+    }
 }

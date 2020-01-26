@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        $.ajax({
+                url: 'all',
+                method: 'GET',
+                datatype: 'json',
+                complete: function (data) {
+                    var items = data.responseJSON;
+                    var result = "<tr>" +
+                        "<th>ID</th>" +
+                        "<th>Name</th>" +
+                        "<th>Description</th>" +
+                        "<th>Created</th>" +
+                        "<th>Complete</th>" +
+                        "</tr>";
+                    for (var i = 0; i !== items.length; i++) {
+                        var timestamp = new Date(items[i].created);
+                        result += "<tr>"
+                            + "<td>" + items[i].id + "</td>"
+                            + "<td>" + items[i].name + "</td>"
+                            + "<td>" + items[i].desc + "</td>"
+                            + "<td>" + timestamp + "</td>"
+                            + "<td>" + items[i].done + "</td>"
+                        "</tr>"
+                    }
+                    var table = document.getElementById("items");
+
+                    table.innerHTML = result;
+                }
+            }
+        )
+    </script>
+    <script>
+        function addItem() {
+            var obj = {
+                name: $('#name').val(),
+                desc: $('#desc').val()
+            };
+            $.ajax({
+                url: 'add',
+                method: 'post',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(obj),
+                datatype: 'json'
+            })
+        }
+    </script>
+
+</head>
+
+<body>
+<h1 style="color: #000000">
+    TODO List
+</h1>
+
+<div class="container">
+    <h2 style="color: black">Добавить новую заявку в систему</h2>
+    <form id="addNewItem">
+        <div class="form-group">
+            <label for="name">Имя заявки:</label>
+            <input type="text" class="form-control" id="name" name="name"
+                   placeholder="Введите короткое имя вашей заявки">
+        </div>
+        <div class="form-group">
+            <label for="desc">Description:</label>
+            <input type="text" class="form-control" id="desc" name="desc" placeholder="Введите описание вашей заявки">
+        </div>
+        <div>
+            <input type="submit" Отправить onclick="addItem();">
+        </div>
+    </form>
+</div>
+
+
+<div class="container">
+    <h2>Список заявок в системе</h2>
+    <table class="table" id="items">
+        <thead>
+        <tr id="header-items"></tr>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created</th>
+            <th>Complete</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet"
+      id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+    function addAccount() {
+        var object =
+            {
+                email: $('#email').val(),
+                password: $('#password').val()
+            };
+        $.ajax({
+                url: 'add',
+                method: "post",
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(object),
+                datatype: 'json'
+            }
+        ).complete()
+
+    }
+</script>
+<script>
+
+</script>
+
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <h2 style="color: black">Login page</h2>
+    <form id="addAccount">
+        <div class="form-group">
+            <label for="email">Login :</label>
+            <input type="text" class="form-control" id="email" name="name"
+                   placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="desc">
+        </div>
+        <div>
+            <input type="submit" Login onclick=addAccount()>
+        </div>
+    </form>
+</div>
+
+
