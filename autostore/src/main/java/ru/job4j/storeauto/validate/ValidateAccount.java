@@ -7,6 +7,7 @@ import ru.job4j.storeauto.models.Car;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 
 public class ValidateAccount implements Validation<Account> {
@@ -46,6 +47,12 @@ public class ValidateAccount implements Validation<Account> {
     @Override
     public List<Account> findAll() {
         return INSTANCE.findAll();
+    }
+
+    public Account find(Account account) {
+        List<Account> rs = findAll();
+        Optional<Account> f = rs.stream().filter(account1 -> account1.getEmail().equals(account.getEmail()) && account1.getPassword().equals(account.getPassword())).findFirst();
+        return f.orElseThrow();
     }
 
     public static ValidateAccount getValidate() {

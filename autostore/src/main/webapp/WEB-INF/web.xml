@@ -4,19 +4,19 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
         version="2.4">
-
     <servlet>
-        <servlet-name>AddAccountController</servlet-name>
-        <servlet-class>ru.job4j.storeauto.servlets.AddAccountController</servlet-class>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>ru.job4j.storeauto.servlets.LoginController</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>AddAccountController</servlet-name>
-        <url-pattern>/page/add</url-pattern>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/page/auth</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>/page/*</url-pattern>
     </servlet-mapping>
+
 </web-app>

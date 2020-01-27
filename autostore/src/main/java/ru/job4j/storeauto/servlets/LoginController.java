@@ -10,14 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AddAccountController extends HttpServlet {
+public class LoginController extends HttpServlet {
     private ValidateAccount validateAccount = ValidateAccount.getValidate();
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Account account = DataMapper.convertJsonToModel(req, Account.class);
-        validateAccount.add(account);
-        req.setAttribute("id", account.getId());
+        Account account = new Account();
+        account = DataMapper.convertJsonToModel(req, Account.class);
+        if (account.equals(validateAccount.find(account))) {
+            resp.sendRedirect(String.format("%s/page/index.html", req.getContextPath()));
+        }
 
     }
 }
