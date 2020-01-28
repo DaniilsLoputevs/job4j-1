@@ -11,13 +11,11 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "title", unique = true)
+    @Column(name = "car_model", unique = true)
     private String title;
     @Column(name = "car_body")
     @Enumerated(EnumType.STRING)
     private CarBody carBody;
-    @OneToOne(mappedBy = "car")
-    private Advert advert;
 
     public Car() {
     }
@@ -45,14 +43,6 @@ public class Car {
     }
 
 
-    public Advert getAdvert() {
-        return advert;
-    }
-
-    public void setAdvert(Advert advert) {
-        this.advert = advert;
-    }
-
     public CarBody getCarBody() {
         return carBody;
     }
@@ -74,13 +64,12 @@ public class Car {
                 &&
                 Objects.equals(title, car.title)
                 &&
-                carBody == car.carBody
-                &&
-                Objects.equals(advert, car.advert);
+                carBody == car.carBody;
+//
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, carBody, advert);
+        return Objects.hash(id, title, carBody);
     }
 }

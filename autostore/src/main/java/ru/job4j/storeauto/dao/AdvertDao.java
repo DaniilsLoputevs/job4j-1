@@ -1,13 +1,8 @@
 package ru.job4j.storeauto.dao;
 
 import ru.job4j.storeauto.hiberutils.FuncSessionOpen;
-import ru.job4j.storeauto.models.Account;
 import ru.job4j.storeauto.models.Advert;
-
-import ru.job4j.storeauto.models.Car;
-import ru.job4j.storeauto.models.CarBody;
 import ru.job4j.storeauto.store.Store;
-
 import java.util.List;
 
 
@@ -47,7 +42,7 @@ public class AdvertDao implements Store<Advert> {
     @SuppressWarnings("unchecked")
     @Override
     public List<Advert> findAll() {
-        return FuncSessionOpen.funcApplyCommand(session -> session.createQuery("from Advert").list());
+        return FuncSessionOpen.funcApplyCommand(session -> session.createQuery("from Advert ").list());
     }
 
 

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Добавление нового обьявления</title>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        function addItem() {
+           var obj = $('#add_form').serialize();
+            $.ajax({
+                url: 'add',
+                method: 'post',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(obj),
+                datatype: 'json'
+            })
+        }
+    </script>
+</head>
+<body>
+<form id="add_form">
+    <div class="form-group">
+        <label for="advert_title">Title</label>
+        <input type="text" class="form-control" id="advert_title" placeholder="Write sell title">
+    </div>
+    <div class="form-group">
+        <label for="car_title">Car prod</label>
+        <input type="text" class="form-control" id="car_title" placeholder="Select car prod">
+        <select class="form-control" id="car_select_prod">
+            <option>Acura</option>
+            <option>Alfa Romeo</option>
+            <option>Aston Martin</option>
+            <option>Audi</option>
+            <option>Bentley</option>
+            <option>Bentley</option>
+            <option>BMW</option>
+            <option>Bugatti</option>
+            <option>Bugatti</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="car_type">Select Car Type</label>
+        <select class="form-control" id="car_type">
+            <option>Saloon</option>
+            <option>Hatchback</option>
+            <option>Estate</option>
+            <option>Coupe</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Write sell info</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="sell_price">Sell price</label>
+        <input type="number" id="sell_price" min="1" max="999999">
+    </div>
+</form>
+<button type="button" class="btn btn-primary btn-lg btn-block" id="add" onclick="addItem()">Add new advert</button>
+</body>
+</html>

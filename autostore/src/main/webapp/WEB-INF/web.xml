@@ -8,6 +8,14 @@
         <servlet-name>LoginController</servlet-name>
         <servlet-class>ru.job4j.storeauto.servlets.LoginController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DataServlet</servlet-name>
+        <servlet-class>ru.job4j.storeauto.servlets.DataServletController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddAdvert</servlet-name>
+        <servlet-class>ru.job4j.storeauto.servlets.AddAdvertController</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -17,6 +25,15 @@
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>/page/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DataServlet</servlet-name>
+        <url-pattern>/page/data</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAdvert</servlet-name>
+        <url-pattern>/page/add</url-pattern>
     </servlet-mapping>
 
 </web-app>
