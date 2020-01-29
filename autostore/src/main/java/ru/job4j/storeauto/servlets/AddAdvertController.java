@@ -10,12 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
 public class AddAdvertController extends HttpServlet {
     private ValidateAdvert validate = ValidateAdvert.getValidate();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Advert advert = DataMapper.convertJsonToModel(req, Advert.class);
+        Advert advert = new Advert();
+        advert = DataMapper.convertJsonToModel(req, Advert.class);
         validate.add(advert);
 
     }

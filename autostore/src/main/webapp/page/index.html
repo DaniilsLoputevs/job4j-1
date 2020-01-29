@@ -16,11 +16,11 @@
             complete: function (data) {
                 var adverts = data.responseJSON;
                 var result = "<tr>" +
-                    "<th>#ID_advert</th>" +
-                    "<th>#Title</th>" +
-                    "<th>#Car_Detail</th>" +
-                    "<th>#Car_Type</th>" +
-                    "<th>#Price</th>" +
+                    "<th>ID обьявления</th>" +
+                    "<th>Описание</th>" +
+                    "<th>Марка автомобиля</th>" +
+                    "<th>Тип кузова</th>" +
+                    "<th>Цена</th>" +
                     "</tr>";
                 for (var i = 0; i !== adverts.length; i++) {
                     result += "<tr>"
@@ -41,7 +41,7 @@
 
     <script>
         function redir() {
-            window.location.href ='add.html';
+            window.location.href = 'newadvert.html';
         }
     </script>
 </head>
@@ -49,13 +49,12 @@
 <body>
 
 
-
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 table-responsive">
             <table class="table table-bordered table-hover table-sortable" id="adverts_table">
                 <thead>
-                <tr >
+                <tr>
                     <th class="text-center">
                         #ID_advert
                     </th>
@@ -80,7 +79,7 @@
             </table>
         </div>
     </div>
-    <button type="button" class="btn btn-primary btn-lg btn-block" id="add"onclick="redir()">Add new advert</button>
+    <button type="button" class="btn btn-primary btn-lg btn-block" id="add" onclick="redir()">Add new advert</button>
 </div>
 </body>
 </html>

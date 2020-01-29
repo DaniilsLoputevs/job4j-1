@@ -1,24 +1,24 @@
 package ru.job4j.storeauto.mapper;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.job4j.storeauto.models.Account;
-import ru.job4j.storeauto.models.Advert;
 
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
+import java.io.InputStreamReader;
+
 import java.util.List;
 
 public class DataMapper {
-    private final static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private static final Gson GSON = new Gson();
 
     public static <T> void convertModelToJson(HttpServletResponse response, List<T> value) throws IOException {
-        OBJECT_MAPPER.writeValue(response.getWriter(), value);
-
+        GSON.toJson(value, response.getWriter());
     }
 
+
     public static <T> T convertJsonToModel(HttpServletRequest request, Class<T> tClass) throws IOException {
-        return OBJECT_MAPPER.readValue(request.getInputStream(), tClass);
+        return GSON.fromJson(new JsonReader(new InputStreamReader(request.getInputStream())), tClass);
     }
 }

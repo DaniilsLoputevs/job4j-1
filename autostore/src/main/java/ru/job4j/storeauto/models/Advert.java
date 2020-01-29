@@ -16,7 +16,7 @@ public class Advert {
 
     @Column(name = "price")
     private String price;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id")
     private Car car;
 
