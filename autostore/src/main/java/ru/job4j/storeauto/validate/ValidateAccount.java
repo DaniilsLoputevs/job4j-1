@@ -63,4 +63,5 @@ public class ValidateAccount implements Validation<Account> {
         return Objects.nonNull(value.getEmail()) && Objects.nonNull(value.getPassword());
     }
 
+
 }

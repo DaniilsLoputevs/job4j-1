@@ -21,9 +21,11 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Account account = new Account();
         account = DataMapper.convertJsonToModel(req, Account.class);
-        if (account.equals(validateAccount.find(account))) {
-            resp.sendRedirect(String.format("%s/page/index.html", req.getContextPath()));
+        Account check = validateAccount.find(account);
+        if (account.getEmail().equals(check.getEmail()) && account.getPassword().equals(check.getPassword())) {
+            doGet(req, resp);
         }
+
 
     }
 }

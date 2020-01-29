@@ -1,6 +1,7 @@
 package ru.job4j.storeauto.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ public class Account {
     @Column(name = "password")
     private String password;
     @OneToMany()
-    List<Advert> advertList;
+    List<Advert> advertList = new ArrayList<>();
 
     public Account(String email, String password, List<Advert> advertList) {
         this.email = email;
@@ -79,4 +80,5 @@ public class Account {
     public int hashCode() {
         return Objects.hash(id, email, password, advertList);
     }
+
 }
