@@ -11,7 +11,7 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "car_model", unique = true)
+    @Column(name = "car_model")
     private String title;
     @Column(name = "car_body")
     @Enumerated(EnumType.STRING)

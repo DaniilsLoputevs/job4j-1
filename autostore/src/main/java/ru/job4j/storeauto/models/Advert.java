@@ -1,10 +1,13 @@
 package ru.job4j.storeauto.models;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 
-@Entity
+@Entity()
 @Table(name = "advert")
 public class Advert {
     @Id
@@ -16,7 +19,8 @@ public class Advert {
 
     @Column(name = "price")
     private String price;
-    @OneToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id")
     private Car car;
 

@@ -8,14 +8,14 @@
         <servlet-name>LoginController</servlet-name>
         <servlet-class>ru.job4j.storeauto.servlets.LoginController</servlet-class>
     </servlet>
-<!--    <filter>-->
-<!--        <filter-name>LoginFilter</filter-name>-->
-<!--        <filter-class>ru.job4j.storeauto.filters.AuthFilter</filter-class>-->
-<!--    </filter>-->
-<!--    <filter-mapping>-->
-<!--        <filter-name>LoginFilter</filter-name>-->
-<!--        <url-pattern>page/auth</url-pattern>-->
-<!--    </filter-mapping>-->
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>ru.job4j.storeauto.filters.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/page/auth</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>DataServlet</servlet-name>
         <servlet-class>ru.job4j.storeauto.servlets.DataServletController</servlet-class>

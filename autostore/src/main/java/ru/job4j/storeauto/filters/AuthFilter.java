@@ -30,13 +30,14 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         Account account = DataMapper.convertJsonToModel(request, Account.class);
-        if (request.getRequestURI().contains("/login.html")) {
+        if (request.getRequestURI().contains("/login")) {
             filterChain.doFilter(request, response);
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("login", account.getEmail());
+            session.setAttribute("password", account.getPassword());
             if (session.getAttribute("login") == null) {
-                ((HttpServletResponse) response).sendRedirect(String.format("%s/login.html", ((HttpServletRequest) req).getContextPath()));
+                ((HttpServletResponse) response).sendRedirect(String.format("%s/auth", ((HttpServletRequest) req).getContextPath()));
                 return;
             }
             filterChain.doFilter(request, response);
