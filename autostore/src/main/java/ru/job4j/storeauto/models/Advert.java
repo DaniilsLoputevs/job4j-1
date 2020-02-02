@@ -1,14 +1,14 @@
 package ru.job4j.storeauto.models;
 
+
 import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 
-@Entity()
-@Table(name = "advert")
+@Entity
+@Table(name = "ADVERTS")
 public class Advert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +19,10 @@ public class Advert {
 
     @Column(name = "price")
     private String price;
+
+    @ManyToOne()
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id")
@@ -66,27 +70,12 @@ public class Advert {
         this.title = title;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Advert advert = (Advert) o;
-        return Objects.equals(id, advert.id)
-                &&
-                Objects.equals(title, advert.title)
-                &&
-                Objects.equals(price, advert.price)
-                &&
-                Objects.equals(car, advert.car);
+    public Account getAccount() {
+        return account;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, price, car);
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     @Override
@@ -106,5 +95,30 @@ public class Advert {
                 + car
                 +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Advert advert = (Advert) o;
+        return Objects.equals(id, advert.id)
+                &&
+                Objects.equals(title, advert.title)
+                &&
+                Objects.equals(price, advert.price)
+                &&
+                Objects.equals(account, advert.account)
+                &&
+                Objects.equals(car, advert.car);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, price, account, car);
     }
 }

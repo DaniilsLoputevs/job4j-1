@@ -4,9 +4,7 @@ import ru.job4j.storeauto.hiberutils.FuncSessionOpen;
 import ru.job4j.storeauto.models.Account;
 import ru.job4j.storeauto.store.Store;
 
-
 import java.util.List;
-import java.util.Optional;
 
 public class AccountsDao implements Store<Account> {
     private static final AccountsDao INSTANCE = new ru.job4j.storeauto.dao.AccountsDao();
@@ -41,13 +39,19 @@ public class AccountsDao implements Store<Account> {
     @SuppressWarnings("unchecked")
     @Override
     public List<Account> findAll() {
-        return FuncSessionOpen.funcApplyCommand(session -> session.createQuery("from account ").list());
+        return FuncSessionOpen.funcApplyCommand(session -> session.createQuery("from ACCOUNTS ").list());
+    }
+
+    @Override
+    public Account findbById(Account value) {
+        return FuncSessionOpen.funcApplyCommand(session -> session.get(Account.class, value.getId()));
     }
 
 
     public static AccountsDao getINSTANCE() {
         return INSTANCE;
     }
+
 
 }
 

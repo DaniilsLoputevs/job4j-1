@@ -12,4 +12,6 @@ public interface Store<T> {
 
     List<T> findAll();
 
+    T findbById(T value);
+
 }

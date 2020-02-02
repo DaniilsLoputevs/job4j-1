@@ -1,8 +1,6 @@
 package ru.job4j.storeauto.validate;
 
-import ru.job4j.storeauto.dao.AccountsDao;
 import ru.job4j.storeauto.dao.AdvertDao;
-import ru.job4j.storeauto.models.Account;
 import ru.job4j.storeauto.models.Advert;
 
 import java.util.List;

@@ -2,6 +2,7 @@ package ru.job4j.storeauto.mapper;
 
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ public class DataMapper {
     private static final Gson GSON = new Gson();
 
     public static <T> void convertModelToJson(HttpServletResponse response, List<T> value) throws IOException {
+        Gson gsonb = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         GSON.toJson(value, response.getWriter());
     }
 
@@ -21,4 +23,5 @@ public class DataMapper {
     public static <T> T convertJsonToModel(HttpServletRequest request, Class<T> tClass) throws IOException {
         return GSON.fromJson(new JsonReader(new InputStreamReader(request.getInputStream())), tClass);
     }
+
 }

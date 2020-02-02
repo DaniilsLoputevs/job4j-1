@@ -23,7 +23,8 @@ public class LoginController extends HttpServlet {
         HttpSession session = req.getSession();
         String login = (String) session.getAttribute("login");
         String password = (String) session.getAttribute("password");
-        if (Objects.nonNull(validateAccount.find(new Account(login, password)))) {
+        Account checked = validateAccount.find(new Account(login, password));
+        if (Objects.nonNull(checked)) {
             return;
         }
 

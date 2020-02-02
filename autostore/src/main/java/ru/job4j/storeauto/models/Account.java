@@ -1,11 +1,13 @@
 package ru.job4j.storeauto.models;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "account")
+@Entity(name = "ACCOUNTS")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,8 +15,8 @@ public class Account {
     @Column(name = "login", unique = true)
     private String email;
     @Column(name = "password")
-    private String password;
-    @OneToMany()
+    private  String password;
+    @OneToMany(fetch = FetchType.EAGER)
     List<Advert> advertList = new ArrayList<>();
 
     public Account(String email, String password, List<Advert> advertList) {
@@ -24,6 +26,12 @@ public class Account {
     }
 
     public Account(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public Account(Integer id, String email, String password) {
+        this.id = id;
         this.email = email;
         this.password = password;
     }
@@ -86,4 +94,23 @@ public class Account {
         return Objects.hash(id, email, password, advertList);
     }
 
+    @Override
+    public String toString() {
+        return "Account{"
+                +
+                "id="
+                + id
+                +
+                ", email='"
+                + email + '\''
+                +
+                ", password='"
+                + password
+                + '\''
+                +
+                ", advertList="
+                + advertList
+                +
+                '}';
+    }
 }

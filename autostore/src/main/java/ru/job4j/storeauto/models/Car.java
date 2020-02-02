@@ -6,16 +6,22 @@ import java.util.Objects;
 
 
 @Entity
-@Table(name = "car")
+@Table(name = "CARS")
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(name = "car_model")
     private String title;
+
+    @Column(name = "car_vincode")
+    private String vincode;
+
     @Column(name = "car_body")
     @Enumerated(EnumType.STRING)
     private CarBody carBody;
+
 
     public Car() {
     }
@@ -23,6 +29,12 @@ public class Car {
     public Car(String title, CarBody carBody) {
         this.title = title;
         this.carBody = carBody;
+    }
+
+    public Car(String title, String vincode, CarBody carBody) {
+        this.title = title;
+        this.carBody = carBody;
+        this.vincode = vincode;
     }
 
 
@@ -51,6 +63,15 @@ public class Car {
         this.carBody = carBody;
     }
 
+    public String getVincode() {
+        return vincode;
+    }
+
+    public void setVincode(String vincode) {
+        this.vincode = vincode;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -64,13 +85,14 @@ public class Car {
                 &&
                 Objects.equals(title, car.title)
                 &&
+                Objects.equals(vincode, car.vincode)
+                &&
                 carBody == car.carBody;
-//
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, carBody);
+        return Objects.hash(id, title, vincode, carBody);
     }
 
     @Override
@@ -82,6 +104,10 @@ public class Car {
                 +
                 ", title='"
                 + title
+                + '\''
+                +
+                ", vincode='"
+                + vincode
                 + '\''
                 +
                 ", carBody="

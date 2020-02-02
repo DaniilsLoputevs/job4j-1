@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class DataServletController extends HttpServlet {
-    private ValidateAdvert validateAccount = ValidateAdvert.getValidate();
+    private ValidateAdvert validateAdvert = ValidateAdvert.getValidate();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/json");
-        DataMapper.convertModelToJson(resp, validateAccount.findAll());
+        DataMapper.convertModelToJson(resp, validateAdvert.findAll());
     }
 }

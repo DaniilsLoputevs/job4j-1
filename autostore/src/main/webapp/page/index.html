@@ -20,7 +20,9 @@
                     "<th>Описание</th>" +
                     "<th>Марка автомобиля</th>" +
                     "<th>Тип кузова</th>" +
+                    "<th>Винкод машины</th>" +
                     "<th>Цена</th>" +
+                    "<th>ID пользователя</th>" +
                     "</tr>";
                 for (var i = 0; i !== adverts.length; i++) {
                     result += "<tr>"
@@ -28,7 +30,9 @@
                         + "<td>" + adverts[i].title + "</td>"
                         + "<td>" + adverts[i].car.carBody + "</td>"
                         + "<td>" + adverts[i].car.title + "</td>"
+                        + "<td>" + adverts[i].car.vincode + "</td>"
                         + "<td>" + adverts[i].price + "</td>"
+                        + "<td>" + adverts[i].account.id + "</td>"
                         + "</tr>"
                 }
                 var table = document.getElementById("adverts_table");
@@ -44,6 +48,7 @@
             window.location.href = 'newadvert.html';
         }
     </script>
+
 </head>
 
 <body>
@@ -56,19 +61,22 @@
                 <thead>
                 <tr>
                     <th class="text-center">
-                        #ID_advert
+                        ID обьявления
                     </th>
                     <th class="text-center">
-                        #Title
+                        Описание
                     </th>
                     <th class="text-center">
-                        #Car_Detail
+                        Марка автомобиля
                     </th>
                     <th class="text-center">
-                        #Car_Type
+                        Тип кузова
                     </th>
                     <th class="text-center">
-                        #Price
+                        Цена
+                    </th>
+                    <th class="text-center">
+                        ID пользователя
                     </th>
                     <th class="text-center" style="border-top: 1px solid #ffffff; border-right: 1px solid #ffffff;">
                     </th>
@@ -81,5 +89,6 @@
     </div>
     <button type="button" class="btn btn-primary btn-lg btn-block" id="add" onclick="redir()">Add new advert</button>
 </div>
+
 </body>
 </html>

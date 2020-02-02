@@ -18,7 +18,7 @@ public class AuthFilter implements Filter {
     }
 
     /**
-     * Checking role and redirect resp
+     * Checking auth and redirect resp
      *
      * @param req         req
      * @param response    resp

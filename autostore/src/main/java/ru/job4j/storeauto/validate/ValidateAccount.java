@@ -55,6 +55,10 @@ public class ValidateAccount implements Validation<Account> {
         return f.orElseThrow();
     }
 
+    public Account findById(Account account) {
+        return null;
+    }
+
     public static ValidateAccount getValidate() {
         return VALIDATE_DATA;
     }

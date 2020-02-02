@@ -28,6 +28,26 @@
 
         }
     </script>
+    <script>
+        function createUser() {
+            var object =
+                {
+                    email: $('#email').val(),
+                    password: $('#pwd').val()
+                };
+            $.ajax({
+                    url: 'adduser',
+                    method: "post",
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(object),
+                    datatype: 'json',
+                }
+            ).done(function () {
+                window.location.href = 'index.html';
+            });
+        }
+
+    </script>
 </head>
 <body>
 <form>
@@ -39,7 +59,8 @@
         <label for="pwd">Password:</label>
         <input type="password" class="form-control" placeholder="Enter password" id="pwd">
     </div>
-    <button type="button" class="btn btn-primary" onclick="authUser()">Submit</button>
+    <button type="button" class="btn btn-primary" onclick="authUser()">Login</button>
+    <button type="button" class="btn btn-primary" onclick="createUser()">Create new User</button>
 </form>
 </body>
 </html>

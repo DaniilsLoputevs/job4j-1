@@ -1,9 +1,11 @@
 package ru.job4j.storeauto.dao;
 
+
 import ru.job4j.storeauto.hiberutils.FuncSessionOpen;
 import ru.job4j.storeauto.models.Advert;
 import ru.job4j.storeauto.store.Store;
 import java.util.List;
+
 
 
 public class AdvertDao implements Store<Advert> {
@@ -45,5 +47,9 @@ public class AdvertDao implements Store<Advert> {
         return FuncSessionOpen.funcApplyCommand(session -> session.createQuery("from Advert ").list());
     }
 
+    @Override
+    public Advert findbById(Advert value) {
+        return FuncSessionOpen.funcApplyCommand(session -> session.get(Advert.class, value.getId()));
+    }
 
 }
