@@ -16,6 +16,7 @@
         <property name="connection.username">postgres</property> <!-- DB User -->
         <property name="connection.password">password</property> <!-- DB Password -->
         <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
         <property name="hbm2ddl.auto">update</property> <!-- create / create-drop / update -->
         <mapping class="ru.job4j.storeauto.models.Car"/>
         <mapping class="ru.job4j.storeauto.models.Advert"/>

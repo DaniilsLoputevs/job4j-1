@@ -17,6 +17,7 @@
                 var adverts = data.responseJSON;
                 var result = "<tr>" +
                     "<th>ID обьявления</th>" +
+                    "<th>Статус обьявления</th>" +
                     "<th>Описание</th>" +
                     "<th>Марка автомобиля</th>" +
                     "<th>Тип кузова</th>" +
@@ -27,6 +28,7 @@
                 for (var i = 0; i !== adverts.length; i++) {
                     result += "<tr>"
                         + "<td>" + adverts[i].id + "</td>"
+                        + "<td>" + adverts[i].status + "</td>"
                         + "<td>" + adverts[i].title + "</td>"
                         + "<td>" + adverts[i].car.carBody + "</td>"
                         + "<td>" + adverts[i].car.title + "</td>"
@@ -53,6 +55,7 @@
 
 <body>
 
+<h1 align="center">Обьявления по продаже машин</h1>
 
 <div class="container">
     <div class="row clearfix">
@@ -62,6 +65,9 @@
                 <tr>
                     <th class="text-center">
                         ID обьявления
+                    </th>
+                    <th class="text-center">
+                        Статус обьявления
                     </th>
                     <th class="text-center">
                         Описание
@@ -87,7 +93,7 @@
             </table>
         </div>
     </div>
-    <button type="button" class="btn btn-primary btn-lg btn-block" id="add" onclick="redir()">Add new advert</button>
+    <button type="button" class="btn btn-primary btn-lg btn-block" id="add" onclick="redir()">Перейти к добавлению нового обьявления</button>
 </div>
 
 </body>

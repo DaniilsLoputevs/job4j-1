@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Validation<T> {
 
-    T add(T value);
+     T add(T value);
 
     boolean replace(T value);
 

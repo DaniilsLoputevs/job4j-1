@@ -12,10 +12,10 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "car_model")
+    @Column(name = "car_model", nullable = false)
     private String title;
 
-    @Column(name = "car_vincode")
+    @Column(name = "car_vincode", nullable = false)
     private String vincode;
 
     @Column(name = "car_body")

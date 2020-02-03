@@ -1,8 +1,6 @@
 package ru.job4j.storeauto.models;
 
 
-import org.hibernate.annotations.Fetch;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -14,19 +12,22 @@ public class Advert {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private String price;
 
-    @ManyToOne()
-    @JoinColumn(name = "account_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "car_id")
+    @JoinColumn(name = "car_id", nullable = false)
     private Car car;
+
+    @Column(name = "advert_status")
+    private boolean status = true;
 
     public Advert() {
     }
@@ -78,23 +79,12 @@ public class Advert {
         this.account = account;
     }
 
-    @Override
-    public String toString() {
-        return "Advert{"
-                +
-                "id="
-                + id
-                +
-                ", title='"
-                + title + '\''
-                +
-                ", price='"
-                + price + '\''
-                +
-                ", account="
-                + car
-                +
-                '}';
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     @Override
@@ -106,7 +96,9 @@ public class Advert {
             return false;
         }
         Advert advert = (Advert) o;
-        return Objects.equals(id, advert.id)
+        return status == advert.status
+                &&
+                Objects.equals(id, advert.id)
                 &&
                 Objects.equals(title, advert.title)
                 &&
@@ -119,6 +111,34 @@ public class Advert {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, price, account, car);
+        return Objects.hash(id, title, price, account, car, status);
+    }
+
+    @Override
+    public String toString() {
+        return "Advert{"
+                +
+                "id="
+                + id
+                +
+                ", title='"
+                + title
+                + '\''
+                +
+                ", price='"
+                + price
+                + '\''
+                +
+                ", account="
+                + account
+                +
+                ", car="
+                + car
+                +
+                ", status="
+                + status
+                +
+                '}';
     }
 }
+

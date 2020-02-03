@@ -1,6 +1,6 @@
 package ru.job4j.storeauto.models;
 
-import com.google.gson.annotations.Expose;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,9 +14,10 @@ public class Account {
     private Integer id;
     @Column(name = "login", unique = true)
     private String email;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "password")
-    private  String password;
-    @OneToMany(fetch = FetchType.EAGER)
+    private String password;
+    @OneToMany(fetch = FetchType.LAZY)
     List<Advert> advertList = new ArrayList<>();
 
     public Account(String email, String password, List<Advert> advertList) {
