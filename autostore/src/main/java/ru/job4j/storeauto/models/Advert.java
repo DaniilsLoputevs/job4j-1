@@ -2,6 +2,7 @@ package ru.job4j.storeauto.models;
 
 
 import javax.persistence.*;
+import java.io.File;
 import java.util.Objects;
 
 
@@ -25,6 +26,10 @@ public class Advert {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id", nullable = false)
     private Car car;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "photo_id")
+    private Photo photo;
 
     @Column(name = "advert_status")
     private boolean status = true;
@@ -85,6 +90,14 @@ public class Advert {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public Photo getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Photo photo) {
+        this.photo = photo;
     }
 
     @Override

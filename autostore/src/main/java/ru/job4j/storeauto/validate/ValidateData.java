@@ -1,57 +1,57 @@
 package ru.job4j.storeauto.validate;
 
-import ru.job4j.storeauto.dao.AdvertDao;
-import ru.job4j.storeauto.models.Advert;
+import ru.job4j.storeauto.models.Account;
 
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 
-public class ValidateData implements Validation<Advert> {
-    private final static AdvertDao INSTANCE = AdvertDao.getINSTANCE();
-    private final static ValidateData VALIDATE_DATA = new ValidateData();
+public class ValidateData implements Validation<Account> {
+    private final Map<Integer, Account> storage = new HashMap<>();
+    private int id = 0;
 
-    private ValidateData() {
+    public ValidateData() {
     }
 
 
     @Override
-    public Advert add(Advert value) {
+    public Account add(Account value) {
         if (checkModel(value)) {
-            INSTANCE.add(value);
+            value.setId(id++);
+            storage.put(value.getId(), value);
         }
         return value;
     }
 
     @Override
-    public boolean replace(Advert value) {
+    public boolean replace(Account value) {
         boolean rs = checkModel(value);
         if (rs) {
-            INSTANCE.replace(value);
+            storage.replace(value.getId(), value);
         }
         return rs;
     }
 
     @Override
-    public boolean delete(Advert value) {
+    public boolean delete(Account value) {
         boolean rs = checkModel(value);
         if (rs) {
-            INSTANCE.delete(value);
+            storage.remove(value.getId());
         }
         return rs;
     }
 
     @Override
-    public List<Advert> findAll() {
-        return INSTANCE.findAll();
+    public List<Account> findAll() {
+        List<Account> rs = (List<Account>) storage.values();
+        return rs;
     }
 
-    public static ValidateData getValidate() {
-        return VALIDATE_DATA;
-    }
-
-    private boolean checkModel(Advert value) {
-        return Objects.nonNull(value.getPrice()) && Objects.nonNull(value.getTitle());
+    private boolean checkModel(Account value) {
+        return Objects.nonNull(value.getPassword()) && Objects.nonNull(value.getEmail());
     }
 
 }

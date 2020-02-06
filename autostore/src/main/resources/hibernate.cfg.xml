@@ -21,6 +21,7 @@
         <mapping class="ru.job4j.storeauto.models.Car"/>
         <mapping class="ru.job4j.storeauto.models.Advert"/>
         <mapping class="ru.job4j.storeauto.models.Account"/>
+        <mapping class="ru.job4j.storeauto.models.Photo"/>
 
     </session-factory>
 </hibernate-configuration>
