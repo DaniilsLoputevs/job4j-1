@@ -46,6 +46,11 @@ public class ValidateCar implements Validation<Car> {
         return INSTANCE.findAll();
     }
 
+    @Override
+    public Car find(Car value) {
+        return null;
+    }
+
     public static ValidateCar getValidate() {
         return VALIDATE_DATA;
     }

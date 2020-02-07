@@ -11,4 +11,6 @@ public interface Validation<T> {
     boolean delete(T value);
 
     List<T> findAll();
+
+    T find(T value);
 }

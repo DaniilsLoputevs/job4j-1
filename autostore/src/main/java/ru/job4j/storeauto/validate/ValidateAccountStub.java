@@ -9,18 +9,18 @@ import java.util.Map;
 import java.util.Objects;
 
 
-public class ValidateData implements Validation<Account> {
+public class ValidateAccountStub implements Validation<Account> {
     private final Map<Integer, Account> storage = new HashMap<>();
     private int id = 0;
 
-    public ValidateData() {
+    public ValidateAccountStub() {
     }
 
 
     @Override
     public Account add(Account value) {
         if (checkModel(value)) {
-            value.setId(id++);
+            value.setId(++id);
             storage.put(value.getId(), value);
         }
         return value;
@@ -48,6 +48,11 @@ public class ValidateData implements Validation<Account> {
     public List<Account> findAll() {
         List<Account> rs = (List<Account>) storage.values();
         return rs;
+    }
+
+    @Override
+    public Account find(Account value) {
+        return storage.get(value.getId());
     }
 
     private boolean checkModel(Account value) {

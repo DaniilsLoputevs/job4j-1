@@ -2,6 +2,7 @@ package ru.job4j.storeauto.servlets;
 
 import ru.job4j.storeauto.models.Account;
 import ru.job4j.storeauto.validate.ValidateAccount;
+import ru.job4j.storeauto.validate.Validation;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class LoginController extends HttpServlet {
-    private ValidateAccount validateAccount = ValidateAccount.getValidate();
+    private Validation<Account> validateAccount = ValidateAccount.getValidate();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

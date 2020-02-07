@@ -6,6 +6,7 @@ import ru.job4j.storeauto.models.Advert;
 import ru.job4j.storeauto.models.Photo;
 import ru.job4j.storeauto.validate.ValidateAccount;
 import ru.job4j.storeauto.validate.ValidateAdvert;
+import ru.job4j.storeauto.validate.Validation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -15,17 +16,11 @@ import java.io.*;
 
 @MultipartConfig(maxFileSize = 8000000)
 public class AddAdvertController extends HttpServlet {
-    private ValidateAdvert validate = ValidateAdvert.getValidate();
-    private ValidateAccount validateAccount = ValidateAccount.getValidate();
+    private Validation<Advert> validate = ValidateAdvert.getValidate();
+    private Validation<Account> validateAccount = ValidateAccount.getValidate();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        File file = new File(System.getProperty("java.io.tmpdir"), File.separator + "images.jpg");
-//        file.createNewFile();
-////        Part part = req.getPart("atach");
-////        byte[] photo = part.getInputStream().readAllBytes();
-////        FileOutputStream fileOutputStream = new FileOutputStream(file);
-////        fileOutputStream.write(photo);
         HttpSession session = req.getSession(false);
         String login = (String) session.getAttribute("login");
         String password = (String) session.getAttribute("password");

@@ -14,7 +14,6 @@ public class Account {
     private Integer id;
     @Column(name = "login", unique = true)
     private String email;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "password")
     private String password;
     @OneToMany(fetch = FetchType.LAZY)

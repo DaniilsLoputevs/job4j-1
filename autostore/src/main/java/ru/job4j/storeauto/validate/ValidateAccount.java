@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class ValidateAccount implements Validation<Account> {
     private final static AccountsDao INSTANCE = AccountsDao.getINSTANCE();
-    private final static ValidateAccount VALIDATE_DATA = new ValidateAccount();
+    private final static Validation<Account> VALIDATE_DATA = new ValidateAccount();
 
     private ValidateAccount() {
     }
@@ -56,10 +56,11 @@ public class ValidateAccount implements Validation<Account> {
     }
 
     public Account findById(Account account) {
-        return null;
+
+        return INSTANCE.findbById(account);
     }
 
-    public static ValidateAccount getValidate() {
+    public static Validation<Account> getValidate() {
         return VALIDATE_DATA;
     }
 

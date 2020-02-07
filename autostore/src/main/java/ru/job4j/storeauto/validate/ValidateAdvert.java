@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class ValidateAdvert implements Validation<Advert> {
     private final static AdvertDao INSTANCE = AdvertDao.getINSTANCE();
-    private final static ValidateAdvert VALIDATE_DATA = new ValidateAdvert();
+    private final static Validation<Advert> VALIDATE_DATA = new ValidateAdvert();
 
     private ValidateAdvert() {
     }
@@ -53,7 +53,7 @@ public class ValidateAdvert implements Validation<Advert> {
         return f.orElseThrow();
     }
 
-    public static ValidateAdvert getValidate() {
+    public static Validation<Advert> getValidate() {
         return VALIDATE_DATA;
     }
 

@@ -19,7 +19,6 @@ import java.io.IOException;
 
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class DataMapper {
@@ -57,7 +56,7 @@ public class DataMapper {
      * @throws IOException
      */
     public static <T> T convertJsonToModel(HttpServletRequest request, Class<T> tClass) throws IOException {
-        return mapper.readValue(request.getInputStream(), tClass);
+        return mapper.readValue(request.getReader(), tClass);
     }
 
     public static Advert convertReqDataToModel(HttpServletRequest request) {
