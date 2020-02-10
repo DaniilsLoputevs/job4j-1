@@ -3,16 +3,20 @@ package ru.job4j.storeauto.validate;
 import ru.job4j.storeauto.dao.AdvertDao;
 import ru.job4j.storeauto.models.Advert;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 
 public class ValidateAdvert implements Validation<Advert> {
     private final static AdvertDao INSTANCE = AdvertDao.getINSTANCE();
-    private final static Validation<Advert> VALIDATE_DATA = new ValidateAdvert();
+    private final static ValidateAdvert VALIDATE_DATA = new ValidateAdvert();
 
     private ValidateAdvert() {
+
     }
 
 
@@ -53,7 +57,11 @@ public class ValidateAdvert implements Validation<Advert> {
         return f.orElseThrow();
     }
 
-    public static Validation<Advert> getValidate() {
+    public List<Advert> findByPhoto() {
+        return INSTANCE.findOnlyWithPhoto();
+    }
+
+    public static ValidateAdvert getValidate() {
         return VALIDATE_DATA;
     }
 

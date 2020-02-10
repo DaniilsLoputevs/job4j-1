@@ -40,11 +40,11 @@ public class AddAccountControllerTest {
         Account find = new Account();
         find.setId(1);
         String val = objectMapper.writeValueAsString(account);
-        System.out.println(val);
         when(request.getReader()).thenReturn(new BufferedReader(new StringReader(val)));
         new AddAccountController().doPost(request, response);
         assertThat(validation.find(find), is(new Account(1, "root", "root")));
 
     }
+
 
 }
