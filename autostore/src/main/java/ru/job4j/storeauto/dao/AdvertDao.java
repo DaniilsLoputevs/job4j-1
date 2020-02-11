@@ -55,7 +55,7 @@ public class AdvertDao implements Store<Advert> {
 
     @SuppressWarnings("unchecked")
     public List<Advert> findOnlyWithPhoto() {
-        return FuncSessionOpen.funcApplyCommand(session -> session.createQuery("from Advert as u where photo.path!= null ").list());
+        return FuncSessionOpen.funcApplyCommand(session -> session.createQuery("from Advert as u where photo.path!= null and photo.filename!= null ").list());
     }
 
 }
