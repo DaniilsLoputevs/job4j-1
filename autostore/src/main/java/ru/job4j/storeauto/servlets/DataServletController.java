@@ -21,13 +21,17 @@ public class DataServletController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String s = req.getParameter("action");
-        if (Objects.nonNull(s)) {
+        if (Objects.isNull(s)) {
             resp.setContentType("text/json");
-            List<Advert> adverts = actions.get(s).get();
+            DataMapper.convertModelToJson(resp, validateAdvert.findAll());
+        } else if (s.equals("findBy")) {
+            resp.setContentType("text/json");
+            List<Advert> adverts = validateAdvert.findByCarModel(req.getParameter("car_title"));
             DataMapper.convertModelToJson(resp, adverts);
         } else {
             resp.setContentType("text/json");
-            DataMapper.convertModelToJson(resp, validateAdvert.findAll());
+            List<Advert> adverts = actions.get(s).get();
+            DataMapper.convertModelToJson(resp, adverts);
         }
 
     }
@@ -42,5 +46,6 @@ public class DataServletController extends HttpServlet {
     private void load() {
         actions.put("all_photo", validateAdvert::findByPhoto);
         actions.put("all", validateAdvert::findAll);
+        actions.put("today", validateAdvert::findAllToday);
     }
 }

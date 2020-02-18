@@ -3,9 +3,15 @@ package ru.job4j.storeauto.models;
 
 import javax.persistence.*;
 import java.io.File;
+import java.sql.Timestamp;
 import java.util.Objects;
 
-
+@NamedQueries({
+        @NamedQuery(name = "ADVERTS.findAllWithPhoto", query = "from Advert as a where  a.photo.filename!= null and a.photo.path!= null "),
+        @NamedQuery(name = "ADVERTS.findAddedToday", query = "from Advert as a where a.added >= current_date "),
+        @NamedQuery(name = "ADVERTS.findByCarModel", query = "from Advert as a where car.title =:title ")
+}
+)
 @Entity
 @Table(name = "ADVERTS")
 public class Advert {
@@ -33,6 +39,8 @@ public class Advert {
 
     @Column(name = "advert_status")
     private boolean status = true;
+    @Column(name = "added")
+    private Timestamp added;
 
     public Advert() {
     }
@@ -120,6 +128,14 @@ public class Advert {
                 Objects.equals(account, advert.account)
                 &&
                 Objects.equals(car, advert.car);
+    }
+
+    public Timestamp getAdded() {
+        return added;
+    }
+
+    public void setAdded(Timestamp added) {
+        this.added = added;
     }
 
     @Override

@@ -18,7 +18,7 @@ public class AccessFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession(false);
-        if (Objects.isNull(session) && !request.getRequestURI().contains("login")) {
+        if (Objects.isNull(session) && !request.getRequestURI().contains("login") && !request.getRequestURI().contains("adduser")) {
             ((HttpServletResponse) servletResponse).sendRedirect(String.format("%s/page/login.html", request.getContextPath()));
         } else {
             filterChain.doFilter(request, servletResponse);

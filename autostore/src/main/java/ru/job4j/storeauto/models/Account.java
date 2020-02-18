@@ -108,9 +108,6 @@ public class Account {
                 + password
                 + '\''
                 +
-                ", advertList="
-                + advertList
-                +
                 '}';
     }
 }

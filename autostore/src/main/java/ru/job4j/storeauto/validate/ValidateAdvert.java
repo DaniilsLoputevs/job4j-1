@@ -3,6 +3,10 @@ package ru.job4j.storeauto.validate;
 import ru.job4j.storeauto.dao.AdvertDao;
 import ru.job4j.storeauto.models.Advert;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
@@ -22,6 +26,8 @@ public class ValidateAdvert implements Validation<Advert> {
 
     @Override
     public Advert add(Advert value) {
+        Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now(ZoneId.systemDefault()));
+        value.setAdded(timestamp);
         if (checkModel(value)) {
             INSTANCE.add(value);
         }
@@ -59,6 +65,14 @@ public class ValidateAdvert implements Validation<Advert> {
 
     public List<Advert> findByPhoto() {
         return INSTANCE.findOnlyWithPhoto();
+    }
+
+    public List<Advert> findAllToday() {
+        return INSTANCE.findAdvertsAddedToday();
+    }
+
+    public List<Advert> findByCarModel(String cartitle) {
+        return INSTANCE.findAdvertsByCarModel(cartitle);
     }
 
     public static ValidateAdvert getValidate() {

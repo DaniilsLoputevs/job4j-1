@@ -2,6 +2,7 @@ package ru.job4j.storeauto.dao;
 
 import ru.job4j.storeauto.hiberutils.FuncSessionOpen;
 
+import ru.job4j.storeauto.models.Car;
 import ru.job4j.storeauto.models.Photo;
 import ru.job4j.storeauto.store.Store;
 
@@ -15,23 +16,36 @@ public class PhotoDao implements Store<Photo> {
     }
 
     @Override
-    public void add(Photo value) {
+    public Photo add(Photo value) {
+        return FuncSessionOpen.funcApplyCommand(session -> {
+            session.save(value);
+            return value;
+        });
 
     }
 
     @Override
-    public void replace(Photo value) {
+    public Photo replace(Photo value) {
+        return FuncSessionOpen.funcApplyCommand(session -> {
+            session.update(value);
+            return value;
+        });
 
     }
 
     @Override
-    public void delete(Photo value) {
+    public Photo delete(Photo value) {
+        return FuncSessionOpen.funcApplyCommand(session -> {
+            session.delete(value);
+            return value;
+        });
 
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Photo> findAll() {
-        return null;
+        return FuncSessionOpen.funcApplyCommand(session -> session.createQuery("from car_photo ").list());
     }
 
     @Override

@@ -15,23 +15,26 @@ public class CarsDao implements Store<Car> {
     }
 
     @Override
-    public void add(Car value) {
-        FuncSessionOpen.funcApplyCommand(session -> session.save(value));
-
-    }
-
-    @Override
-    public void replace(Car value) {
-        FuncSessionOpen.funcApplyCommand(session -> {
-            session.update(value);
+    public Car add(Car value) {
+        return FuncSessionOpen.funcApplyCommand(session -> {
+            session.save(value);
             return value;
         });
 
     }
 
     @Override
-    public void delete(Car value) {
-        FuncSessionOpen.funcApplyCommand(session -> {
+    public Car replace(Car value) {
+        return FuncSessionOpen.funcApplyCommand(session -> {
+              session.update(value);
+              return value;
+          });
+
+    }
+
+    @Override
+    public Car delete(Car value) {
+        return FuncSessionOpen.funcApplyCommand(session -> {
             session.delete(value);
             return value;
         });
@@ -41,7 +44,7 @@ public class CarsDao implements Store<Car> {
     @SuppressWarnings("unchecked")
     @Override
     public List<Car> findAll() {
-        return FuncSessionOpen.funcApplyCommand(session -> session.createQuery("from Cars ").list());
+        return FuncSessionOpen.funcApplyCommand(session -> session.createQuery("from Car ").list());
     }
 
     @Override

@@ -1,5 +1,7 @@
 package ru.job4j.storeauto.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.job4j.storeauto.hiberutils.FuncSessionOpen;
 import ru.job4j.storeauto.models.Account;
 import ru.job4j.storeauto.store.Store;
@@ -7,32 +9,36 @@ import ru.job4j.storeauto.store.Store;
 import java.util.List;
 
 public class AccountsDao implements Store<Account> {
+    private final Logger logger = LoggerFactory.getLogger(AccountsDao.class);
     private static final AccountsDao INSTANCE = new ru.job4j.storeauto.dao.AccountsDao();
 
     private AccountsDao() {
     }
 
     @Override
-    public void add(Account value) {
-        FuncSessionOpen.funcApplyCommand(session -> session.save(value));
+    public Account add(Account value) {
+        return FuncSessionOpen.funcApplyCommand(session -> {
+             session.save(value);
+             return value;
+         });
 
     }
 
     @Override
-    public void replace(Account value) {
-        FuncSessionOpen.funcApplyCommand(session -> {
-            session.update(value);
-            return value;
-        });
+    public Account replace(Account value) {
+        return FuncSessionOpen.funcApplyCommand(session -> {
+             session.update(value);
+             return value;
+         });
 
     }
 
     @Override
-    public void delete(Account value) {
-        FuncSessionOpen.funcApplyCommand(session -> {
-            session.delete(value);
-            return value;
-        });
+    public Account delete(Account value) {
+        return FuncSessionOpen.funcApplyCommand(session -> {
+             session.delete(value);
+             return value;
+         });
 
     }
 

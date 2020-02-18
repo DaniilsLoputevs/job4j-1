@@ -5,6 +5,7 @@ import ru.job4j.storeauto.hiberutils.FuncSessionOpen;
 import ru.job4j.storeauto.models.Advert;
 import ru.job4j.storeauto.store.Store;
 
+import javax.persistence.Query;
 import java.util.List;
 
 
@@ -19,25 +20,34 @@ public class AdvertDao implements Store<Advert> {
     }
 
     @Override
-    public void add(Advert value) {
-        FuncSessionOpen.funcApplyCommand(session -> session.save(value));
+    public Advert add(Advert value) {
+        Advert added;
+        added = FuncSessionOpen.funcApplyCommand(session -> {
+            session.save(value);
+            return value;
+        });
+        return added;
     }
 
     @Override
-    public void replace(Advert value) {
-        FuncSessionOpen.funcApplyCommand(session -> {
+    public Advert replace(Advert value) {
+        Advert replaced;
+        replaced = FuncSessionOpen.funcApplyCommand(session -> {
             session.update(value);
             return value;
         });
+        return replaced;
 
     }
 
     @Override
-    public void delete(Advert value) {
-        FuncSessionOpen.funcApplyCommand(session -> {
+    public Advert delete(Advert value) {
+        Advert deleted;
+        deleted = FuncSessionOpen.funcApplyCommand(session -> {
             session.delete(value);
             return value;
         });
+        return deleted;
 
     }
 
@@ -55,7 +65,21 @@ public class AdvertDao implements Store<Advert> {
 
     @SuppressWarnings("unchecked")
     public List<Advert> findOnlyWithPhoto() {
-        return FuncSessionOpen.funcApplyCommand(session -> session.createQuery("from Advert as u where photo.path!= null and photo.filename!= null ").list());
+        return FuncSessionOpen.funcApplyCommand(session -> session.createNamedQuery("ADVERTS.findAllWithPhoto", Advert.class).list());
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Advert> findAdvertsAddedToday() {
+        return FuncSessionOpen.funcApplyCommand(session -> session.createNamedQuery("ADVERTS.findAddedToday", Advert.class).list());
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Advert> findAdvertsByCarModel(String cartitle) {
+        return FuncSessionOpen.funcApplyCommand(session -> {
+            Query query = session.createNamedQuery("ADVERTS.findByCarModel", Advert.class);
+            query.setParameter("title", cartitle);
+            return query.getResultList();
+        });
     }
 
 }

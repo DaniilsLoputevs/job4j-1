@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface Store<T> {
 
-    void add(T value);
+    T  add(T value);
 
-    void replace(T value);
+    T replace(T value);
 
-    void delete(T value);
+    T delete(T value);
 
     List<T> findAll();
 
