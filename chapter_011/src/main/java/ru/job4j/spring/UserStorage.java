@@ -1,20 +1,22 @@
 package ru.job4j.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserStorage {
     private final Storage storage;
 
+
     @Autowired
-    public UserStorage(final Storage storage) {
+    public UserStorage(@Qualifier("jdbcStorage") final Storage storage) {
         this.storage = storage;
     }
 
-    public void add(User user) {
+    public User add(User user) {
         storage.add(user);
-
+        return user;
     }
 
     public Storage getStorage() {
